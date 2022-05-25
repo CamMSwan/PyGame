@@ -1,10 +1,9 @@
 import pygame
+from Configurações import LARGURA,ALTURA
 
 pygame.init()
 
-Largura = 960
-Altura = 540
-window = pygame.display.set_mode((Largura, Altura))
+window = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('Raposa Kombat')
 
 game = True

@@ -1,0 +1,28 @@
+import pygame
+from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
+from os import path
+
+def tela_inicial(janela):
+    tempo_fps = pygame.time.Clock()
+    plano_de_fundo = pygame.image.load(path.join(DIR_IMG, 'Raposa_Loka.jpg')).convert()
+    plano_de_fundo = pygame.transform.scale(plano_de_fundo, (960,540))
+    
+    rodando = True
+    while rodando:
+        tempo_fps.tick(FPS)
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                estado = QUIT
+                rodando = False
+
+            if evento.type == pygame.KEYUP:
+                estado = GAME
+                rodando = False
+
+        janela.fill(PRETO)  
+        janela.blit(plano_de_fundo, (0, 0))
+
+        pygame.display.flip()
+
+    return estado

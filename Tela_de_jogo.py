@@ -4,7 +4,7 @@ from os import path
 
 def gameplay(janela):
     tempo_fps = pygame.time.Clock()
-    imagem_raposa = pygame.image.load(DIR_IMG,'imagem_humberto.png').convert()
+    imagem_raposa = pygame.image.load(path.join(DIR_IMG, 'imagem_humberto.png')).convert()
     imagem_raposa = pygame.transform.scale(imagem_raposa, (600, 400))
     rodando = True
     while rodando:

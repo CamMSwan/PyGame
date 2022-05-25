@@ -1,24 +1,22 @@
 import pygame
-from Configurações import LARGURA,ALTURA
+from Configurações import INIC, LARGURA, ALTURA, GAME, QUIT 
+from os import path
+import Inicialização as In
+import Tela_de_jogo as Tj
 
 pygame.init()
 
-window = pygame.display.set_mode((LARGURA, ALTURA))
+janela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('Raposa Kombat')
 
-game = True
-
-image = pygame.image.load('Raposa_Loka.jpg').convert()
-image = pygame.transform.scale(image, (960,540))
-
-while game:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            game = False
-
-
-    window.fill((0, 0, 0))  
-    window.blit(image, (0,0))
+game = INIC
+while game != QUIT:
+    if game == INIC:
+        game = In.tela_inicial(janela)
+    elif game == GAME:
+        game = Tj.gameplay(janela)
+    else:
+        game = QUIT
 
     
     pygame.display.update()  

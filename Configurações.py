@@ -15,6 +15,6 @@ VERDE = (0, 255, 0)
 AZUL = (0, 0, 255)
 AMARELO = (255, 255, 0)
 
-INIT = 0
+INIC = 0
 GAME = 1
 QUIT = 2

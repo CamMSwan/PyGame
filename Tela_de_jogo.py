@@ -1,5 +1,5 @@
 import pygame
-from Classes import carinha
+from Classes import player1
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
 from os import path
 import Elementos as El
@@ -9,11 +9,11 @@ def gameplay(janela):
 
     elementos = El.carregar_elementos()
     todos_sprites = pygame.sprite.Group()
-    groups = {}
-    groups['todos_sprites'] = todos_sprites
+    grupo = {}
+    grupo['todos_sprites'] = todos_sprites
     
-    player = carinha(groups, elementos)
-    todos_sprites.add(player)
+    jogador = player1(grupo,elementos)
+    todos_sprites.add(jogador)
     
     rodando = True
     while rodando:

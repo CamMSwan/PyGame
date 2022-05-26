@@ -3,8 +3,8 @@ from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
 from Elementos import FOX_IMG
     
-class carinha(pygame.sprite.Sprite):
-    def __init__(self, groups, elementos):
+class player1(pygame.sprite.Sprite):
+    def __init__(self, grupo, elementos):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
@@ -14,8 +14,8 @@ class carinha(pygame.sprite.Sprite):
         self.rect.centerx = LARGURA / 2
         self.rect.bottom = ALTURA - 10
         self.speedx = 0
-        self.groups = groups
-        self.assets = elementos
+        self.groups = grupo
+        self.elementos = elementos
 
     def update(self):
         # Atualização da posição da raposa

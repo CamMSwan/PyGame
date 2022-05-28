@@ -1,5 +1,5 @@
 import pygame
-from Classes import player1
+from Classes import player1, player2
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
 from os import path
 import Elementos as El
@@ -12,8 +12,9 @@ def gameplay(janela):
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
     
-    jogador = player1(grupo,elementos)
-    todos_sprites.add(jogador)
+    jogador1 = player1(grupo,elementos)
+    jogador2 = player2(grupo,elementos)
+    
     
     rodando = True
     while rodando:
@@ -29,7 +30,8 @@ def gameplay(janela):
                 rodando = False
         todos_sprites.update()
         janela.fill(PRETO)  
-        todos_sprites.draw(janela)
+        jogador1.draw(janela)
+        jogador2.draw(janela)
         pygame.display.flip()
 
     return estado

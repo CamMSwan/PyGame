@@ -29,3 +29,6 @@ while game:
                 FOX_IMG.speedx += 8
             if event.key == pygame.K_RIGHT:
                 FOX_IMG.speedx += 8
+
+
+

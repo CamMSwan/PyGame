@@ -1,17 +1,23 @@
 from multiprocessing import Event
 import pygame
 import random
-
 from sqlalchemy import false
 from sympy import fps
-
-from Elementos import FOX_IMG
+from Classes import player1,player2
+import Elementos as El
 
 #Andar jogador 1
 
 game = True
 clock = pygame.time.Clock()
 FPS = 60
+elementos = El.carregar_elementos()
+todos_sprites = pygame.sprite.Group()
+grupo = {}
+grupo['todos_sprites'] = todos_sprites
+jogador1 = player1(grupo,elementos)
+jogador2 = player2(grupo,elementos)
+
 
 while game:
     clock.tick(FPS)
@@ -20,15 +26,15 @@ while game:
             game = false
         if event.type==pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                FOX_IMG.speedx += 8
+                jogador1.speedx += 8
             if event.key == pygame.K_RIGHT:
-                FOX_IMG.speedx += 8
+                jogador1.speedx += 8
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
-                FOX_IMG.speedx += 8
+                jogador1.speedx += 8
             if event.key == pygame.K_RIGHT:
-                FOX_IMG.speedx += 8
+                jogador1.speedx += 8
 
 
 

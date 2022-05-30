@@ -15,8 +15,8 @@ def tela_inicial(janela):
     
 
     rodando = True
-    fonte = pygame.font.SysFont(None, 48)
-    text = fonte.render('Batalha', True, (0,0,0))
+    fonte = pygame.font.SysFont(None, 60)
+    text = fonte.render('Duelo Cowboy', True, (0,0,0))
 
     while rodando:
         tempo_fps.tick(FPS)

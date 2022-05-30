@@ -10,6 +10,8 @@ DOUTOR_IMG = 'imagem_resina.png'
 LARGURA_DR = 85
 ALTURA_DR = 100
 
+PLANO_DE_FUNDO = 'fundo2.png'
+MENU = 'fundo1.png'
 
 def carregar_elementos():
     elementos = {}

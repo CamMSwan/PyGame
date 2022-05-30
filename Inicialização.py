@@ -4,7 +4,7 @@ from os import path
 
 def tela_inicial(janela):
     tempo_fps = pygame.time.Clock()
-    plano_de_fundo = pygame.image.load(path.join(DIR_IMG, 'Raposa_Loka.jpg')).convert()
+    plano_de_fundo = pygame.image.load(path.join(DIR_IMG, 'fundo1.png')).convert()
     plano_de_fundo = pygame.transform.scale(plano_de_fundo, (960,540))
     
     rodando = True

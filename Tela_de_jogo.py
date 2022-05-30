@@ -6,7 +6,7 @@ import Elementos as El
 
 def gameplay(janela):
     tempo_fps = pygame.time.Clock()
-
+    
     elementos = El.carregar_elementos()
     todos_sprites = pygame.sprite.Group()
     grupo = {}
@@ -30,8 +30,25 @@ def gameplay(janela):
                 rodando = False
         todos_sprites.update()
         janela.fill(PRETO)  
-        jogador1.draw(janela)
-        jogador2.draw(janela)
-        pygame.display.flip()
+        janela.draw(jogador1)
+        janela.draw(jogador2)
+
+    while rodando:
+        tempo_fps.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                rodando = False
+            if event.type==pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    jogador1.speedx += 8
+                if event.key == pygame.K_RIGHT:
+                    jogador1.speedx += 8
+            
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    jogador1.speedx += 8
+                if event.key == pygame.K_RIGHT:
+                    jogador1.speedx += 8
+    pygame.display.flip()
 
     return estado

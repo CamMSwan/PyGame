@@ -3,7 +3,7 @@ from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
 from Elementos import DOUTOR_IMG, FOX_IMG
     
-class player1(pygame.sprite.Sprite):
+class Player1(pygame.sprite.Sprite):
     def __init__(self, grupo, elementos):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -27,7 +27,7 @@ class player1(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
             
-class player2(pygame.sprite.Sprite):
+class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo, elementos):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)

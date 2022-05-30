@@ -2,6 +2,7 @@ import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
 from os import path
 
+
 def tela_inicial(janela):
     tempo_fps = pygame.time.Clock()
     plano_de_fundo = pygame.image.load(path.join(DIR_IMG, 'plano3.jpg')).convert()

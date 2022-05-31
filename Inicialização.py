@@ -16,7 +16,7 @@ def tela_inicial(janela):
 
     rodando = True
     fonte = pygame.font.SysFont(None, 60)
-    text = fonte.render('', True, (0,0,0))
+    text = fonte.render('Have Fun with the Fox', True, (0,0,0))
 
     while rodando:
         tempo_fps.tick(FPS)
@@ -32,7 +32,7 @@ def tela_inicial(janela):
 
         janela.fill(PRETO)  
         janela.blit(plano_de_fundo, pdf_rect)
-        janela.blit(text, (400,150))
+        janela.blit(text, (250,150))
 
 
         pygame.display.flip()

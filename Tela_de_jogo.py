@@ -53,7 +53,7 @@ def gameplay(janela):
                 rodando = False
             if rodando == JOGANDO:
                     # Verifica se apertou alguma tecla.
-                    if evento.type == pygame.KEYDOWN:
+                    if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 1
                         # Dependendo da tecla, altera a velocidade.
                         tecla[evento.key] = True
                         if evento.key == pygame.K_LEFT:
@@ -61,32 +61,29 @@ def gameplay(janela):
                         if evento.key == pygame.K_RIGHT:
                             jogador1.speedx += 8
                         if evento.key == pygame.K_UP:
-                            jogador1.shoot()
-                    # Verifica se soltou alguma tecla.
+                            jogador1.jumping
                     if evento.type == pygame.KEYUP:
-                        # Dependendo da tecla, altera a velocidade.
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_LEFT:
                                 jogador1.speedx += 8
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
-                    if evento.type == pygame.KEYDOWN:
+
+                    if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
                         tecla[evento.key] = True
                         if evento.key == pygame.K_a:
                             jogador2.speedx -= 8
                         if evento.key == pygame.K_d:
                             jogador2.speedx += 8
                         if evento.key == pygame.K_w:
-                            jogador2.shoot()
+                            jogador2.jumping
                     if evento.type == pygame.KEYUP:
-        
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_a:
                                 jogador2.speedx += 8
                             if evento.key == pygame.K_d:
                                 jogador2.speedx -= 8
             
-
         todos_sprites.update()
         janela.fill(PRETO)  
         janela.blit(plano_jogo, (0, 0))

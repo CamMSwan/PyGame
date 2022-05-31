@@ -12,7 +12,7 @@ def tela_inicial(janela):
     tempo_fps = pygame.time.Clock()
     plano_de_fundo = pygame.image.load(path.join(DIR_IMG, 'plano3.jpg')).convert()
     plano_de_fundo = pygame.transform.scale(plano_de_fundo, (960,540))
-    
+    pdf_rect = plano_de_fundo.get_rect()
 
     rodando = True
     fonte = pygame.font.SysFont(None, 60)
@@ -31,7 +31,7 @@ def tela_inicial(janela):
                 rodando = False
 
         janela.fill(PRETO)  
-        janela.blit(plano_de_fundo, (0, 0))
+        janela.blit(plano_de_fundo, pdf_rect)
         janela.blit(text, (400,150))
 
 

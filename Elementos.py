@@ -10,10 +10,11 @@ DOUTOR_IMG = 'imagem_resina.png'
 LARGURA_DR = 150
 ALTURA_DR = 165
 
-PLANO_DE_FUNDO = 'fundo2.png'
-MENU = 'fundo1.png'
+PLANO_DE_FUNDO = 'fundo_jogo.png'
+MENU = 'fundo_inicial.png'
 
 MACHADO = 'Animação machado'
+
 machado_anim = []
 
 def carregar_elementos():

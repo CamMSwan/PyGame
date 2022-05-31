@@ -5,7 +5,6 @@ from os import path
 import Elementos as El
 
 
-    
 def gameplay(janela):
     tempo_fps = pygame.time.Clock()
     plano_jogo = pygame.image.load(path.join(DIR_IMG, 'fundo2.png')).convert()
@@ -41,14 +40,14 @@ def gameplay(janela):
         pygame.display.update()
         pygame.quit()
 
-    '''while rodando:
+    while rodando:
         tempo_fps.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 rodando = False
             if event.type==pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    jogador1.speedx += 8
+                    jogador1.speedx -= 8
                 if event.key == pygame.K_RIGHT:
                     jogador1.speedx += 8
             
@@ -56,7 +55,9 @@ def gameplay(janela):
                 if event.key == pygame.K_LEFT:
                     jogador1.speedx += 8
                 if event.key == pygame.K_RIGHT:
-                    jogador1.speedx += 8'''
+                    jogador1.speedx -= 8
+    
     pygame.display.flip()
 
     return estado
+

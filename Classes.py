@@ -14,12 +14,14 @@ class Player1(pygame.sprite.Sprite):
         self.rect.centerx = LARGURA / 2
         self.rect.bottom = ALTURA - 10
         self.speedx = 0
+        self.speedy = 0
         self.groups = grupo
         self.elementos = elementos
 
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
+        self.rect.y += self.speedy
 
         # Mantem dentro da tela
         if self.rect.right > LARGURA:

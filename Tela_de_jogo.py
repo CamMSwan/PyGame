@@ -51,7 +51,7 @@ def gameplay(janela):
                             jogador1.speedx -= 8
                         if evento.key == pygame.K_RIGHT:
                             jogador1.speedx += 8
-                        if evento.key == pygame.K_SPACE:
+                        if evento.key == pygame.K_UP:
                             jogador1.shoot()
                     # Verifica se soltou alguma tecla.
                     if evento.type == pygame.KEYUP:
@@ -61,6 +61,21 @@ def gameplay(janela):
                                 jogador1.speedx += 8
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
+                    if evento.type == pygame.KEYDOWN:
+                        tecla[evento.key] = True
+                        if evento.key == pygame.K_a:
+                            jogador2.speedx -= 8
+                        if evento.key == pygame.K_d:
+                            jogador2.speedx += 8
+                        if evento.key == pygame.K_w:
+                            jogador2.shoot()
+                    if evento.type == pygame.KEYUP:
+        
+                        if evento.key in tecla and tecla[evento.key]:
+                            if evento.key == pygame.K_a:
+                                jogador2.speedx += 8
+                            if evento.key == pygame.K_d:
+                                jogador2.speedx -= 8
             '''key_pressed = pygame.key.get_pressed()
 
             if key_pressed==[pygame.K_LEFT]:

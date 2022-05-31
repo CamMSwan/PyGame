@@ -72,3 +72,4 @@ class Bala(pygame.sprite.Sprite):
         # se a sala passar do fim da tela, desaparece
         if self.rect.centerx > 960:
             self.kill()
+

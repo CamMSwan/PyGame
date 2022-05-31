@@ -18,6 +18,14 @@ class Player1(pygame.sprite.Sprite):
         self.groups = grupo
         self.elementos = elementos
 
+    def get_input(self):
+        key_pressed = pygame.key.get_pressed()
+
+        if key_pressed==[pygame.K_LEFT]:
+            self.speedx -= 8
+        if key_pressed==[pygame.K_RIGHT]:
+            self.speedx += 8
+            
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
@@ -28,7 +36,8 @@ class Player1(pygame.sprite.Sprite):
             self.rect.right = LARGURA
         if self.rect.left < 0:
             self.rect.left = 0
-            
+        self.get_input()    
+
 class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo, elementos):
         # Construtor da classe mãe (Sprite).

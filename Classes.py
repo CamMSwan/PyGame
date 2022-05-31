@@ -133,7 +133,6 @@ class Bala(pygame.sprite.Sprite):
             
 class Machado(pygame.sprite.Sprite):
     def __init__(self,elementos):
-        # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
         self.machado_anim = elementos[MACHADO]
@@ -161,15 +160,19 @@ class Machado(pygame.sprite.Sprite):
         now = pygame.time.get_ticks()
         # Verifica quantos ticks se passaram desde a ultima mudança de frame.
         elapsed_ticks = now - self.last_update
-
-        # Se já está na hora de mudar de imagem...
+        
         if elapsed_ticks > self.frame_ticks:
-            # Marca o tick da nova imagem.
             self.last_update = now
-
-            # Avança um quadro.
             self.frame += 1
 
+        if self.frame == len(self.machado_anim):
+            self.frame = 0 
+        
+        else:
+            # Se ainda não chegou ao fim da explosão, troca de imagem.
+            self.image = self.machado_anim[self.frame]
+            self.rect = self.image.get_rect()
+                
         self.rect.x += self.speedx
         self.rect.y += self.speedy
         

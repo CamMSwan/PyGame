@@ -52,7 +52,7 @@ def gameplay(janela):
                         if evento.key == pygame.K_RIGHT:
                             jogador1.speedx += 8
                         if evento.key == pygame.K_UP:
-                            jogador1.jumping()
+                            jogador1.jumping
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_LEFT:
@@ -67,20 +67,14 @@ def gameplay(janela):
                         if evento.key == pygame.K_d:
                             jogador2.speedx += 8
                         if evento.key == pygame.K_w:
-                            jogador2.shoot()
+                            jogador2.jumping
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_a:
                                 jogador2.speedx += 8
                             if evento.key == pygame.K_d:
                                 jogador2.speedx -= 8
-            '''key_pressed = pygame.key.get_pressed()
-
-            if key_pressed==[pygame.K_LEFT]:
-                jogador1.speedx -= 8
-            if key_pressed==[pygame.K_RIGHT]:
-                jogador1.speedx += 8 '''
-
+            
         todos_sprites.update()
         janela.fill(PRETO)  
         janela.blit(plano_jogo, (0, 0))

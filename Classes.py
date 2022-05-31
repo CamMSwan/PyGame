@@ -46,8 +46,8 @@ class Player2(pygame.sprite.Sprite):
         self.image = elementos[DOUTOR_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.centerx = LARGURA / 2
-        self.rect.bottom = ALTURA - 10
+        self.rect.centerx = LARGURA / 8
+        self.rect.bottom = ALTURA - 20
         self.speedx = 0
         self.groups = grupo
         self.elementos = elementos

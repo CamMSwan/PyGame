@@ -3,12 +3,12 @@ import os
 from Configurações import DIR_IMG, DIR_SOM, DIR_FONT, LARGURA
 
 FOX_IMG = 'imagem2.png'
-LARGURA_FOX = 85
-ALTURA_FOX = 100
+LARGURA_FOX = 150
+ALTURA_FOX = 165
 
 DOUTOR_IMG = 'imagem_resina.png'
-LARGURA_DR = 85
-ALTURA_DR = 100
+LARGURA_DR = 150
+ALTURA_DR = 165
 
 PLANO_DE_FUNDO = 'fundo2.png'
 MENU = 'fundo1.png'

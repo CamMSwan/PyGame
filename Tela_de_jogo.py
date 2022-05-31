@@ -1,3 +1,4 @@
+from pickle import TRUE
 import pygame
 from Classes import Player1, Player2
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
@@ -23,9 +24,14 @@ def gameplay(janela):
         machado = Meteor(assets)
         all_sprites.add(meteor)
         all_meteors.add(meteor)'''
-    
-    rodando = True
-    while rodando:
+        
+    tecla = {}
+    ACABOU = 0
+    JOGANDO = 1
+    MORTO = 2
+
+    rodando = JOGANDO
+    while rodando != ACABOU:
         tempo_fps.tick(FPS)
 
         for evento in pygame.event.get():
@@ -36,24 +42,37 @@ def gameplay(janela):
             if evento.type == pygame.KEYUP:
                 estado = GAME
                 rodando = False
-        
-            key_pressed = pygame.key.get_pressed()
+            if rodando == JOGANDO:
+                    # Verifica se apertou alguma tecla.
+                    if evento.type == pygame.KEYDOWN:
+                        # Dependendo da tecla, altera a velocidade.
+                        tecla[evento.key] = True
+                        if evento.key == pygame.K_LEFT:
+                            jogador1.speedx -= 8
+                        if evento.key == pygame.K_RIGHT:
+                            jogador1.speedx += 8
+                        if evento.key == pygame.K_SPACE:
+                            jogador1.shoot()
+                    # Verifica se soltou alguma tecla.
+                    if evento.type == pygame.KEYUP:
+                        # Dependendo da tecla, altera a velocidade.
+                        if evento.key in tecla and tecla[evento.key]:
+                            if evento.key == pygame.K_LEFT:
+                                jogador1.speedx += 8
+                            if evento.key == pygame.K_RIGHT:
+                                jogador1.speedx -= 8
+            '''key_pressed = pygame.key.get_pressed()
 
             if key_pressed==[pygame.K_LEFT]:
                 jogador1.speedx -= 8
             if key_pressed==[pygame.K_RIGHT]:
-                jogador1.speedx += 8 
+                jogador1.speedx += 8 '''
 
         todos_sprites.update()
         janela.fill(PRETO)  
         janela.blit(plano_jogo, (0, 0))
         todos_sprites.draw(janela)
         pygame.display.update()
-        pygame.quit()
-
-
-    
-    pygame.display.flip()
 
     return estado
 

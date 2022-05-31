@@ -1,6 +1,6 @@
 from pickle import TRUE
 import pygame
-from Classes import Player1, Player2
+from Classes import Machado, Player1, Player2
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
 from os import path
 import Elementos as El
@@ -14,7 +14,16 @@ def gameplay(janela):
     todos_sprites = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
+    machados = pygame.sprite.Group()
+    grupo['machados'] = machados
     
+    i = 1
+    while i < 5:
+        machado = Machado(elementos)
+        todos_sprites.add(machado)
+        machados.add(machado)
+        i += 1
+        
     jogador1 = Player1(grupo,elementos)
     jogador2 = Player2(grupo,elementos)
     todos_sprites.add(jogador2)
@@ -76,12 +85,7 @@ def gameplay(janela):
                                 jogador2.speedx += 8
                             if evento.key == pygame.K_d:
                                 jogador2.speedx -= 8
-            '''key_pressed = pygame.key.get_pressed()
-
-            if key_pressed==[pygame.K_LEFT]:
-                jogador1.speedx -= 8
-            if key_pressed==[pygame.K_RIGHT]:
-                jogador1.speedx += 8 '''
+            
 
         todos_sprites.update()
         janela.fill(PRETO)  

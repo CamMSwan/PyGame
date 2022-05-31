@@ -20,7 +20,10 @@ def gameplay(janela):
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
     
-    
+    for i in range(8):
+        machado = Meteor(assets)
+        all_sprites.add(meteor)
+        all_meteors.add(meteor)
     
     rodando = True
     while rodando:

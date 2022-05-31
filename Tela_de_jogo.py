@@ -43,7 +43,7 @@ def gameplay(janela):
         pygame.display.update()
         pygame.quit()
 
-    while rodando:
+    '''while rodando:
         tempo_fps.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -58,7 +58,7 @@ def gameplay(janela):
                 if event.key == pygame.K_LEFT:
                     jogador1.speedx += 8
                 if event.key == pygame.K_RIGHT:
-                    jogador1.speedx -= 8
+                    jogador1.speedx -= 8'''
     
     pygame.display.flip()
 

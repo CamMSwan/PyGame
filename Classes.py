@@ -18,14 +18,32 @@ class Player1(pygame.sprite.Sprite):
         self.groups = grupo
         self.elementos = elementos
 
+        self.y_gravidade = 1
+        self.y_saltomax = 20
+        self.y_velocidade = self.y_saltomax
+        self.jumping = False
+        
+
     def get_input(self):
         key_pressed = pygame.key.get_pressed()
-
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        
         if key_pressed==[pygame.K_LEFT]:
             self.speedx -= 8
         if key_pressed==[pygame.K_RIGHT]:
             self.speedx += 8
+        
+        if key_pressed[pygame.K_UP]:
+            self.jumping = True
+        if self.jumping:
+            self.rect.y -= self.y_velocidade
+            self.y_velocidade -= self.y_gravidade
+            if self.y_velocidade <-(self.y_saltomax):
+                self.jumping = False
+                self.y_velocidade = self.y_saltomax
             
+
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx

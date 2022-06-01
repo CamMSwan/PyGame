@@ -24,7 +24,7 @@ QUIT = 2
 '''largura_coracao = 70
 altura_coracao = 60
 
-CORE_IMG = pygame.image.load('imagens/coracao.png').convert_alpha()
+'''CORE_IMG = pygame.image.load('imagens/coracao.png').convert_alpha()
 CORE_2 = CORE_IMG
 CORE_3 = CORE_IMG
 

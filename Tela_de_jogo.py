@@ -1,7 +1,7 @@
 from pickle import TRUE
 import pygame
 from Classes import Machado, Player1, Player2
-from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
+from Configurações import BRANCO, DIR_IMG,FPS,QUIT,GAME,PRETO
 from os import path
 import Elementos as El
 
@@ -27,7 +27,7 @@ def gameplay(janela):
     ACABOU = 0
     JOGANDO = 1
     MORTO = 2
-
+    
     rodando = JOGANDO
     while rodando != ACABOU:
         tempo_fps.tick(FPS)
@@ -74,7 +74,7 @@ def gameplay(janela):
                                 jogador2.speedx -= 8
             
         todos_sprites.update()
-        janela.fill(PRETO)  
+        janela.fill(BRANCO)  
         janela.blit(plano_jogo, (0, 0))
         todos_sprites.draw(janela)
         pygame.display.update()

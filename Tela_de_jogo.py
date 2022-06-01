@@ -10,7 +10,6 @@ def gameplay(janela):
     tempo_fps = pygame.time.Clock()
     plano_jogo = pygame.image.load(path.join(DIR_IMG, 'fundo_jogo.png')).convert()
     plano_jogo = pygame.transform.scale(plano_jogo, (960,540))
-    elementos = El.carregar_elementos()
     todos_sprites = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
@@ -19,8 +18,8 @@ def gameplay(janela):
     todos_sprites.add(machado)
     
         
-    jogador1 = Player1(grupo,elementos)
-    jogador2 = Player2(grupo,elementos)
+    jogador1 = Player1(grupo)
+    jogador2 = Player2(grupo)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
         

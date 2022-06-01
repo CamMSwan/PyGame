@@ -3,15 +3,16 @@ from turtle import delay
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_M, DOUTOR_IMG, FOX_IMG, LARGURA_M, MACHADO
+from Elementos import ALTURA_DR, ALTURA_FOX, ALTURA_M, DOUTOR_IMG, FOX_IMG, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO
 import random
     
 class Player1(pygame.sprite.Sprite):
-    def __init__(self, grupo, elementos):
+    def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = elementos[FOX_IMG]
+        self.image = pygame.image.load(path.join(DIR_IMG, 'raposa.png')).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_FOX, ALTURA_FOX))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA / 2
@@ -19,7 +20,6 @@ class Player1(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo
-        self.elementos = elementos
 
         self.y_gravidade = 1
         self.y_saltomax = 20
@@ -60,11 +60,12 @@ class Player1(pygame.sprite.Sprite):
         self.get_input()    
 
 class Player2(pygame.sprite.Sprite):
-    def __init__(self, grupo, elementos):
+    def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = elementos[DOUTOR_IMG]
+        self.image = pygame.image.load(path.join(DIR_IMG, 'imagem_resina.png')).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_DR, ALTURA_DR))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA / 8
@@ -72,7 +73,6 @@ class Player2(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo
-        self.elementos = elementos
 
         self.y_gravidade = 1
         self.y_saltomax = 20

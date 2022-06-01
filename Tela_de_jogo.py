@@ -14,25 +14,15 @@ def gameplay(janela):
     todos_sprites = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
-    machados = pygame.sprite.Group()
-    grupo['machados'] = machados
     
-    i = 1
-    while i < 5:
-        machado = Machado(elementos)
-        todos_sprites.add(machado)
-        machados.add(machado)
-        i += 1
+    machado = Machado()
+    todos_sprites.add(machado)
+    
         
     jogador1 = Player1(grupo,elementos)
     jogador2 = Player2(grupo,elementos)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
-    
-    '''for i in range(8):
-        machado = Meteor(assets)
-        all_sprites.add(meteor)
-        all_meteors.add(meteor)'''
         
     tecla = {}
     ACABOU = 0

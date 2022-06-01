@@ -1,3 +1,4 @@
+from json import load
 from turtle import delay
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
@@ -132,55 +133,22 @@ class Bala(pygame.sprite.Sprite):
             self.kill()
             
 class Machado(pygame.sprite.Sprite):
-    def __init__(self,elementos):
+    def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-
-        self.machado_anim = elementos[MACHADO]
-         # Inicia o processo de animação colocando a primeira imagem na tela.
-        self.frame = 0  # Armazena o índice atual na animação
-        self.image = self.machado_anim[self.frame]  # Pega a primeira imagem
+        self.frames = []
+        self.frames.append(pygame.image.load('{}/{}/axe-1.png'.format(DIR_IMG,MACHADO)).convert())
+        self.frames.append(pygame.image.load('{}/{}/axe-2.png'.format(DIR_IMG,MACHADO)).convert())
+        self.frames.append(pygame.image.load('{}/{}/axe-3.png'.format(DIR_IMG,MACHADO)).convert())
+        self.frames.append(pygame.image.load('{}/{}/axe-4.png'.format(DIR_IMG,MACHADO)).convert())
+        self.frame_atual = 0
+        self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()
         
-        # Guarda o tick da primeira imagem, ou seja, o momento em que a imagem foi mostrada
-        self.last_update = pygame.time.get_ticks()
-
-        # Controle de ticks de animação: troca de imagem a cada self.frame_ticks milissegundos.
-        # Quando pygame.time.get_ticks() - self.last_update > self.frame_ticks a
-        # próxima imagem da animação será mostrada
-        self.frame_ticks = 50
-        
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, LARGURA-LARGURA_M)
-        self.rect.y = random.randint(-100, -LARGURA_M)
-        self.speedx = 3
-        self.speedy = 3
-
     def update(self):
-        now = pygame.time.get_ticks()
-        # Verifica quantos ticks se passaram desde a ultima mudança de frame.
-        elapsed_ticks = now - self.last_update
+        self.frame_atual += 0.18
         
-        if elapsed_ticks > self.frame_ticks:
-            self.last_update = now
-            self.frame += 1
-
-        if self.frame == len(self.machado_anim):
-            self.frame = 0 
-        
-        else:
-            # Se ainda não chegou ao fim da explosão, troca de imagem.
-            self.image = self.machado_anim[self.frame]
-            self.rect = self.image.get_rect()
-                
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
-        
-        if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
-            delay(2000)
-            self.rect.x = random.randint(0, LARGURA-LARGURA_M)
-            self.rect.y = random.randint(-100, -LARGURA)
-            self.speedx = 3
-            self.speedy = 3
-          
+        if self.frame_atual >= len(self.frames):
+            self.frame_atual = 0
+            
+        self.image = self.frames[int(self.frame_atual)]
             

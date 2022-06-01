@@ -1,7 +1,7 @@
 from pickle import TRUE
 import pygame
 from Classes import Machado, Player1, Player2
-from Configurações import BRANCO, DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO
+from Configurações import ALTURA, BRANCO, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,PRETO
 from os import path
 from Elementos import MUSICA_JOGO
 import Funções as fun
@@ -9,7 +9,7 @@ import Funções as fun
 def gameplay(janela):
     tempo_fps = pygame.time.Clock()
     plano_jogo = pygame.image.load(path.join(DIR_IMG, 'fundo_jogo.png')).convert()
-    plano_jogo = pygame.transform.scale(plano_jogo, (960,540))
+    plano_jogo = pygame.transform.scale(plano_jogo, (LARGURA,ALTURA))
     todos_sprites = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
@@ -34,11 +34,6 @@ def gameplay(janela):
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
-                estado = QUIT
-                rodando = False
-
-            if evento.type == pygame.KEYUP:
-                estado = GAME
                 rodando = False
                 
             if rodando == JOGANDO:
@@ -75,10 +70,11 @@ def gameplay(janela):
                                 jogador2.speedx -= 8
         
         todos_sprites.update()
+        
         janela.fill(BRANCO)  
         janela.blit(plano_jogo, (0, 0))
         todos_sprites.draw(janela)
         pygame.display.update()
 
-    return estado
+  
 

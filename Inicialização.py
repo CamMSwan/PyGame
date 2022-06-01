@@ -2,7 +2,7 @@ from turtle import width
 from click import edit
 import pygame
 from pygame import mixer
-from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO
+from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,PRETO
 from os import path
 import Funções as fun
 
@@ -16,7 +16,7 @@ def tela_inicial(janela):
   
     tempo_fps = pygame.time.Clock()
     plano_de_fundo = pygame.image.load(path.join(DIR_IMG, 'fundo_inicial.jpg')).convert()
-    plano_de_fundo = pygame.transform.scale(plano_de_fundo, (960,540))
+    plano_de_fundo = pygame.transform.scale(plano_de_fundo, (LARGURA,ALTURA))
     pdf_rect = plano_de_fundo.get_rect()
     rodando = True
     fonte = pygame.font.SysFont(None, 60)

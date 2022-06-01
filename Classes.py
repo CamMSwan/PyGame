@@ -136,16 +136,14 @@ class Machado(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.frames = []
-        self.frames.append(pygame.image.load('{}/{}/axe-1.png'.format(DIR_IMG,MACHADO)).convert())
-        self.frames.append(pygame.image.load('{}/{}/axe-2.png'.format(DIR_IMG,MACHADO)).convert())
-        self.frames.append(pygame.image.load('{}/{}/axe-3.png'.format(DIR_IMG,MACHADO)).convert())
-        self.frames.append(pygame.image.load('{}/{}/axe-4.png'.format(DIR_IMG,MACHADO)).convert())
+        for i in range(1,5):
+            self.frames.append(pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert())
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()
         
     def update(self):
-        self.frame_atual += 0.18
+        self.frame_atual += 0.14
         
         if self.frame_atual >= len(self.frames):
             self.frame_atual = 0

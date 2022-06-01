@@ -14,8 +14,8 @@ PLANO_DE_FUNDO = 'fundo_jogo.png'
 MENU = 'fundo_inicial.png'
 
 MACHADO = 'Animação machado'
-LARGURA_M = 32
-ALTURA_M = 32
+LARGURA_M = 60
+ALTURA_M = 60
 
 MUSICA_MENU = 'good,bad,ugly.mp3'
 MUSICA_JOGO = '2 Old 2 Die Young.mp3'

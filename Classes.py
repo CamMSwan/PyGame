@@ -137,7 +137,10 @@ class Machado(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.frames = []
         for i in range(1,5):
-            self.frames.append(pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert())
+            self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert()
+            self.image = pygame.transform.scale(self.image, (LARGURA_M, ALTURA_M))
+            self.frames.append(self.image)
+            
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()

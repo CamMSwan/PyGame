@@ -2,7 +2,7 @@ import pygame
 import os
 from Configurações import DIR_IMG, DIR_SOM, DIR_FONT, LARGURA
 
-FOX_IMG = 'raposa.png'
+RAPOSA = 'Raposa'
 LARGURA_FOX = 150
 ALTURA_FOX = 165
 

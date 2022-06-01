@@ -1,9 +1,8 @@
-from pickle import TRUE
 import pygame
 from Classes import Machado, Player1, Player2
 from Configurações import ALTURA, BRANCO, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,PRETO
 from os import path
-from Elementos import MUSICA_JOGO
+from Elementos import DIR_IMG
 import Funções as fun
 
 def gameplay(janela):
@@ -28,6 +27,9 @@ def gameplay(janela):
     JOGANDO = 1
     MORTO = 2
     
+    direita = False
+    esquerda = False
+    
     rodando = JOGANDO
     while rodando != ACABOU:
         tempo_fps.tick(FPS)
@@ -43,17 +45,24 @@ def gameplay(janela):
                         tecla[evento.key] = True
                         if evento.key == pygame.K_LEFT:
                             jogador1.speedx -= 8
+                            direita = False
+                            esquerda = True
                         if evento.key == pygame.K_RIGHT:
                             jogador1.speedx += 8
+                            direita = False
+                            esquerda = True
                         if evento.key == pygame.K_UP:
                             jogador1.jumping
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_LEFT:
                                 jogador1.speedx += 8
+                                direita = False
+                                esquerda = False
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
-
+                                direita = False
+                                esquerda = False
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
                         tecla[evento.key] = True
                         if evento.key == pygame.K_a:

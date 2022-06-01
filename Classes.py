@@ -3,16 +3,19 @@ from turtle import delay
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_DR, ALTURA_FOX, ALTURA_M, INIMIGO_IMG, FOX_IMG, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO
+from Elementos import ALTURA_DR, ALTURA_FOX, ALTURA_M, INIMIGO_IMG, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, RAPOSA
 import random
     
 class Player1(pygame.sprite.Sprite):
     def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-
-        self.image = pygame.image.load(path.join(DIR_IMG, FOX_IMG)).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (LARGURA_FOX, ALTURA_FOX))
+        self.imagens = []
+        for i in range(0,2):
+            self.image = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa{}.png'.format(i) )).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (LARGURA_FOX, ALTURA_FOX))
+            self.imagens.append(self.image)
+            
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA / 2
@@ -34,9 +37,10 @@ class Player1(pygame.sprite.Sprite):
         
         if key_pressed==[pygame.K_LEFT]:
             self.speedx -= 8
+            self.image = self.imagens[1]
         if key_pressed==[pygame.K_RIGHT]:
             self.speedx += 8
-        
+            self.rect = self.image.get_rect()
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
@@ -50,7 +54,8 @@ class Player1(pygame.sprite.Sprite):
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
-        self.rect.y += self.speedy
+        
+        
 
         # Mantem dentro da tela
         if self.rect.right > LARGURA:

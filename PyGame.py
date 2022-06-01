@@ -1,6 +1,5 @@
 import pygame
 from Configurações import INIC, LARGURA, ALTURA, GAME, QUIT 
-from os import path
 import Inicialização as In
 import Tela_de_jogo as Tj
 

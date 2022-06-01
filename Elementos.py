@@ -6,7 +6,7 @@ FOX_IMG = 'raposa.png'
 LARGURA_FOX = 150
 ALTURA_FOX = 165
 
-DOUTOR_IMG = 'imagem_resina.png'
+INIMIGO_IMG = 'imagem_resina.png'
 LARGURA_DR = 150
 ALTURA_DR = 165
 

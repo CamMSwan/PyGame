@@ -3,7 +3,7 @@ from turtle import delay
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import DOUTOR_IMG, FOX_IMG, LARGURA_M, MACHADO
+from Elementos import ALTURA_M, DOUTOR_IMG, FOX_IMG, LARGURA_M, MACHADO
 import random
     
 class Player1(pygame.sprite.Sprite):
@@ -141,12 +141,21 @@ class Machado(pygame.sprite.Sprite):
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()
+        self.rect.x = random.randint(-LARGURA_M,0)
+        self.rect.y = random.randint(0,ALTURA-ALTURA_M)
+        self.speedx = 6
         
     def update(self):
         self.frame_atual += 0.14
+        self.rect.x += self.speedx
         
+        if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
+            self.rect.x = random.randint(-LARGURA_M,0)
+            self.rect.y = random.randint(0,ALTURA-ALTURA_M)
+            self.speedx = 6
+            
         if self.frame_atual >= len(self.frames):
             self.frame_atual = 0
-            
+        
         self.image = self.frames[int(self.frame_atual)]
             

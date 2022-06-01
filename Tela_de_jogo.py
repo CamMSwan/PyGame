@@ -1,10 +1,10 @@
 from pickle import TRUE
 import pygame
 from Classes import Machado, Player1, Player2
-from Configurações import BRANCO, DIR_IMG,FPS,QUIT,GAME,PRETO
+from Configurações import BRANCO, DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO
 from os import path
-import Elementos as El
-
+from Elementos import MUSICA_JOGO
+import Funções as fun
 
 def gameplay(janela):
     tempo_fps = pygame.time.Clock()
@@ -40,6 +40,7 @@ def gameplay(janela):
             if evento.type == pygame.KEYUP:
                 estado = GAME
                 rodando = False
+                
             if rodando == JOGANDO:
                     # Verifica se apertou alguma tecla.
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 1
@@ -72,7 +73,7 @@ def gameplay(janela):
                                 jogador2.speedx += 8
                             if evento.key == pygame.K_d:
                                 jogador2.speedx -= 8
-            
+        
         todos_sprites.update()
         janela.fill(BRANCO)  
         janela.blit(plano_jogo, (0, 0))

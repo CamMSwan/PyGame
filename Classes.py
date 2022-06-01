@@ -37,10 +37,8 @@ class Player1(pygame.sprite.Sprite):
         
         if key_pressed==[pygame.K_LEFT]:
             self.speedx -= 8
-            self.image = self.imagens[1]
         if key_pressed==[pygame.K_RIGHT]:
             self.speedx += 8
-            self.rect = self.image.get_rect()
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
@@ -54,9 +52,12 @@ class Player1(pygame.sprite.Sprite):
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
-        
-        
 
+        if self.speedx < 0:
+            self.image = self.imagens[1]
+        if self.speedx > 0:
+            self.image = self.imagens[0]
+            
         # Mantem dentro da tela
         if self.rect.right > LARGURA:
             self.rect.right = LARGURA
@@ -108,7 +109,12 @@ class Player2(pygame.sprite.Sprite):
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
-
+        
+        '''if self.speedx < 0:
+            self.image = self.imagens[1]
+        if self.speedx > 0:
+            self.image = self.imagens[0]'''
+            
         # Mantem dentro da tela
         if self.rect.right > LARGURA:
             self.rect.right = LARGURA

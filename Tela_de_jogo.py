@@ -1,6 +1,6 @@
 import pygame
 from Classes import Machado, Player1, Player2
-from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, LARGURA, LARGURA_CORE, POSICOES_CORE,QUIT,GAME,PRETO
+from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, LARGURA, LARGURA_CORE, POSICOES_CORE,QUIT,GAME,PRETO, VERMELHO
 from os import path
 from Elementos import DIR_IMG
 import Funções as fun
@@ -22,7 +22,7 @@ def gameplay(janela):
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
         
-    vidas = 3
+    vidas = 2
     
     tecla = {}
     ACABOU = 0
@@ -89,12 +89,22 @@ def gameplay(janela):
         janela.blit(plano_jogo, (0, 0))
         todos_sprites.draw(janela)
         
-        for i in range(0,vidas):
+        '''for i in range(0,vidas):
             coracoes = [0]*vidas
             coracao = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert_alpha()
             coracao = pygame.transform.scale(coracao, (LARGURA_CORE,ALTURA_CORE))
             coracoes[i] = coracao
-            janela.blit(coracoes[i],POSICOES_CORE[i])   
+            janela.blit(coracoes[i],POSICOES_CORE[i])   '''
+            
+        coracao = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert_alpha()
+        coracao = pygame.transform.scale(coracao, (LARGURA_CORE,ALTURA_CORE))
+        if vidas >= 1:
+            janela.blit(coracao, POSICOES_CORE[0])
+            if vidas >= 2:
+                janela.blit(coracao, POSICOES_CORE[1])
+                if vidas == 3:
+                    janela.blit(coracao, POSICOES_CORE[2])
+        
         
         
         pygame.display.update()

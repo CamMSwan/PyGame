@@ -1,8 +1,7 @@
-from json import load
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, INIMIGO_IMG, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, RAPOSA
+from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, RAPOSA
 import random
     
 class Player1(pygame.sprite.Sprite):
@@ -125,10 +124,11 @@ class Player2(pygame.sprite.Sprite):
         self.get_input()
 
 class Bala1(pygame.sprite.Sprite):
-    def __init__(self, img ,bottom,centerx):
+    def __init__(self,bottom,centerx):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = img 
+        self.image = pygame.image.load(path.join(DIR_IMG, BALA1_IMG)).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_BALA,ALTURA_BALA))
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
 

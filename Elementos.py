@@ -22,3 +22,6 @@ MUSICA_JOGO = '2 Old 2 Die Young.mp3'
 
 BALA1_IMG = 'bala.png'
 BALA2_IMG = 'bala.png'
+
+LARGURA_BALA = 17
+ALTURA_BALA = 17

@@ -1,5 +1,4 @@
 from json import load
-from turtle import delay
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path

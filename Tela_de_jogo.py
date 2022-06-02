@@ -85,9 +85,6 @@ def gameplay(janela):
             coracao = pygame.transform.scale(coracao, (LARGURA_CORE,ALTURA_CORE))
             coracoes[i] = coracao
             janela.blit(coracoes[i],POSICOES_CORE[i])'''   
-            
-        
-        
         
         
         pygame.display.update()

@@ -1,6 +1,6 @@
 from pickle import TRUE
 import pygame
-from Classes import Player1, Player2
+from Classes import Machado, Player1, Player2
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO
 from os import path
 import Elementos as El
@@ -15,15 +15,14 @@ def gameplay(janela):
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
     
+    machado = Machado()
+    todos_sprites.add(machado)
+    
+        
     jogador1 = Player1(grupo,elementos)
     jogador2 = Player2(grupo,elementos)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
-    
-    '''for i in range(8):
-        machado = Meteor(assets)
-        all_sprites.add(meteor)
-        all_meteors.add(meteor)'''
         
     tecla = {}
     ACABOU = 0

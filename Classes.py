@@ -1,7 +1,10 @@
+from json import load
+from turtle import delay
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import DOUTOR_IMG, FOX_IMG
+from Elementos import DOUTOR_IMG, FOX_IMG, LARGURA_M, MACHADO
+import random
     
 class Player1(pygame.sprite.Sprite):
     def __init__(self, grupo, elementos):
@@ -128,4 +131,22 @@ class Bala(pygame.sprite.Sprite):
         # se a sala passar do fim da tela, desaparece
         if self.rect.centerx > 960:
             self.kill()
-
+            
+class Machado(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.frames = []
+        for i in range(1,5):
+            self.frames.append(pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert())
+        self.frame_atual = 0
+        self.image = self.frames[self.frame_atual]
+        self.rect = self.image.get_rect()
+        
+    def update(self):
+        self.frame_atual += 0.14
+        
+        if self.frame_atual >= len(self.frames):
+            self.frame_atual = 0
+            
+        self.image = self.frames[int(self.frame_atual)]
+            

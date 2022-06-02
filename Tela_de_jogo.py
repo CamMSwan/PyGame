@@ -1,6 +1,6 @@
 import pygame
 from Classes import Machado, Player1, Player2
-from Configurações import ALTURA, BRANCO, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,PRETO
+from Configurações import ALTURA, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, LARGURA, POSICOES_CORE,QUIT,GAME,PRETO
 from os import path
 from Elementos import DIR_IMG
 import Funções as fun
@@ -16,19 +16,18 @@ def gameplay(janela):
     machado = Machado()
     todos_sprites.add(machado)
     
-        
+    
     jogador1 = Player1(grupo)
     jogador2 = Player2(grupo)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
         
+    vidas = 3
+    
     tecla = {}
     ACABOU = 0
     JOGANDO = 1
     MORTO = 2
-    
-    direita = False
-    esquerda = False
     
     rodando = JOGANDO
     while rodando != ACABOU:
@@ -45,24 +44,20 @@ def gameplay(janela):
                         tecla[evento.key] = True
                         if evento.key == pygame.K_LEFT:
                             jogador1.speedx -= 8
-                            direita = False
-                            esquerda = True
+                        
                         if evento.key == pygame.K_RIGHT:
                             jogador1.speedx += 8
-                            direita = False
-                            esquerda = True
+                            
                         if evento.key == pygame.K_UP:
                             jogador1.jumping
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_LEFT:
                                 jogador1.speedx += 8
-                                direita = False
-                                esquerda = False
+                               
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
-                                direita = False
-                                esquerda = False
+                                
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
                         tecla[evento.key] = True
                         if evento.key == pygame.K_a:
@@ -83,6 +78,17 @@ def gameplay(janela):
         janela.fill(BRANCO)  
         janela.blit(plano_jogo, (0, 0))
         todos_sprites.draw(janela)
+        
+        i = 1
+        while i < vidas:
+            coracoes = [0]*vidas
+            coracoes[i] = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert()
+            janela.blit(coracoes[i],POSICOES_CORE[i])   
+            i += 1
+        
+        
+        
+        
         pygame.display.update()
 
   

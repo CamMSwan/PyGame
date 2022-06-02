@@ -1,6 +1,7 @@
 from os import path
 
 import pygame
+pygame.init()
 
 DIR_IMG = path.join(path.dirname(__file__), 'imagens')
 DIR_SOM = path.join(path.dirname(__file__), 'sons')
@@ -24,12 +25,11 @@ QUIT = 2
 largura_coracao = 70
 altura_coracao = 60
 
-CORE_IMG = pygame.image.load('imagens/coracao.png').convert_alpha()
+
+CORE_IMG = 'coracao.png'
 CORE_2 = CORE_IMG
 CORE_3 = CORE_IMG
 
 #----------------Pontos e vidas
-coracoes = [CORE_IMG,CORE_2, CORE_3]
-pontos_coracoes_p1 = [(20, 20), (90, 20), (160, 20)]
-
+POSICOES_CORE = [(20, 20), (90, 20), (160, 20)]
 

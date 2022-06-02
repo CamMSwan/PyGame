@@ -1,25 +1,27 @@
 from json import load
-from turtle import delay
 import pygame
 from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import DOUTOR_IMG, FOX_IMG, LARGURA_M, MACHADO
+from Elementos import ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, INIMIGO_IMG, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, RAPOSA
 import random
     
 class Player1(pygame.sprite.Sprite):
-    def __init__(self, grupo, elementos):
+    def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-
-        self.image = elementos[FOX_IMG]
+        self.imagens = []
+        for i in range(0,2):
+            self.image = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa{}.png'.format(i) )).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (LARGURA_FOX, ALTURA_FOX))
+            self.imagens.append(self.image)
+            
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA / 2
-        self.rect.bottom = ALTURA - 10
+        self.rect.bottom = ALTURA - 178
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo
-        self.elementos = elementos
 
         self.y_gravidade = 1
         self.y_saltomax = 20
@@ -36,7 +38,6 @@ class Player1(pygame.sprite.Sprite):
             self.speedx -= 8
         if key_pressed==[pygame.K_RIGHT]:
             self.speedx += 8
-        
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
@@ -45,34 +46,40 @@ class Player1(pygame.sprite.Sprite):
             if self.y_velocidade <-(self.y_saltomax):
                 self.jumping = False
                 self.y_velocidade = self.y_saltomax
+    
+    
             
 
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
-        self.rect.y += self.speedy
 
+        if self.speedx < 0:
+            self.image = self.imagens[1]
+        if self.speedx > 0:
+            self.image = self.imagens[0]
+            
         # Mantem dentro da tela
-        if self.rect.right > LARGURA:
-            self.rect.right = LARGURA
-        if self.rect.left < 0:
-            self.rect.left = 0
+        if self.rect.right > LARGURA - LARGURA_FOX:
+            self.rect.right = LARGURA - LARGURA_FOX
+        if self.rect.left < 800 - LARGURA_FOX:
+            self.rect.left = 800 - LARGURA_FOX
         self.get_input()    
 
 class Player2(pygame.sprite.Sprite):
-    def __init__(self, grupo, elementos):
+    def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = elementos[DOUTOR_IMG]
+        self.image = pygame.image.load(path.join(DIR_IMG, INIMIGO_IMG)).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_DR, ALTURA_DR))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA / 8
-        self.rect.bottom = ALTURA - 20
+        self.rect.bottom = ALTURA - 178
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo
-        self.elementos = elementos
 
         self.y_gravidade = 1
         self.y_saltomax = 20
@@ -103,16 +110,21 @@ class Player2(pygame.sprite.Sprite):
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
-
+        
+        '''if self.speedx < 0:
+            self.image = self.imagens[1]
+        if self.speedx > 0:
+            self.image = self.imagens[0]'''
+            
         # Mantem dentro da tela
-        if self.rect.right > LARGURA:
-            self.rect.right = LARGURA
+        if self.rect.right > 700:
+            self.rect.right = 700
         if self.rect.left < 0:
             self.rect.left = 0
-        self.get_input()
         
+        self.get_input()
 
-class Bala(pygame.sprite.Sprite):
+class Bala1(pygame.sprite.Sprite):
     def __init__(self, img ,bottom,centerx):
         pygame.sprite.Sprite.__init__(self)
 
@@ -124,12 +136,37 @@ class Bala(pygame.sprite.Sprite):
 
         self.rect.centerx = centerx
         self.rect.bottom = bottom
-        self.speedx = 15
+        self.speedx = -10
 
     def update(self):
         self.rect.x += self.speedx
         # se a sala passar do fim da tela, desaparece
-        if self.rect.centerx > 960:
+        if self.rect.centerx < 0:
+            self.kill()
+    
+    
+        
+
+        
+
+class Bala2(pygame.sprite.Sprite):
+    def __init__(self, img ,bottom,centerx):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img 
+        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+
+        #definindo lugar em x e y
+
+        self.rect.centerx = centerx
+        self.rect.bottom = bottom
+        self.speedx = 10
+
+    def update(self):
+        self.rect.x += self.speedx
+        # se a sala passar do fim da tela, desaparece
+        if self.rect.centerx > LARGURA:
             self.kill()
             
 class Machado(pygame.sprite.Sprite):
@@ -137,16 +174,28 @@ class Machado(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.frames = []
         for i in range(1,5):
-            self.frames.append(pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert())
+            self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (LARGURA_M, ALTURA_M))
+            self.frames.append(self.image)
+            
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
+        self.rect.y = 0-ALTURA_M
+        self.speedy = 6
         
     def update(self):
         self.frame_atual += 0.14
+        self.rect.y += self.speedy
         
+        if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
+            self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
+            self.rect.y = 0-ALTURA_M
+            self.speedy = 6
+            
         if self.frame_atual >= len(self.frames):
             self.frame_atual = 0
-            
+        
         self.image = self.frames[int(self.frame_atual)]
             

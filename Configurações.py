@@ -22,14 +22,10 @@ INIC = 0
 GAME = 1
 QUIT = 2
 
-largura_coracao = 70
-altura_coracao = 60
+LARGURA_CORE = 50
+ALTURA_CORE = 40
 
 
-CORE_IMG = 'coracao.png'
-CORE_2 = CORE_IMG
-CORE_3 = CORE_IMG
-
-#----------------Pontos e vidas
+CORE_IMG = 'coracao.png'    
 POSICOES_CORE = [(20, 20), (90, 20), (160, 20)]
 

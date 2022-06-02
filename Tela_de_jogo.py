@@ -1,6 +1,6 @@
 import pygame
 from Classes import Machado, Player1, Player2
-from Configurações import ALTURA, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, LARGURA, POSICOES_CORE,QUIT,GAME,PRETO
+from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, LARGURA, LARGURA_CORE, POSICOES_CORE,QUIT,GAME,PRETO
 from os import path
 from Elementos import DIR_IMG
 import Funções as fun
@@ -79,12 +79,13 @@ def gameplay(janela):
         janela.blit(plano_jogo, (0, 0))
         todos_sprites.draw(janela)
         
-        i = 1
-        while i < vidas:
+        '''for i in range(0,vidas):
             coracoes = [0]*vidas
-            coracoes[i] = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert()
-            janela.blit(coracoes[i],POSICOES_CORE[i])   
-            i += 1
+            coracao = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert_alpha()
+            coracao = pygame.transform.scale(coracao, (LARGURA_CORE,ALTURA_CORE))
+            coracoes[i] = coracao
+            janela.blit(coracoes[i],POSICOES_CORE[i])'''   
+            
         
         
         

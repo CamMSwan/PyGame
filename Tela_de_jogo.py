@@ -22,7 +22,7 @@ def gameplay(janela):
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
         
-    vidas = 3
+    vidas = 2
     
     tecla = {}
     ACABOU = 0
@@ -88,9 +88,9 @@ def gameplay(janela):
             
         coracao = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert_alpha()
         coracao = pygame.transform.scale(coracao, (LARGURA_CORE,ALTURA_CORE))
-        if vidas > 1:
+        if vidas >= 1:
             janela.blit(coracao, POSICOES_CORE[0])
-            if vidas > 2:
+            if vidas >= 2:
                 janela.blit(coracao, POSICOES_CORE[1])
                 if vidas == 3:
                     janela.blit(coracao, POSICOES_CORE[2])

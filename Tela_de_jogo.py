@@ -79,12 +79,12 @@ def gameplay(janela):
         janela.blit(plano_jogo, (0, 0))
         todos_sprites.draw(janela)
         
-        '''for i in range(0,vidas):
+        for i in range(0,vidas):
             coracoes = [0]*vidas
             coracao = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert_alpha()
             coracao = pygame.transform.scale(coracao, (LARGURA_CORE,ALTURA_CORE))
             coracoes[i] = coracao
-            janela.blit(coracoes[i],POSICOES_CORE[i])'''   
+            janela.blit(coracoes[i],POSICOES_CORE[i])   
         
         
         pygame.display.update()

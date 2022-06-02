@@ -19,3 +19,6 @@ ALTURA_M = 60
 
 MUSICA_MENU = 'good,bad,ugly.mp3'
 MUSICA_JOGO = '2 Old 2 Die Young.mp3'
+
+BALA1_IMG = 'bala.png'
+BALA2_IMG = 'bala.png'

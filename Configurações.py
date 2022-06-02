@@ -24,10 +24,12 @@ QUIT = 2
 largura_coracao = 70
 altura_coracao = 60
 
-'''CORE_IMG = pygame.image.load('imagens/coracao.png').convert_alpha()
+CORE_IMG = pygame.image.load('imagens/coracao.png').convert_alpha()
 CORE_2 = CORE_IMG
 CORE_3 = CORE_IMG
 
 #----------------Pontos e vidas
 coracoes = [CORE_IMG,CORE_2, CORE_3]
-pontos_coracoes = [(20, 20), (90, 20), (160, 20)]'''
+pontos_coracoes_p1 = [(20, 20), (90, 20), (160, 20)]
+
+

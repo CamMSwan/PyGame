@@ -22,9 +22,11 @@ def tela_inicial(janela):
     fonte = pygame.font.SysFont(None, 60)
     titulo = fonte.render('Red Dead Raposa', True, (0,0,0))
     integrante1 =  fonte.render('Nina Schvartsman', True, (0,0,0))
-    integrante1 = pygame.transform.scale(integrante1,(400,200))
+    integrante1 = pygame.transform.scale(integrante1,(200,20))
     integrante2 =  fonte.render('Cameron Swan', True, (0,0,0))
+    integrante2 = pygame.transform.scale(integrante2, (200,20))
     integrante3 = fonte.render('Mariana Albuquerque', True, (0,0,0))
+    integrante3 =  pygame.transform.scale(integrante3, (200,20))
     musica = path.join(DIR_SOM,MUSICA_JOGO)
     while rodando:
         tempo_fps.tick(FPS)

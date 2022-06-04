@@ -29,18 +29,18 @@ def gameplay(janela):
     vidas2 = 3
     
     tecla = {}
-    ACABOU = 0
-    JOGANDO = 1
+
     
-    rodando = JOGANDO
-    while rodando != ACABOU:
+    
+    rodando = GAME
+    while rodando != GAME_OVER:
         tempo_fps.tick(FPS)
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
-                
-            if rodando == JOGANDO:
+
+            if rodando == GAME:
                     # Verifica se apertou alguma tecla.
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 1
                         # Dependendo da tecla, altera a velocidade.
@@ -87,7 +87,7 @@ def gameplay(janela):
                 jogador1.kill()
                 #morte = Morte(jogador1.rect.x,grupo)
                 #todos_sprites.add(morte)
-                rodando = ACABOU
+                rodando = GAME_OVER
                 
                         
            
@@ -99,7 +99,8 @@ def gameplay(janela):
                 jogador2.kill()
                 #morte = Morte(jogador2.rect.x,grupo)
                 #todos_sprites.add(morte)
-                rodando = ACABOU
+                rodando = GAME_OVER
+                
                         
                         
 
@@ -132,9 +133,13 @@ def gameplay(janela):
         
         
         pygame.display.update()
+
+    
+    
+
+    return rodando
         
-    if rodando == ACABOU:
-        return GAME_OVER
+    
 
   
 

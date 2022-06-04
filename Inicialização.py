@@ -22,6 +22,7 @@ def tela_inicial(janela):
     fonte = pygame.font.SysFont(None, 60)
     titulo = fonte.render('Red Dead Raposa', True, (0,0,0))
     integrante1 =  fonte.render('Nina Schvartsman', True, (0,0,0))
+    integrante1 = pygame.transform.scale(integrante1,(400,200))
     integrante2 =  fonte.render('Cameron Swan', True, (0,0,0))
     integrante3 = fonte.render('Mariana Albuquerque', True, (0,0,0))
     musica = path.join(DIR_SOM,MUSICA_JOGO)
@@ -43,8 +44,8 @@ def tela_inicial(janela):
         
         janela.fill(PRETO)  
         janela.blit(plano_de_fundo, pdf_rect)
-        janela.blit(titulo, (300,150))
-        janela.blit(integrante1, (250,40))
+        janela.blit(titulo, (520,300))
+        janela.blit(integrante1, (520,400))
         janela.blit(integrante2, (250,30))
         janela.blit(integrante3, (250,70))
         

@@ -20,7 +20,7 @@ class Player1(pygame.sprite.Sprite):
             
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.centerx = LARGURA / 2
+        self.rect.centerx = LARGURA - LARGURA_FOX/2
         self.rect.bottom = ALTURA - 178
         self.speedx = 0
         self.speedy = 0
@@ -78,7 +78,7 @@ class Player2(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (LARGURA_DR, ALTURA_DR))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.centerx = LARGURA / 8
+        self.rect.centerx = LARGURA_DR/2
         self.rect.bottom = ALTURA - 178
         self.speedx = 0
         self.speedy = 0
@@ -207,4 +207,15 @@ class Machado(pygame.sprite.Sprite):
         
         if self.rect.bottom < 0:
             self.kill()
-            
+
+class Morte(pygame.sprite.Sprite):     
+    def __init__(self):       
+        self.frames = []
+        for i in range(1,5):
+            self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (LARGURA_M, ALTURA_M))
+            self.frames.append(self.image)
+        #machado = path.join(DIR_SOM,BARULHO_M)
+        self.frame_atual = 0
+        self.image = self.frames[self.frame_atual]
+        self.rect = self.image.get_rect()

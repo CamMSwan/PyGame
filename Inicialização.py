@@ -43,7 +43,7 @@ def tela_inicial(janela):
         
         janela.fill(PRETO)  
         janela.blit(plano_de_fundo, pdf_rect)
-        janela.blit(titulo, (250,150))
+        janela.blit(titulo, (300,150))
         janela.blit(integrante1, (250,40))
         janela.blit(integrante2, (250,30))
         janela.blit(integrante3, (250,70))

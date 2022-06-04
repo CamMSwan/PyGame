@@ -24,9 +24,9 @@ def tela_inicial(janela):
     integrante1 =  fonte.render('Nina Schvartsman', True, (0,0,0))
     integrante1 = pygame.transform.scale(integrante1,(200,20))
     integrante2 =  fonte.render('Cameron Swan', True, (0,0,0))
-    integrante2 = pygame.transform.scale(integrante2, (200,20))
+    integrante2 = pygame.transform.scale(integrante2, (180,20))
     integrante3 = fonte.render('Mariana Albuquerque', True, (0,0,0))
-    integrante3 =  pygame.transform.scale(integrante3, (200,20))
+    integrante3 =  pygame.transform.scale(integrante3, (210,25))
     musica = path.join(DIR_SOM,MUSICA_JOGO)
     while rodando:
         tempo_fps.tick(FPS)
@@ -48,8 +48,8 @@ def tela_inicial(janela):
         janela.blit(plano_de_fundo, pdf_rect)
         janela.blit(titulo, (520,300))
         janela.blit(integrante1, (0,655))
-        janela.blit(integrante2, (0,680))
-        janela.blit(integrante3, (0,700))
+        janela.blit(integrante2, (0,685))
+        janela.blit(integrante3, (0,715))
         
     
 

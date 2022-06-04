@@ -2,7 +2,7 @@ import pygame
 from Classes import Machado, Morte, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO
 from os import path
-from Elementos import DIR_IMG, SOM_DANO
+from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
 
 def gameplay(janela):
@@ -135,7 +135,8 @@ def gameplay(janela):
         pygame.display.update()
 
     
-    
+    musica = path.join(DIR_SOM,MUSICA_FINAL)
+    fun.tocar_musica(musica)
 
     return rodando
         

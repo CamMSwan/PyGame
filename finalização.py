@@ -6,7 +6,8 @@ from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,PRET
 from os import path
 import Funções as fun
 
-from Elementos import MUSICA_JOGO
+
+mixer.init()
 
 def tela_final (janela):
 

@@ -27,5 +27,6 @@ ALTURA_CORE = 40
 
 
 CORE_IMG = 'coracao.png'    
-POSICOES_CORE = [(20, 20), (90, 20), (160, 20)]
+POSICOES_CORE1 = [(20, 20), (90, 20), (160, 20)]
+POSICOES_CORE2 = [(LARGURA - 210, 20), (LARGURA - 140, 20), (LARGURA - 70, 20)]
 

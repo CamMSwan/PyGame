@@ -1,7 +1,7 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, RAPOSA
+from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, MORTE, RAPOSA
 import random
 from pygame import mixer
 import Funções as fun
@@ -48,9 +48,7 @@ class Player1(pygame.sprite.Sprite):
             self.y_velocidade -= self.y_gravidade
             if self.y_velocidade <-(self.y_saltomax):
                 self.jumping = False
-                self.y_velocidade = self.y_saltomax
-    
-    
+                self.y_velocidade = self.y_saltomax        
             
 
     def update(self):
@@ -68,6 +66,10 @@ class Player1(pygame.sprite.Sprite):
         if self.rect.left < 800 - LARGURA_FOX:
             self.rect.left = 800 - LARGURA_FOX
         self.get_input()    
+        
+    def morte(self):
+        morte = Morte(self.rect.x)
+        self.groups['todos_sprites'].add(morte)
 
 class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo):
@@ -209,13 +211,27 @@ class Machado(pygame.sprite.Sprite):
             self.kill()
 
 class Morte(pygame.sprite.Sprite):     
-    def __init__(self):       
+    def __init__(self,x,grupo):    
+        pygame.sprite.Sprite.__init__(self)   
         self.frames = []
-        for i in range(1,5):
-            self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
-            self.image = pygame.transform.scale(self.image, (LARGURA_M, ALTURA_M))
+        for i in range(1,16):
+            self.image = pygame.image.load('{}/{}/original-{}.png.png'.format(DIR_IMG,MORTE,i)).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (120, 120))
             self.frames.append(self.image)
-        #machado = path.join(DIR_SOM,BARULHO_M)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = x
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()
+        
+    def update(self):
+        self.frame_atual += 0.5
+        
+        if self.frame_atual >= len(self.frames):
+            self.frame_atual = 0
+            
+        self.image = self.frames[int(self.frame_atual)]
+        x = self.rect.x
+        self.rect = self.image.get_rect()
+        self.rect.x = x

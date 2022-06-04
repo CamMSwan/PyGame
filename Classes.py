@@ -63,8 +63,8 @@ class Player1(pygame.sprite.Sprite):
             self.image = self.imagens[0]
             
         # Mantem dentro da tela
-        if self.rect.right > LARGURA - LARGURA_FOX:
-            self.rect.right = LARGURA - LARGURA_FOX
+        if self.rect.right > LARGURA :
+            self.rect.right = LARGURA 
         if self.rect.left < 800 - LARGURA_FOX:
             self.rect.left = 800 - LARGURA_FOX
         self.get_input()    
@@ -181,11 +181,11 @@ class Machado(pygame.sprite.Sprite):
             self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
             self.image = pygame.transform.scale(self.image, (LARGURA_M, ALTURA_M))
             self.frames.append(self.image)
-        machado = path.join(DIR_SOM,BARULHO_M)
+        #machado = path.join(DIR_SOM,BARULHO_M)
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()
-        fun.tocar_musica(machado,5)
+        #fun.tocar_musica(machado,5)
         self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
         self.rect.y = 0-ALTURA_M
         self.speedy = 8
@@ -195,7 +195,7 @@ class Machado(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         
         if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
-            fun.tocar_musica(machado,5)
+            #fun.tocar_musica(machado,5)
             self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
             self.rect.y = 0-ALTURA_M
             self.speedy = 8
@@ -204,4 +204,7 @@ class Machado(pygame.sprite.Sprite):
             self.frame_atual = 0
         
         self.image = self.frames[int(self.frame_atual)]
+        
+        if self.rect.bottom < 0:
+            self.kill()
             

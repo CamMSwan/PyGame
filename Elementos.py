@@ -28,3 +28,5 @@ LARGURA_BALA = 17
 ALTURA_BALA = 17
 
 SOM_DANO = 'Argh.mp3'
+
+MORTE = 'Morte'

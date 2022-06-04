@@ -23,7 +23,7 @@ def gameplay(janela):
     todos_sprites.add(jogador1)
         
     vidas1 = 3
-    vidas2 = 2
+    vidas2 = 3
     
     tecla = {}
     ACABOU = 0

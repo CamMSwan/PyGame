@@ -183,7 +183,7 @@ class Machado(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
         self.rect.y = 0-ALTURA_M
-        self.speedy = 6
+        self.speedy = 8
         
     def update(self):
         self.frame_atual += 0.14
@@ -192,7 +192,7 @@ class Machado(pygame.sprite.Sprite):
         if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
             self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
             self.rect.y = 0-ALTURA_M
-            self.speedy = 6
+            self.speedy = 8
             
         if self.frame_atual >= len(self.frames):
             self.frame_atual = 0

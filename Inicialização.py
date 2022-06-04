@@ -20,7 +20,10 @@ def tela_inicial(janela):
     pdf_rect = plano_de_fundo.get_rect()
     rodando = True
     fonte = pygame.font.SysFont(None, 60)
-    text = fonte.render('Have Fun with the Fox', True, (0,0,0))
+    titulo = fonte.render('Red Dead Raposa', True, (0,0,0))
+    integrante1 =  fonte.render('Nina Schvartsman', True, (0,0,0))
+    integrante2 =  fonte.render('Cameron Swan', True, (0,0,0))
+    integrante3 = fonte.render('Mariana Albuquerque', True, (0,0,0))
     musica = path.join(DIR_SOM,MUSICA_JOGO)
     while rodando:
         tempo_fps.tick(FPS)
@@ -40,7 +43,10 @@ def tela_inicial(janela):
         
         janela.fill(PRETO)  
         janela.blit(plano_de_fundo, pdf_rect)
-        janela.blit(text, (250,150))
+        janela.blit(titulo, (250,150))
+        janela.blit(integrante1, (250,40))
+        janela.blit(integrante2, (250,30))
+        janela.blit(integrante3, (250,70))
         
     
 

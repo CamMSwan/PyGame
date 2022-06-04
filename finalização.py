@@ -18,13 +18,14 @@ def tela_final (janela):
     plano_fundo = pygame.transform.scale(plano_fundo, (LARGURA,ALTURA))
     pdf_rect = plano_fundo.get_rect()
     rodando = True
+    
     while rodando:
         tempo_fps.tick(FPS)
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 estado = QUIT
                 rodando = False
-            if evento.type == pygame.KEYUP:
+            if evento.type == pygame.K_SPACE:
                 estado = GAME
                 rodando = False
     

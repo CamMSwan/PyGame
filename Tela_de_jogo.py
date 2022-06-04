@@ -1,6 +1,6 @@
 import pygame
 from Classes import Machado, Morte, Player1, Player2
-from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO
+from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO
 from os import path
 from Elementos import DIR_IMG, SOM_DANO
 import Funções as fun
@@ -31,7 +31,6 @@ def gameplay(janela):
     tecla = {}
     ACABOU = 0
     JOGANDO = 1
-    MORTO = 2
     
     rodando = JOGANDO
     while rodando != ACABOU:
@@ -86,9 +85,9 @@ def gameplay(janela):
             fun.tocar_som(som_dano)
             if vidas1 == 0:
                 jogador1.kill()
-                morte = Morte(jogador1.rect.x)
-                todos_sprites.add(morte)
-                rodando = MORTO
+                #morte = Morte(jogador1.rect.x,grupo)
+                #todos_sprites.add(morte)
+                rodando = ACABOU
                 
                         
            
@@ -98,9 +97,9 @@ def gameplay(janela):
             fun.tocar_som(som_dano)
             if vidas2 == 0:
                 jogador2.kill()
-                morte = Morte(jogador2.rect.x)
-                todos_sprites.add(morte)
-                rodando = MORTO
+                #morte = Morte(jogador2.rect.x,grupo)
+                #todos_sprites.add(morte)
+                rodando = ACABOU
                         
                         
 
@@ -133,6 +132,9 @@ def gameplay(janela):
         
         
         pygame.display.update()
+        
+    if rodando == ACABOU:
+        return GAME_OVER
 
   
 

@@ -12,7 +12,7 @@ mixer.init()
 def tela_final (janela):
 
     tempo_fps = pygame.time.Clock()
-    plano_fundo = pygame.image.load(path.join(DIR_IMG, 'plano_final.jpg')).convert()
+    plano_fundo = pygame.image.load(path.join(DIR_IMG, 'fim de tarde.png')).convert()
     plano_fundo = pygame.transform.scale(plano_fundo, (LARGURA,ALTURA))
     pdf_rect = plano_fundo.get_rect()
     rodando = True

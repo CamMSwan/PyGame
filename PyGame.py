@@ -1,10 +1,11 @@
 from os import path
 import pygame
-from Configurações import DIR_SOM, INIC, LARGURA, ALTURA, GAME, QUIT 
+from Configurações import DIR_SOM, INIC, LARGURA, ALTURA, GAME, QUIT, GAME_OVER
 import Inicialização as In
 import Tela_de_jogo as Tj
 from Elementos import MUSICA_MENU,MUSICA_JOGO
 import Funções as fun
+import finalização as fim
 
 
 pygame.init()
@@ -21,6 +22,8 @@ while game != QUIT:
         game = In.tela_inicial(janela)
     elif game == GAME:
         game = Tj.gameplay(janela)
+    elif game == GAME_OVER:
+        game = fim.tela_final(janela)
     else:
         game = QUIT
 

@@ -1,8 +1,12 @@
 import pygame
-from Configurações import DIR_IMG,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
+from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, RAPOSA
+from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, RAPOSA
 import random
+from pygame import mixer
+import Funções as fun
+
+machado = path.join(DIR_SOM,BARULHO_M)
     
 class Player1(pygame.sprite.Sprite):
     def __init__(self, grupo):
@@ -177,10 +181,11 @@ class Machado(pygame.sprite.Sprite):
             self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
             self.image = pygame.transform.scale(self.image, (LARGURA_M, ALTURA_M))
             self.frames.append(self.image)
-            
+        machado = path.join(DIR_SOM,BARULHO_M)
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
         self.rect = self.image.get_rect()
+        fun.tocar_musica(machado,5)
         self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
         self.rect.y = 0-ALTURA_M
         self.speedy = 8
@@ -190,6 +195,7 @@ class Machado(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         
         if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
+            fun.tocar_musica(machado,5)
             self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
             self.rect.y = 0-ALTURA_M
             self.speedy = 8

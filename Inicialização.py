@@ -36,7 +36,7 @@ def tela_inicial(janela):
                 
                 if estado == GAME:
                     mixer.music.stop()
-                    fun.tocar_musica(musica)
+                    fun.tocar_musica(musica,-1)
         
         janela.fill(PRETO)  
         janela.blit(plano_de_fundo, pdf_rect)

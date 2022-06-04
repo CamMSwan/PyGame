@@ -16,6 +16,7 @@ MENU = 'fundo_inicial.png'
 MACHADO = 'Animação machado'
 LARGURA_M = 60
 ALTURA_M = 60
+BARULHO_M = 'Few dollars more .mp3'
 
 MUSICA_MENU = 'good,bad,ugly.mp3'
 MUSICA_JOGO = '2 Old 2 Die Young.mp3'

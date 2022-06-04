@@ -10,7 +10,7 @@ import Funções as fun
 pygame.init()
 pygame.mixer.init()
 musica = path.join(DIR_SOM,MUSICA_MENU)
-fun.tocar_musica(musica)
+fun.tocar_musica(musica,-1)
 janela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('Raposa Kombat')
 

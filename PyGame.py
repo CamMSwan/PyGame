@@ -20,9 +20,9 @@ game = INIC
 while game != QUIT:
     if game == INIC:
         game = In.tela_inicial(janela)
-    elif game == GAME:
+    if game == GAME:
         game = Tj.gameplay(janela)
-    elif game == GAME_OVER:
+    if game == GAME_OVER:
         game = fim.tela_final(janela)
     else:
         game = QUIT

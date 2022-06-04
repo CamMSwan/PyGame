@@ -8,9 +8,6 @@ import Funções as fun
 
 from Elementos import MUSICA_JOGO
 
-pygame.init()
-mixer.init()
-
 def tela_final (janela):
 
     tempo_fps = pygame.time.Clock()
@@ -25,10 +22,13 @@ def tela_final (janela):
             if evento.type == pygame.QUIT:
                 estado = QUIT
                 rodando = False
+
             if evento.type == pygame.K_SPACE:
                 estado = GAME
                 rodando = False
     
-    janela.blit(plano_fundo, pdf_rect)
+        janela.blit(plano_fundo, pdf_rect)
+
+        pygame.display.update()
 
     return estado

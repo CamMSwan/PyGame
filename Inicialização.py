@@ -8,9 +8,6 @@ import Funções as fun
 
 from Elementos import MUSICA_JOGO
 
-pygame.init()
-mixer.init()
-#Configurações da janela
 
 def tela_inicial(janela):
   

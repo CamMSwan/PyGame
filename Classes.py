@@ -114,6 +114,7 @@ class Player2(pygame.sprite.Sprite):
             
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
+        self.image = self.imagens[0]
         self.rect.centerx = LARGURA_DR/2
         self.rect.bottom = ALTURA - 178
         self.speedx = 0

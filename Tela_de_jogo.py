@@ -25,6 +25,7 @@ def gameplay(janela):
     
     jogador1 = Player1(grupo)
     direcao1 = 'E'
+    direcao2 = 'D'
     jogador2 = Player2(grupo)
     
     jogadores.add(jogador1)

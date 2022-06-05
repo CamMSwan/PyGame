@@ -74,7 +74,7 @@ def gameplay(janela):
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_LEFT:
                                 jogador1.speedx += 8
-                               
+                                
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
                                 
@@ -85,12 +85,17 @@ def gameplay(janela):
                         tecla[evento.key] = True
                         if evento.key == pygame.K_a:
                             jogador2.speedx -= 8
+                            direcao2 = 'E'
                         if evento.key == pygame.K_d:
                             jogador2.speedx += 8
+                            direcao2 = 'D'
                         if evento.key == pygame.K_w:
                             jogador2.jumping
                         if evento.key == pygame.K_q:
-                            jogador2.atirarD()
+                            if direcao2 == 'D':
+                                jogador2.atirarD()
+                            if direcao2 == 'E':
+                                jogador2.atirarE()
                             
                             
                     if evento.type == pygame.KEYUP:

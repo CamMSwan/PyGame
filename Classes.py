@@ -61,8 +61,8 @@ class Player1(pygame.sprite.Sprite):
         # Mantem dentro da tela
         if self.rect.right > LARGURA :
             self.rect.right = LARGURA 
-        if self.rect.left < 800 - LARGURA_FOX:
-            self.rect.left = 800 - LARGURA_FOX
+        if self.rect.left < 0:
+            self.rect.left = 0
         self.get_input()    
         
     
@@ -106,8 +106,12 @@ class Player2(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = pygame.image.load(path.join(DIR_IMG, INIMIGO_IMG)).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (LARGURA_DR, ALTURA_DR))
+        self.imagens = []
+        for i in range(0,2):
+            self.image = pygame.image.load(path.join(DIR_IMG,INIMIGO_IMG,'imagem_resina{}.png'.format(i) )).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (LARGURA_DR, ALTURA_DR))
+            self.imagens.append(self.image)
+            
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA_DR/2
@@ -127,14 +131,7 @@ class Player2(pygame.sprite.Sprite):
 
     def get_input(self):      
             key_pressed = pygame.key.get_pressed()
-            self.rect.x += self.speedx
-            self.rect.y += self.speedy
-        
-            if key_pressed==[pygame.K_a]:
-                self.speedx -= 8
-            if key_pressed==[pygame.K_d]:
-                self.speedx += 8
-        
+            
             if key_pressed[pygame.K_w]:
                 self.jumping = True
             if self.jumping:
@@ -149,14 +146,14 @@ class Player2(pygame.sprite.Sprite):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
         
-        '''if self.speedx < 0:
+        if self.speedx < 0:
             self.image = self.imagens[1]
         if self.speedx > 0:
-            self.image = self.imagens[0]'''
+            self.image = self.imagens[0]
             
         # Mantem dentro da tela
-        if self.rect.right > 700:
-            self.rect.right = 700
+        if self.rect.right > LARGURA:
+            self.rect.right = LARGURA
         if self.rect.left < 0:
             self.rect.left = 0
         

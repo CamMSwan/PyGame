@@ -6,7 +6,7 @@ RAPOSA = 'Raposa'
 LARGURA_FOX = 150
 ALTURA_FOX = 165
 
-INIMIGO_IMG = 'imagem_resina.png'
+INIMIGO_IMG = 'Jacare'
 LARGURA_DR = 150
 ALTURA_DR = 165
 

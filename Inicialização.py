@@ -27,6 +27,7 @@ def tela_inicial(janela):
     trabalho =  fonte.render('Projeto final de Dessoft', True, (0,0,0))
     trabalho = pygame.transform.scale(trabalho, (210,25))
     musica = path.join(DIR_SOM,MUSICA_JOGO)
+    
     while rodando:
         tempo_fps.tick(FPS)
 
@@ -36,8 +37,9 @@ def tela_inicial(janela):
                 rodando = False
 
             if evento.type == pygame.KEYUP:
-                estado = GAME
-                rodando = False
+                if evento.key == pygame.K_SPACE:
+                    estado = GAME
+                    rodando = False
                 
                 if estado == GAME:
                     mixer.music.stop()

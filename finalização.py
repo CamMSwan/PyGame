@@ -11,24 +11,30 @@ from Elementos import  MUSICA_JOGO
 mixer.init()
 
 def tela_final (janela):
-
+    tempo_fps = pygame.time.Clock()
     musica = path.join(DIR_SOM,MUSICA_JOGO)
     tempo_fps = pygame.time.Clock()
     plano_fundo = pygame.image.load(path.join(DIR_IMG, 'fim de tarde.png')).convert()
     plano_fundo = pygame.transform.scale(plano_fundo, (LARGURA,ALTURA))
     pdf_rect = plano_fundo.get_rect()
+    
     rodando = GAME_OVER
+    
     while rodando == GAME_OVER:
+        
         tempo_fps.tick(FPS)
+        
         for evento in pygame.event.get():
+            
             if evento.type == pygame.QUIT:
                 rodando = QUIT
                 
 
-            if evento.type == pygame.K_SPACE:
-                rodando = GAME
-                mixer.music.stop()
-                fun.tocar_musica(musica)
+            if evento.type == pygame.KEYUP:
+                if evento.key == pygame.K_SPACE:
+                    rodando = GAME
+                    mixer.music.stop()
+                    fun.tocar_musica(musica)
                 
     
         janela.blit(plano_fundo, pdf_rect)

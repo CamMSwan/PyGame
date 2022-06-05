@@ -18,6 +18,7 @@ pygame.display.set_caption('Raposa Kombat')
 game = INIC
 
 while game != QUIT:
+    
     if game == INIC:
         game = In.tela_inicial(janela)
     if game == GAME:
@@ -26,7 +27,6 @@ while game != QUIT:
         game = fim.tela_final(janela)
     else:
         game = QUIT
-
     
     pygame.display.update()  
 

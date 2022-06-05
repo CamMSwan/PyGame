@@ -23,7 +23,8 @@ MUSICA_JOGO = '2 Old 2 Die Young.mp3'
 MUSICA_FINAL = 'riders in the sky.mp3'
 
 BALA1_IMG = 'bala.png'
-BALA2_IMG = 'bala.png'
+BALA2_IMG = 'bala (1).png'
+TIRO = 'Django Gunshot.mp3'
 
 LARGURA_BALA = 17
 ALTURA_BALA = 17

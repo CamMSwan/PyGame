@@ -1,30 +1,43 @@
+from turtle import speed
 import pygame
-from Classes import Machado, Morte, Player1, Player2
+from Classes import Machado, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO
 from os import path
-from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO
+from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO, RAPOSA, LARGURA_FOX,ALTURA_FOX
 import Funções as fun
 
 def gameplay(janela):
+    
+    direita = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa0.png')).convert_alpha()
+    direita = pygame.transform.scale(direita, (LARGURA_FOX, ALTURA_FOX))
+    
+    esquerda = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa1.png')).convert_alpha()
+    esquerda = pygame.transform.scale(esquerda, (LARGURA_FOX, ALTURA_FOX))
+    
     tempo_fps = pygame.time.Clock()
     plano_jogo = pygame.image.load(path.join(DIR_IMG, 'fundo_jogo.png')).convert()
     plano_jogo = pygame.transform.scale(plano_jogo, (LARGURA,ALTURA))
     todos_sprites = pygame.sprite.Group()
+    todas_balas = pygame.sprite.Group()
+    jogadores = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
+    grupo['todas_balas'] = todas_balas
+    grupo['jogadores'] = jogadores
     
     machado = Machado()
     todos_sprites.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
     
     jogador1 = Player1(grupo)
+    direcao1 = 'E'
     jogador2 = Player2(grupo)
+    
+    jogadores.add(jogador1)
+    jogadores.add(jogador2)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
-    
-    dano1 = pygame.sprite.collide_rect(machado,jogador1)
-    dano2 = pygame.sprite.collide_rect(machado,jogador2)
-        
+
     vidas1 = 3
     vidas2 = 3
     
@@ -33,12 +46,13 @@ def gameplay(janela):
     
     
     rodando = GAME
-    while rodando != GAME_OVER:
+    while rodando != GAME_OVER and rodando != QUIT:
         tempo_fps.tick(FPS)
 
         for evento in pygame.event.get():
+            
             if evento.type == pygame.QUIT:
-                rodando = False
+                rodando = QUIT
 
             if rodando == GAME:
                     # Verifica se apertou alguma tecla.
@@ -47,12 +61,21 @@ def gameplay(janela):
                         tecla[evento.key] = True
                         if evento.key == pygame.K_LEFT:
                             jogador1.speedx -= 8
-                        
+                            direcao1 = 'E'
                         if evento.key == pygame.K_RIGHT:
                             jogador1.speedx += 8
+                            direcao1 = 'D'
                             
                         if evento.key == pygame.K_UP:
                             jogador1.jumping
+                            
+                        if evento.key == pygame.K_SPACE:
+                            if direcao1 == 'D':
+                                jogador1.atirarD()
+                            if direcao1 == 'E':
+                                jogador1.atirarE()
+                            
+                            
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_LEFT:
@@ -60,6 +83,9 @@ def gameplay(janela):
                                
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
+                                
+                            if evento.key == pygame.K_SPACE:
+                                evento.key = False
                                 
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
                         tecla[evento.key] = True
@@ -69,33 +95,54 @@ def gameplay(janela):
                             jogador2.speedx += 8
                         if evento.key == pygame.K_w:
                             jogador2.jumping
+                        if evento.key == pygame.K_q:
+                            jogador2.atirarD()
+                            
+                            
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_a:
                                 jogador2.speedx += 8
                             if evento.key == pygame.K_d:
                                 jogador2.speedx -= 8
+                            if evento.key == pygame.K_q:
+                                evento.key = False
                                 
-        dano1 = pygame.sprite.collide_rect(machado,jogador1)
-        dano2 = pygame.sprite.collide_rect(machado,jogador2)        
+        dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
+        dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)         
                         
-        if dano1:
+        if dano_machado1:
             machado.rect.top = ALTURA
             vidas1 -= 1
             fun.tocar_som(som_dano)
-            if vidas1 == 0:
+                    
+        if dano_machado2:
+            machado.rect.top = ALTURA
+            vidas2 -= 1
+            fun.tocar_som(som_dano)
+        
+        dano_tiro1 = pygame.sprite.spritecollide(jogador1, todas_balas, True, pygame.sprite.collide_mask)
+        dano_tiro2 = pygame.sprite.spritecollide(jogador2, todas_balas, True, pygame.sprite.collide_mask)
+        
+       
+        if dano_tiro1:
+            fun.tocar_som(som_dano)
+            vidas1 -= 1
+                
+        if dano_tiro2:
+            fun.tocar_som(som_dano)
+            vidas2 -= 1
+
+         
+                
+                
+        if vidas1 == 0:
                 jogador1.kill()
                 #morte = Morte(jogador1.rect.x,grupo)
                 #todos_sprites.add(morte)
                 rodando = GAME_OVER
                 
-                        
-           
-        if dano2:
-            machado.rect.top = ALTURA
-            vidas2 -= 1
-            fun.tocar_som(som_dano)
-            if vidas2 == 0:
+        if vidas2 == 0:
                 jogador2.kill()
                 #morte = Morte(jogador2.rect.x,grupo)
                 #todos_sprites.add(morte)

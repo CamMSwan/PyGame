@@ -1,7 +1,8 @@
+from turtle import left
 import pygame
 from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, MORTE, RAPOSA
+from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, MORTE, RAPOSA, TIRO
 import random
 from pygame import mixer
 import Funções as fun
@@ -26,6 +27,9 @@ class Player1(pygame.sprite.Sprite):
         self.speedy = 0
         self.groups = grupo
 
+        self.last_shot = pygame.time.get_ticks()
+        self.shoot_ticks = 300
+        
         self.y_gravidade = 1
         self.y_saltomax = 20
         self.y_velocidade = self.y_saltomax
@@ -34,13 +38,8 @@ class Player1(pygame.sprite.Sprite):
 
     def get_input(self):
         key_pressed = pygame.key.get_pressed()
-        self.rect.x += self.speedx
         self.rect.y += self.speedy
         
-        if key_pressed==[pygame.K_LEFT]:
-            self.speedx -= 8
-        if key_pressed==[pygame.K_RIGHT]:
-            self.speedx += 8
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
@@ -67,9 +66,41 @@ class Player1(pygame.sprite.Sprite):
             self.rect.left = 800 - LARGURA_FOX
         self.get_input()    
         
-    def morte(self):
-        morte = Morte(self.rect.x)
-        self.groups['todos_sprites'].add(morte)
+    
+    def atirarD(self):
+        # Verifica se pode atirar
+        agora = pygame.time.get_ticks()
+        # Verifica quantos ticks se passaram desde o último tiro.
+        elapsed_ticks = agora - self.last_shot
+
+        # Se já pode atirar novamente...
+        if elapsed_ticks > self.shoot_ticks:
+            # Marca o tick da nova imagem.
+            self.last_shot = agora
+            nova_bala = BalaD(self.rect.right,self.rect.centery)
+            self.groups['todos_sprites'].add(nova_bala)
+            self.groups['todas_balas'].add(nova_bala)
+            tiro = path.join(DIR_SOM,TIRO)
+            fun.tocar_som(tiro)
+            
+    def atirarE(self):
+        # Verifica se pode atirar
+        agora = pygame.time.get_ticks()
+        # Verifica quantos ticks se passaram desde o último tiro.
+        elapsed_ticks = agora - self.last_shot
+
+        # Se já pode atirar novamente...
+        if elapsed_ticks > self.shoot_ticks:
+            # Marca o tick da nova imagem.
+            self.last_shot = agora
+            nova_bala = BalaE(self.rect.left,self.rect.centery)
+            self.groups['todos_sprites'].add(nova_bala)
+            self.groups['todas_balas'].add(nova_bala)
+            tiro = path.join(DIR_SOM,TIRO)
+            fun.tocar_som(tiro)
+                
+        
+    
 
 class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo):
@@ -86,13 +117,16 @@ class Player2(pygame.sprite.Sprite):
         self.speedy = 0
         self.groups = grupo
 
+        self.last_shot = pygame.time.get_ticks()
+        self.shoot_ticks = 300
+        
         self.y_gravidade = 1
         self.y_saltomax = 20
         self.y_velocidade = self.y_saltomax
         self.jumping = False
         
 
-    def get_input(self):
+    def get_input(self):      
             key_pressed = pygame.key.get_pressed()
             self.rect.x += self.speedx
             self.rect.y += self.speedy
@@ -110,7 +144,7 @@ class Player2(pygame.sprite.Sprite):
                 if self.y_velocidade <-(self.y_saltomax):
                     self.jumping = False
                     self.y_velocidade = self.y_saltomax
-                
+        
 
     def update(self):
         # Atualização da posição da raposa
@@ -129,25 +163,56 @@ class Player2(pygame.sprite.Sprite):
         
         self.get_input()
 
-class Bala1(pygame.sprite.Sprite):
-    def __init__(self,bottom,centerx):
+    def atirarE(self):
+        # Verifica se pode atirar
+        agora = pygame.time.get_ticks()
+        # Verifica quantos ticks se passaram desde o último tiro.
+        elapsed_ticks = agora - self.last_shot
+
+        # Se já pode atirar novamente...
+        if elapsed_ticks > self.shoot_ticks:
+            # Marca o tick da nova imagem.
+            self.last_shot = agora
+            nova_bala = BalaE(self.rect.left,self.rect.centery)
+            self.groups['todos_sprites'].add(nova_bala)
+            self.groups['todas_balas'].add(nova_bala)
+            tiro = path.join(DIR_SOM,TIRO)
+            fun.tocar_som(tiro)
+            
+    def atirarD(self):
+            # Verifica se pode atirar
+            agora = pygame.time.get_ticks()
+            # Verifica quantos ticks se passaram desde o último tiro.
+            elapsed_ticks = agora - self.last_shot
+
+            # Se já pode atirar novamente...
+            if elapsed_ticks > self.shoot_ticks:
+                # Marca o tick da nova imagem.
+                self.last_shot = agora
+                nova_bala = BalaD(self.rect.right,self.rect.centery)
+                self.groups['todos_sprites'].add(nova_bala)
+                self.groups['todas_balas'].add(nova_bala)
+                tiro = path.join(DIR_SOM,TIRO)
+                fun.tocar_som(tiro)
+                    
+class BalaE(pygame.sprite.Sprite):
+    def __init__(self,right,centery):
         pygame.sprite.Sprite.__init__(self)
-
-        self.image = pygame.image.load(path.join(DIR_IMG, BALA1_IMG)).convert_alpha()
+        self.image = pygame.image.load(path.join(DIR_IMG, BALA2_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_BALA,ALTURA_BALA))
-        self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
-
+        self.rect = self.image.get_rect()
+        
         #definindo lugar em x e y
 
-        self.rect.centerx = centerx
-        self.rect.bottom = bottom
-        self.speedx = -10
+        self.rect.right = right
+        self.rect.centery = centery
+        self.speedx = -20
 
     def update(self):
         self.rect.x += self.speedx
         # se a sala passar do fim da tela, desaparece
-        if self.rect.centerx < 0:
+        if self.rect.left < 0:
             self.kill()
     
     
@@ -155,24 +220,24 @@ class Bala1(pygame.sprite.Sprite):
 
         
 
-class Bala2(pygame.sprite.Sprite):
-    def __init__(self, img ,bottom,centerx):
+class BalaD(pygame.sprite.Sprite):
+    def __init__(self,left,centery):
         pygame.sprite.Sprite.__init__(self)
-
-        self.image = img 
-        self.rect = self.image.get_rect()
+        self.image = pygame.image.load(path.join(DIR_IMG, BALA1_IMG)).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_BALA,ALTURA_BALA))
         self.mask = pygame.mask.from_surface(self.image)
-
+        self.rect = self.image.get_rect()
+        
         #definindo lugar em x e y
 
-        self.rect.centerx = centerx
-        self.rect.bottom = bottom
-        self.speedx = 10
+        self.rect.left = left
+        self.rect.centery = centery
+        self.speedx = 20
 
     def update(self):
         self.rect.x += self.speedx
         # se a sala passar do fim da tela, desaparece
-        if self.rect.centerx > LARGURA:
+        if self.rect.left < 0:
             self.kill()
             
 class Machado(pygame.sprite.Sprite):
@@ -210,28 +275,3 @@ class Machado(pygame.sprite.Sprite):
         if self.rect.bottom < 0:
             self.kill()
 
-class Morte(pygame.sprite.Sprite):     
-    def __init__(self,x,grupo):    
-        pygame.sprite.Sprite.__init__(self)   
-        self.frames = []
-        for i in range(1,16):
-            self.image = pygame.image.load('{}/{}/original-{}.png.png'.format(DIR_IMG,MORTE,i)).convert_alpha()
-            self.image = pygame.transform.scale(self.image, (120, 120))
-            self.frames.append(self.image)
-        
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.frame_atual = 0
-        self.image = self.frames[self.frame_atual]
-        self.rect = self.image.get_rect()
-        
-    def update(self):
-        self.frame_atual += 0.5
-        
-        if self.frame_atual >= len(self.frames):
-            self.frame_atual = 0
-            
-        self.image = self.frames[int(self.frame_atual)]
-        x = self.rect.x
-        self.rect = self.image.get_rect()
-        self.rect.x = x

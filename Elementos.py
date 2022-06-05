@@ -12,6 +12,7 @@ ALTURA_DR = 165
 
 PLANO_DE_FUNDO = 'fundo_jogo.png'
 MENU = 'fundo_inicial.png'
+FUNDO_GAME_OVER = 'imagem game over.jpg'
 
 MACHADO = 'Animação machado'
 LARGURA_M = 60

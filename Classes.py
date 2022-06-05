@@ -1,4 +1,3 @@
-from turtle import left
 import pygame
 from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
@@ -274,4 +273,36 @@ class Machado(pygame.sprite.Sprite):
         
         if self.rect.bottom < 0:
             self.kill()
-
+            
+            
+class Morte(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.frames = []
+        for i in range(1,5):
+            self.image = pygame.image.load('{}/{}/original-{}.png.png'.format(DIR_IMG,MORTE,i)).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (300, 300))
+            self.frames.append(self.image)
+            
+        self.frame_atual = 0
+        self.image = self.frames[self.frame_atual]
+        self.rect = self.image.get_rect()
+        self.rect.centerx = LARGURA - 190
+        self.rect.centery= ALTURA - 100
+        self.last_animation = pygame.time.get_ticks()
+        self.intervalo = 1000
+        
+    def update(self):
+        agora = pygame.time.get_ticks()
+        elapsed_ticks = agora - self.last_animation
+        self.frame_atual += 0.9
+        
+        if self.frame_atual >= len(self.frames):
+            self.frame_atual = 0
+            
+        if elapsed_ticks > self.intervalo:
+            self.last_animation = agora
+            self.image = self.frames[int(self.frame_atual)]
+        
+            
+          

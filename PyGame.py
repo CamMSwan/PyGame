@@ -13,8 +13,7 @@ pygame.mixer.init()
 musica = path.join(DIR_SOM,MUSICA_MENU)
 fun.tocar_musica(musica)
 janela = pygame.display.set_mode((LARGURA, ALTURA))
-pygame.display.set_caption('Raposa Kombat')
-
+pygame.display.set_caption('Red Dead Raposa')
 game = INIC
 
 while game != QUIT:

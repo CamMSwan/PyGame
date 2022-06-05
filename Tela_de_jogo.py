@@ -8,12 +8,6 @@ import Funções as fun
 
 def gameplay(janela):
     
-    direita = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa0.png')).convert_alpha()
-    direita = pygame.transform.scale(direita, (LARGURA_FOX, ALTURA_FOX))
-    
-    esquerda = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa1.png')).convert_alpha()
-    esquerda = pygame.transform.scale(esquerda, (LARGURA_FOX, ALTURA_FOX))
-    
     tempo_fps = pygame.time.Clock()
     plano_jogo = pygame.image.load(path.join(DIR_IMG, 'fundo_jogo.png')).convert()
     plano_jogo = pygame.transform.scale(plano_jogo, (LARGURA,ALTURA))

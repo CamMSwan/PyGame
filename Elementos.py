@@ -10,6 +10,10 @@ INIMIGO_IMG = 'Jacare'
 LARGURA_DR = 150
 ALTURA_DR = 165
 
+PLATAFORMA_IMG = 'plataforma_jogo.png'
+LARGURA_P = 150
+ALTURA_P = 165
+
 PLANO_DE_FUNDO = 'fundo_jogo.png'
 MENU = 'fundo_inicial.png'
 FUNDO_GAME_OVER1 = 'vitoria_raposa.jpg'

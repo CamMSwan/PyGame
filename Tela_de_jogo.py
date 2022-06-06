@@ -35,8 +35,10 @@ def gameplay(janela):
     todos_sprites.add(jogador1)
 
 
-    plataforma = Plataforma()
+    plataforma = Plataforma(900,300)
+    plataforma2 = Plataforma(300,300)
     todos_sprites.add(plataforma)
+    todos_sprites.add(plataforma2)
     vidas1 = 3
     vidas2 = 3
     

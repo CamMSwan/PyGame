@@ -99,14 +99,15 @@ class Player1(pygame.sprite.Sprite):
             fun.tocar_som(tiro)
                
 class Plataforma(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self,centerx,bottom):
         pygame.sprite.Sprite.__init__(self)
         self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_P, ALTURA_P))
         self.rect = self.image.get_rect()
-        self.rect.centerx = LARGURA - 500
-        self.rect.bottom = ALTURA - 380
-        
+        self.rect.centerx = centerx
+        self.rect.bottom = bottom
+
+
 
 class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo):

@@ -1,7 +1,7 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, MORTE, RAPOSA, TIRO
+from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, ALTURA_P, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
 import random
 from pygame import mixer
 import Funções as fun
@@ -97,9 +97,17 @@ class Player1(pygame.sprite.Sprite):
             self.groups['todas_balas'].add(nova_bala)
             tiro = path.join(DIR_SOM,TIRO)
             fun.tocar_som(tiro)
-                
-        
-    
+               
+class Plataforma(pygame.sprite.Sprite):
+    def __init__(self,centerx,bottom):
+        pygame.sprite.Sprite.__init__(self)
+        self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG)).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_P, ALTURA_P))
+        self.rect = self.image.get_rect()
+        self.rect.centerx = centerx
+        self.rect.bottom = bottom
+
+
 
 class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo):
@@ -339,3 +347,5 @@ class Tumblweed(pygame.sprite.Sprite):
         
         if self.rect.left > LARGURA:
             self.kill()  
+
+

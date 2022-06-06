@@ -38,7 +38,7 @@ def gameplay(janela):
     
     tecla = {}
 
-    
+    vitoria = 0
     
     rodando = GAME
     while rodando != GAME_OVER and rodando != QUIT:
@@ -64,7 +64,7 @@ def gameplay(janela):
                         if evento.key == pygame.K_UP:
                             jogador1.jumping
                             
-                        if evento.key == pygame.K_SPACE:
+                        if evento.key == pygame.K_SLASH:
                             if direcao1 == 'D':
                                 jogador1.atirarD()
                             if direcao1 == 'E':
@@ -79,7 +79,7 @@ def gameplay(janela):
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
                                 
-                            if evento.key == pygame.K_SPACE:
+                            if evento.key == pygame.K_SLASH:
                                 evento.key = False
                                 
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
@@ -107,7 +107,8 @@ def gameplay(janela):
                                 jogador2.speedx -= 8
                             if evento.key == pygame.K_q:
                                 evento.key = False
-                                
+         
+        #colocar mask                        
         dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
         dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)         
                         

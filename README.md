@@ -12,7 +12,7 @@ ENTER: Inicia o Jogo
 UP = pula
 RIGHT = movimenta pra direita
 LEFT = movimenta pra esquerda
-BARRA DE ESPEÇO = atira
+SLASH = atira
 
 -Jacaré:
 W = pula
@@ -20,7 +20,9 @@ D = movimenta pra direita
 A = movimenta pra esquerda
 Q = atira
 
+Arquivo Principal:
 
+PyGame.py
 
 Cameron Martins Swan
 Mariana 

@@ -12,7 +12,7 @@ ENTER: Inicia o Jogo
 UP = pula
 RIGHT = movimenta pra direita
 LEFT = movimenta pra esquerda
-SLASH = atira
+KEY PAD 0 = atira
 
 -Jacaré:
 W = pula

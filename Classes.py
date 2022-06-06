@@ -11,7 +11,7 @@ machado = path.join(DIR_SOM,BARULHO_M)
 class Player1(pygame.sprite.Sprite):
     def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite._init_(self)
+        pygame.sprite.Sprite.__init__(self)
         self.imagens = []
         for i in range(0,2):
             self.image = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa{}.png'.format(i) )).convert_alpha()
@@ -104,7 +104,7 @@ class Player1(pygame.sprite.Sprite):
 class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite._init_(self)
+        pygame.sprite.Sprite.__init__(self)
 
         self.imagens = []
         for i in range(0,2):
@@ -194,7 +194,7 @@ class Player2(pygame.sprite.Sprite):
                     
 class BalaE(pygame.sprite.Sprite):
     def __init__(self,right,centery):
-        pygame.sprite.Sprite._init_(self)
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(path.join(DIR_IMG, BALA2_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_BALA,ALTURA_BALA))
         self.mask = pygame.mask.from_surface(self.image)
@@ -219,7 +219,7 @@ class BalaE(pygame.sprite.Sprite):
 
 class BalaD(pygame.sprite.Sprite):
     def __init__(self,left,centery):
-        pygame.sprite.Sprite._init_(self)
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(path.join(DIR_IMG, BALA1_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_BALA,ALTURA_BALA))
         self.mask = pygame.mask.from_surface(self.image)
@@ -239,7 +239,7 @@ class BalaD(pygame.sprite.Sprite):
             
 class Machado(pygame.sprite.Sprite):
     def __init__(self):
-        pygame.sprite.Sprite._init_(self)
+        pygame.sprite.Sprite.__init__(self)
         self.frames = []
         for i in range(1,5):
             self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
@@ -275,7 +275,7 @@ class Machado(pygame.sprite.Sprite):
             
 class Morte(pygame.sprite.Sprite):
     def __init__(self):
-        pygame.sprite.Sprite._init_(self)
+        pygame.sprite.Sprite.__init__(self)
         self.frames = []
         for i in range(1,5):
             self.image = pygame.image.load('{}/{}/original-{}.png.png'.format(DIR_IMG,MORTE,i)).convert_alpha()

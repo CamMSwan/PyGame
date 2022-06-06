@@ -107,7 +107,8 @@ def gameplay(janela):
                                 jogador2.speedx -= 8
                             if evento.key == pygame.K_q:
                                 evento.key = False
-                                
+         
+        #colocar mask                        
         dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
         dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)         
                         

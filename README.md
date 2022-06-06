@@ -20,7 +20,9 @@ D = movimenta pra direita
 A = movimenta pra esquerda
 Q = atira
 
+Arquivo Principal:
 
+PyGame.py
 
 Cameron Martins Swan
 Mariana 

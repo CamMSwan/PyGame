@@ -1,7 +1,7 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, MORTE, RAPOSA, TIRO
+from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, MORTE, RAPOSA, TIRO
 import random
 from pygame import mixer
 import Funções as fun
@@ -9,9 +9,9 @@ import Funções as fun
 machado = path.join(DIR_SOM,BARULHO_M)
     
 class Player1(pygame.sprite.Sprite):
-    def __init__(self, grupo):
+    def _init_(self, grupo):
         # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite._init_(self)
         self.imagens = []
         for i in range(0,2):
             self.image = pygame.image.load(path.join(DIR_IMG,RAPOSA,'raposa{}.png'.format(i) )).convert_alpha()
@@ -76,7 +76,7 @@ class Player1(pygame.sprite.Sprite):
         if elapsed_ticks > self.shoot_ticks:
             # Marca o tick da nova imagem.
             self.last_shot = agora
-            nova_bala = BalaD(self.rect.right,self.rect.centery)
+            nova_bala = BalaD(self.rect.right-2,self.rect.centery)
             self.groups['todos_sprites'].add(nova_bala)
             self.groups['todas_balas'].add(nova_bala)
             tiro = path.join(DIR_SOM,TIRO)
@@ -92,7 +92,7 @@ class Player1(pygame.sprite.Sprite):
         if elapsed_ticks > self.shoot_ticks:
             # Marca o tick da nova imagem.
             self.last_shot = agora
-            nova_bala = BalaE(self.rect.left,self.rect.centery)
+            nova_bala = BalaE(self.rect.left-2,self.rect.centery)
             self.groups['todos_sprites'].add(nova_bala)
             self.groups['todas_balas'].add(nova_bala)
             tiro = path.join(DIR_SOM,TIRO)
@@ -102,13 +102,13 @@ class Player1(pygame.sprite.Sprite):
     
 
 class Player2(pygame.sprite.Sprite):
-    def __init__(self, grupo):
+    def _init_(self, grupo):
         # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite._init_(self)
 
         self.imagens = []
         for i in range(0,2):
-            self.image = pygame.image.load(path.join(DIR_IMG,INIMIGO_IMG,'imagem_resina{}.png'.format(i) )).convert_alpha()
+            self.image = pygame.image.load(path.join(DIR_IMG,INIMIGO_IMG,'jacare-{}.png'.format(i) )).convert_alpha()
             self.image = pygame.transform.scale(self.image, (LARGURA_DR, ALTURA_DR))
             self.imagens.append(self.image)
             
@@ -170,7 +170,7 @@ class Player2(pygame.sprite.Sprite):
         if elapsed_ticks > self.shoot_ticks:
             # Marca o tick da nova imagem.
             self.last_shot = agora
-            nova_bala = BalaE(self.rect.left,self.rect.centery)
+            nova_bala = BalaE(self.rect.left-45,self.rect.centery+35)
             self.groups['todos_sprites'].add(nova_bala)
             self.groups['todas_balas'].add(nova_bala)
             tiro = path.join(DIR_SOM,TIRO)
@@ -186,15 +186,15 @@ class Player2(pygame.sprite.Sprite):
             if elapsed_ticks > self.shoot_ticks:
                 # Marca o tick da nova imagem.
                 self.last_shot = agora
-                nova_bala = BalaD(self.rect.right,self.rect.centery)
+                nova_bala = BalaD(self.rect.right-45,self.rect.centery+35)
                 self.groups['todos_sprites'].add(nova_bala)
                 self.groups['todas_balas'].add(nova_bala)
                 tiro = path.join(DIR_SOM,TIRO)
                 fun.tocar_som(tiro)
                     
 class BalaE(pygame.sprite.Sprite):
-    def __init__(self,right,centery):
-        pygame.sprite.Sprite.__init__(self)
+    def _init_(self,right,centery):
+        pygame.sprite.Sprite._init_(self)
         self.image = pygame.image.load(path.join(DIR_IMG, BALA2_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_BALA,ALTURA_BALA))
         self.mask = pygame.mask.from_surface(self.image)
@@ -218,8 +218,8 @@ class BalaE(pygame.sprite.Sprite):
         
 
 class BalaD(pygame.sprite.Sprite):
-    def __init__(self,left,centery):
-        pygame.sprite.Sprite.__init__(self)
+    def _init_(self,left,centery):
+        pygame.sprite.Sprite._init_(self)
         self.image = pygame.image.load(path.join(DIR_IMG, BALA1_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_BALA,ALTURA_BALA))
         self.mask = pygame.mask.from_surface(self.image)
@@ -238,8 +238,8 @@ class BalaD(pygame.sprite.Sprite):
             self.kill()
             
 class Machado(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
+    def _init_(self):
+        pygame.sprite.Sprite._init_(self)
         self.frames = []
         for i in range(1,5):
             self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
@@ -274,8 +274,8 @@ class Machado(pygame.sprite.Sprite):
             
             
 class Morte(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
+    def _init_(self):
+        pygame.sprite.Sprite._init_(self)
         self.frames = []
         for i in range(1,5):
             self.image = pygame.image.load('{}/{}/original-{}.png.png'.format(DIR_IMG,MORTE,i)).convert_alpha()
@@ -303,4 +303,40 @@ class Morte(pygame.sprite.Sprite):
             self.image = self.frames[int(self.frame_atual)]
         
             
-          
+class Tumblweed(pygame.sprite.Sprite):
+    def _init_(self):
+        pygame.sprite.Sprite._init_(self)
+        self.frames = []
+        for i in range(0,3):
+            self.image = pygame.image.load('{}/{}/tumbleweed-{}.png'.format(DIR_IMG,ARBUSTO,i)).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (LARGURA_ARB, ALTURA_ARB))
+            self.frames.append(self.image)
+            
+        self.frame_atual = 0
+        self.image = self.frames[self.frame_atual]
+        self.rect = self.image.get_rect()
+        
+        self.rect.x = 0 - LARGURA_ARB
+        self.rect.y= ALTURA - 240
+        self.speedx = 5
+        
+        self.last_animation = pygame.time.get_ticks()
+        
+    def update(self):
+        self.frame_atual += 0.13
+        self.rect.x += self.speedx
+    
+        if self.rect.left > LARGURA:
+            pygame.time.wait(3500)
+            self.image = self.frames[int(self.frame_atual)]
+            self.rect.x = 0 - LARGURA_ARB
+            self.rect.y= ALTURA - 240                
+            self.speedx = 5
+            
+        if self.frame_atual >= len(self.frames):
+            self.frame_atual = 0
+        
+        self.image = self.frames[int(self.frame_atual)]
+        
+        if self.rect.left > LARGURA:
+            self.kill()

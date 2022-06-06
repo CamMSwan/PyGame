@@ -1,10 +1,11 @@
 from turtle import speed
 import pygame
 from Classes import Machado, Player1, Player2
-from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO
+from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
-from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO, RAPOSA, LARGURA_FOX,ALTURA_FOX
+from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
+
 
 def gameplay(janela):
     
@@ -132,21 +133,18 @@ def gameplay(janela):
         if dano_tiro2:
             fun.tocar_som(som_dano)
             vidas2 -= 1
-
-         
-                
-                
+                                
         if vidas1 == 0:
                 jogador1.kill()
-                #morte = Morte(jogador1.rect.x,grupo)
-                #todos_sprites.add(morte)
                 rodando = GAME_OVER
+                vitoria = VITORIA2
+                
                 
         if vidas2 == 0:
                 jogador2.kill()
-                #morte = Morte(jogador2.rect.x,grupo)
-                #todos_sprites.add(morte)
                 rodando = GAME_OVER
+                vitoria = VITORIA1
+                
                 
                         
                         
@@ -176,18 +174,12 @@ def gameplay(janela):
                 if vidas1 == 3:
                     janela.blit(coracao, POSICOES_CORE2[0])
         
-        
-        
-        
         pygame.display.update()
 
     
     musica = path.join(DIR_SOM,MUSICA_FINAL)
     fun.tocar_musica(musica)
 
-    return rodando
-        
-    
 
-  
-
+    lista_gameplay = [rodando,vitoria]
+    return lista_gameplay

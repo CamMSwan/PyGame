@@ -1,7 +1,7 @@
 from platform import platform
 from turtle import speed
 import pygame
-from Classes import Machado, Plataforma, Player1, Player2
+from Classes import Explosao, Machado, Plataforma, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
 from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO
@@ -20,6 +20,9 @@ def gameplay(janela):
     grupo['todos_sprites'] = todos_sprites
     grupo['todas_balas'] = todas_balas
     grupo['Machados'] = machados
+    
+    explosao = Explosao(500)
+    todos_sprites.add(explosao)
     
     machado = Machado()
     todos_sprites.add(machado)

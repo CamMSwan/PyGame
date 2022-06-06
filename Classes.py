@@ -1,7 +1,7 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, ALTURA_P, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
+from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, ALTURA_P, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
 import random
 from pygame import mixer
 import Funções as fun
@@ -348,4 +348,28 @@ class Tumblweed(pygame.sprite.Sprite):
         if self.rect.left > LARGURA:
             self.kill()  
 
-
+class Explosao(pygame.sprite.Sprite):
+    def __init__(self,centerx):
+        pygame.sprite.Sprite.__init__(self)
+        self.frames = []
+        for i in range(0,6):
+            self.image = pygame.image.load('{}/{}/explosão-{}.png'.format(DIR_IMG,EXPLOSAO,i)).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (LARGURA_ARB, ALTURA_ARB))
+            self.frames.append(self.image)
+            
+        self.frame_atual = 0
+        self.image = self.frames[self.frame_atual]
+        self.rect = self.image.get_rect()
+        
+        self.rect.centerx = centerx
+        self.rect.bottom = ALTURA - 178
+        
+    def update(self):
+        self.frame_atual += 0.32
+        
+        if self.frame_atual > len(self.frames):
+            self.frame_atual = 0
+        
+        self.image = self.frames[int(self.frame_atual)]
+        
+     

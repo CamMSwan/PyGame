@@ -45,3 +45,7 @@ WANTEDF = 'wanted_raposa.png'
 ARBUSTO = 'Tumbleweed'
 LARGURA_ARB = 100
 ALTURA_ARB = 100
+
+EXPLOSAO = 'Explosão'
+LARGURA_EX = 80
+LARGURA_EX = 80

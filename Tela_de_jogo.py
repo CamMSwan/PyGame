@@ -14,22 +14,22 @@ def gameplay(janela):
     plano_jogo = pygame.transform.scale(plano_jogo, (LARGURA,ALTURA))
     todos_sprites = pygame.sprite.Group()
     todas_balas = pygame.sprite.Group()
-    jogadores = pygame.sprite.Group()
+    machados = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
     grupo['todas_balas'] = todas_balas
+    grupo['Machados'] = machados
     
     machado = Machado()
     todos_sprites.add(machado)
+    machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
     
     jogador1 = Player1(grupo)
+    jogador2 = Player2(grupo)
     direcao1 = 'E'
     direcao2 = 'D'
-    jogador2 = Player2(grupo)
     
-    jogadores.add(jogador1)
-    jogadores.add(jogador2)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
 
@@ -109,8 +109,11 @@ def gameplay(janela):
                                 evento.key = False
          
         #colocar mask                        
-        dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
-        dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)         
+        #dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
+        #dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)   
+        
+        dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
+        dano_machado2 = pygame.sprite.spritecollide(jogador2, machados, False, pygame.sprite.collide_mask)      
                         
         if dano_machado1:
             machado.rect.top = ALTURA

@@ -12,7 +12,7 @@ ENTER: Inicia o Jogo
 UP = pula
 RIGHT = movimenta pra direita
 LEFT = movimenta pra esquerda
-BARRA DE ESPEÇO = atira
+SLASH = atira
 
 -Jacaré:
 W = pula

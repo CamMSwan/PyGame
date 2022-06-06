@@ -38,7 +38,7 @@ def gameplay(janela):
     
     tecla = {}
 
-    
+    vitoria = 0
     
     rodando = GAME
     while rodando != GAME_OVER and rodando != QUIT:

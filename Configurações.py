@@ -3,9 +3,9 @@ from os import path
 import pygame
 pygame.init()
 
-DIR_IMG = path.join(path.dirname(_file_), 'imagens')
-DIR_SOM = path.join(path.dirname(_file_), 'sons')
-DIR_FONT = path.join(path.dirname(_file_), 'fontes')
+DIR_IMG = path.join(path.dirname(__file__), 'imagens')
+DIR_SOM = path.join(path.dirname(__file__), 'sons')
+DIR_FONT = path.join(path.dirname(__file__), 'fontes')
 
 LARGURA = 1400
 ALTURA = 780

@@ -27,7 +27,7 @@ class Player1(pygame.sprite.Sprite):
         self.groups = grupo
 
         self.last_shot = pygame.time.get_ticks()
-        self.shoot_ticks = 300
+        self.shoot_ticks = 500
         
         self.y_gravidade = 1
         self.y_saltomax = 20
@@ -122,7 +122,7 @@ class Player2(pygame.sprite.Sprite):
         self.groups = grupo
 
         self.last_shot = pygame.time.get_ticks()
-        self.shoot_ticks = 300
+        self.shoot_ticks = 500
         
         self.y_gravidade = 1
         self.y_saltomax = 20
@@ -204,7 +204,7 @@ class BalaE(pygame.sprite.Sprite):
 
         self.rect.right = right
         self.rect.centery = centery
-        self.speedx = -20
+        self.speedx = -25
 
     def update(self):
         self.rect.x += self.speedx
@@ -229,7 +229,7 @@ class BalaD(pygame.sprite.Sprite):
 
         self.rect.left = left
         self.rect.centery = centery
-        self.speedx = 20
+        self.speedx = 25
 
     def update(self):
         self.rect.x += self.speedx

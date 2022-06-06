@@ -3,7 +3,7 @@ import pygame
 from Configurações import DIR_SOM, INIC, LARGURA, ALTURA, GAME, QUIT, GAME_OVER
 import Inicialização as In
 import Tela_de_jogo as Tj
-from Elementos import MUSICA_MENU,MUSICA_JOGO
+from Elementos import MUSICA_MENU
 import Funções as fun
 import finalização as fim
 
@@ -21,14 +21,15 @@ while game != QUIT:
     if game == INIC:
         game = In.tela_inicial(janela)
     if game == GAME:
-        game = Tj.gameplay(janela)
+        lista = Tj.gameplay(janela)
+        game = lista[0]
+        vitoria = lista[1]
     if game == GAME_OVER:
-        game = fim.tela_final(janela)
+        game = fim.tela_final(janela,vitoria)
     else:
         game = QUIT
     
     pygame.display.update()  
 
 
-pygame.quit()  
-
+pygame.quit()

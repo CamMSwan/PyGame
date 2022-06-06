@@ -3,11 +3,11 @@ from os import path
 import pygame
 pygame.init()
 
-DIR_IMG = path.join(path.dirname(__file__), 'imagens')
-DIR_SOM = path.join(path.dirname(__file__), 'sons')
-DIR_FONT = path.join(path.dirname(__file__), 'fontes')
+DIR_IMG = path.join(path.dirname(_file_), 'imagens')
+DIR_SOM = path.join(path.dirname(_file_), 'sons')
+DIR_FONT = path.join(path.dirname(_file_), 'fontes')
 
-LARGURA = 1300
+LARGURA = 1400
 ALTURA = 780
 FPS = 60 
 
@@ -31,3 +31,5 @@ CORE_IMG = 'coracao.png'
 POSICOES_CORE1 = [(20, 20), (90, 20), (160, 20)]
 POSICOES_CORE2 = [(LARGURA - 210, 20), (LARGURA - 140, 20), (LARGURA - 70, 20)]
 
+VITORIA1 = 1
+VITORIA2 = 2

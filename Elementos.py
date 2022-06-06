@@ -12,7 +12,8 @@ ALTURA_DR = 165
 
 PLANO_DE_FUNDO = 'fundo_jogo.png'
 MENU = 'fundo_inicial.png'
-FUNDO_GAME_OVER = 'imagem game over.jpg'
+FUNDO_GAME_OVER1 = 'vitoria_raposa.jpg'
+FUNDO_GAME_OVER2 = 'vitoria_jacare.jpg'
 
 MACHADO = 'Animação machado'
 LARGURA_M = 60
@@ -33,3 +34,10 @@ ALTURA_BALA = 17
 SOM_DANO = 'Argh.mp3'
 
 MORTE = 'Morte'
+
+WANTEDJ = 'wanted_jacare.png'
+WANTEDF = 'wanted_raposa.png'
+
+ARBUSTO = 'Tumbleweed'
+LARGURA_ARB = 100
+ALTURA_ARB = 100

@@ -1,7 +1,6 @@
-from turtle import width
-from click import edit
 import pygame
 from pygame import mixer
+from Classes import Tumblweed
 from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,PRETO
 from os import path
 import Funções as fun
@@ -28,7 +27,14 @@ def tela_inicial(janela):
     trabalho = pygame.transform.scale(trabalho, (210,25))
     musica = path.join(DIR_SOM,MUSICA_JOGO)
     
+    arbusto_rolando = Tumblweed()
+    todos_sprites = pygame.sprite.Group()
+    grupo = {}
+    grupo['todos_sprites'] = todos_sprites
+    todos_sprites.add(arbusto_rolando)
+    
     while rodando:
+        
         tempo_fps.tick(FPS)
 
         for evento in pygame.event.get():
@@ -45,6 +51,8 @@ def tela_inicial(janela):
                         mixer.music.stop()
                         fun.tocar_musica(musica)
         
+        todos_sprites.update()
+        
         janela.fill(PRETO)  
         janela.blit(plano_de_fundo, pdf_rect)
         janela.blit(titulo, (520,300))
@@ -53,11 +61,8 @@ def tela_inicial(janela):
         janela.blit(integrante3, (0,715))
         janela.blit(trabalho, (580,370))
         
-    
-
-        pygame.display.flip()
-
+        todos_sprites.draw(janela)
+        
+        pygame.display.update()
+        
     return estado
-
-
-

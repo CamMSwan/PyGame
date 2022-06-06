@@ -6,6 +6,8 @@ Voce precisa ganhar um duelo com seu adversário e cuidado com os indios, que qu
 
 Controles:
 
+ENTER: Inicia o Jogo
+
 -Raposa:
 UP = pula
 RIGHT = movimenta pra direita

@@ -18,7 +18,6 @@ def gameplay(janela):
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
     grupo['todas_balas'] = todas_balas
-    grupo['jogadores'] = jogadores
     
     machado = Machado()
     todos_sprites.add(machado)

@@ -101,10 +101,10 @@ class Player1(pygame.sprite.Sprite):
 class Plataforma(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG, 'plataforma_jogo.png')).convert_alpha()
+        self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_P, ALTURA_P))
         self.rect = self.image.get_rect()
-        self.rect.centerx = LARGURA_P/2
+        self.rect.centerx = LARGURA - 500
         self.rect.bottom = ALTURA - 380
         
 

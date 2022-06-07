@@ -121,9 +121,9 @@ def gameplay(janela):
                             if evento.key == pygame.K_q:
                                 evento.key = False
          
-        #colocar mask                        
-        #dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
-        #dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)   
+        '''colocar mask                        
+        dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
+        dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)'''
         
         dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
         dano_machado2 = pygame.sprite.spritecollide(jogador2, machados, False, pygame.sprite.collide_mask)      
@@ -187,8 +187,15 @@ def gameplay(janela):
                 vitoria = VITORIA1
                 
                 
-                        
-                        
+        #contato = pygame.colliderect(jogador1,plataforma1)
+        
+        if jogador1.speedy > 0:
+            for plataforma in plataformas:
+                jogador1.collide(plataforma.rect)
+                if jogador1.collide(plataforma.rect):
+                      print('collide')
+                
+                
 
            
         

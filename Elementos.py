@@ -41,3 +41,7 @@ WANTEDF = 'wanted_raposa.png'
 ARBUSTO = 'Tumbleweed'
 LARGURA_ARB = 100
 ALTURA_ARB = 100
+
+PLATAFORMA = 'plataforma_jogo.png'
+ALTURA_PLATAFORMA = 100
+LARGURA_PLATAFORMA = 200

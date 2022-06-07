@@ -1,6 +1,6 @@
 import pygame
 from pygame import mixer
-from Classes import Morte
+from Classes import Morte, Plataforma
 from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,GAME_OVER
 from os import path
 import Funções as fun

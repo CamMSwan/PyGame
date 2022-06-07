@@ -1,7 +1,7 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, MACHADO, MORTE, RAPOSA, TIRO
+from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DR, ALTURA_FOX, ALTURA_M, ALTURA_PLATAFORMA, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DR, LARGURA_FOX, LARGURA_M, LARGURA_PLATAFORMA, MACHADO, MORTE, PLATAFORMA, RAPOSA, TIRO
 import random
 from pygame import mixer
 import Funções as fun
@@ -340,3 +340,16 @@ class Tumblweed(pygame.sprite.Sprite):
         
         if self.rect.left > LARGURA:
             self.kill()  
+
+
+
+class Plataforma(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(path.join(DIR_IMG, PLATAFORMA)).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_PLATAFORMA,ALTURA_PLATAFORMA))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+
+        self.rect.centerx = 400
+        self.rect.bottom =  450

@@ -1,6 +1,7 @@
+from platform import platform
 from turtle import speed
 import pygame
-from Classes import Machado, Plataforma, Player1, Player2
+from Classes import Explosao, Machado, Plataforma, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
 from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO, ALTURA_M
@@ -14,35 +15,39 @@ def gameplay(janela):
     plano_jogo = pygame.transform.scale(plano_jogo, (LARGURA,ALTURA))
     todos_sprites = pygame.sprite.Group()
     todas_balas = pygame.sprite.Group()
-    jogadores = pygame.sprite.Group()
+    machados = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
     grupo['todas_balas'] = todas_balas
+    grupo['Machados'] = machados
+    
+    explosao = Explosao(500)
+    todos_sprites.add(explosao)
     
     machado = Machado()
     todos_sprites.add(machado)
-
-    plataforma = Plataforma()
-    todos_sprites.add(plataforma)
-
+    machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
     
     jogador1 = Player1(grupo)
+    jogador2 = Player2(grupo)
     direcao1 = 'E'
     direcao2 = 'D'
-    jogador2 = Player2(grupo)
     
-    jogadores.add(jogador1)
-    jogadores.add(jogador2)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
 
+
+    plataforma = Plataforma(1000,500)
+    plataforma2 = Plataforma(400,500)
+    todos_sprites.add(plataforma)
+    todos_sprites.add(plataforma2)
     vidas1 = 3
     vidas2 = 3
     
     tecla = {}
 
-    
+    vitoria = 0
     
     rodando = GAME
     while rodando != GAME_OVER and rodando != QUIT:
@@ -68,7 +73,7 @@ def gameplay(janela):
                         if evento.key == pygame.K_UP:
                             jogador1.jumping
                             
-                        if evento.key == pygame.K_SPACE:
+                        if evento.key == pygame.K_SLASH:
                             if direcao1 == 'D':
                                 jogador1.atirarD()
                             if direcao1 == 'E':
@@ -83,7 +88,7 @@ def gameplay(janela):
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8
                                 
-                            if evento.key == pygame.K_SPACE:
+                            if evento.key == pygame.K_SLASH:
                                 evento.key = False
                                 
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
@@ -111,10 +116,13 @@ def gameplay(janela):
                                 jogador2.speedx -= 8
                             if evento.key == pygame.K_q:
                                 evento.key = False
-                                
-        dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
-        dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)
+         
+        #colocar mask                        
+        #dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
+        #dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)   
         
+        dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
+        dano_machado2 = pygame.sprite.spritecollide(jogador2, machados, False, pygame.sprite.collide_mask)      
                         
         if dano_machado1:
             machado.rect.top = ALTURA

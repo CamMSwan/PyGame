@@ -35,7 +35,7 @@ def tela_final (janela,vitoria):
                 
 
             if evento.type == pygame.KEYUP:
-                if evento.key == pygame.K_KP_ENTER:
+                if evento.key == pygame.K_SPACE:
                     rodando = GAME
                     mixer.music.stop()
                     fun.tocar_musica(musica)

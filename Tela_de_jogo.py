@@ -1,7 +1,7 @@
 from platform import platform
 from turtle import speed
 import pygame
-from Classes import Machado, Plataforma, Player1, Player2
+from Classes import Explosao, Machado, Plataforma, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
 from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO
@@ -17,21 +17,25 @@ def gameplay(janela):
     todas_balas = pygame.sprite.Group()
     plataformas = pygame.sprite.Group()
     jogadores = pygame.sprite.Group()
+    machados = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
     grupo['todas_balas'] = todas_balas
+    grupo['Machados'] = machados
+    
+    explosao = Explosao(500)
+    todos_sprites.add(explosao)
     
     machado = Machado()
     todos_sprites.add(machado)
+    machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
     
     jogador1 = Player1(grupo)
+    jogador2 = Player2(grupo)
     direcao1 = 'E'
     direcao2 = 'D'
-    jogador2 = Player2(grupo)
     
-    jogadores.add(jogador1)
-    jogadores.add(jogador2)
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
     jogadores.add(jogador1)
@@ -122,8 +126,11 @@ def gameplay(janela):
                                 evento.key = False
          
         #colocar mask                        
-        dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
-        dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)         
+        #dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
+        #dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)   
+        
+        dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
+        dano_machado2 = pygame.sprite.spritecollide(jogador2, machados, False, pygame.sprite.collide_mask)      
                         
         if dano_machado1:
             machado.rect.top = ALTURA

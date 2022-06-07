@@ -12,7 +12,7 @@ ALTURA_DR = 165
 
 PLATAFORMA_IMG = 'plataforma_jogo.png'
 LARGURA_P = 350
-ALTURA_P = 365
+ALTURA_P = 20
 
 PLANO_DE_FUNDO = 'fundo_jogo.png'
 MENU = 'fundo_inicial.png'

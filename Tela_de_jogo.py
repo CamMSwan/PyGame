@@ -22,6 +22,7 @@ def gameplay(janela):
     grupo['todos_sprites'] = todos_sprites
     grupo['todas_balas'] = todas_balas
     grupo['Machados'] = machados
+    grupo['Plataformas'] = plataformas
     
     '''explosao = Explosao(500)
     todos_sprites.add(explosao)'''
@@ -30,6 +31,13 @@ def gameplay(janela):
     todos_sprites.add(machado)
     machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
+    
+    plataforma1 = Plataforma(1000,425)
+    plataforma2 = Plataforma(400,425)
+    todos_sprites.add(plataforma1)
+    todos_sprites.add(plataforma2)
+    plataformas.add(plataforma1)
+    plataformas.add(plataforma2)
     
     jogador1 = Player1(grupo)
     jogador2 = Player2(grupo)
@@ -40,15 +48,6 @@ def gameplay(janela):
     todos_sprites.add(jogador1)
     jogadores.add(jogador1)
     jogadores.add(jogador2)
-
-
-    plataforma1 = Plataforma(1000,500)
-    plataforma2 = Plataforma(400,500)
-
-    todos_sprites.add(plataforma1)
-    todos_sprites.add(plataforma2)
-    plataformas.add(plataforma1)
-    plataformas.add(plataforma2)
 
     vidas1 = 3
     vidas2 = 3

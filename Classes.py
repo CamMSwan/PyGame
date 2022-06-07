@@ -21,7 +21,7 @@ class Player1(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA - LARGURA_FOX/2
-        self.rect.bottom = ALTURA - 178
+        self.rect.bottom = ALTURA - 170
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo
@@ -33,31 +33,42 @@ class Player1(pygame.sprite.Sprite):
         self.y_saltomax = 20
         self.speedy = self.y_saltomax
         self.jumping = False
-        
+        self.falling = False
+        self.chao = ALTURA - 170
 
+    def collide(self,rect): 
+        collisions = self.rect.colliderect(rect)   
+        collision = abs(self.rect.bottom - rect.top) 
+        tolerancia = 8
+        if collisions:
+            print('collision')
+            if collision < tolerancia:
+                if self.speedy > 0:
+                    self.jumping = False
+                    self.speedy = 0
+                    self.rect.bottom = rect.top + 5
+                    
+        if not collisions and self.rect.bottom != self.chao:
+                self.falling = True    
+                if self.falling == True and self.rect.bottom != self.chao and self.jumping == False:  
+                    self.rect.bottom += self.y_gravidade
+                    if self.rect.bottom == self.chao:
+                        self.falling = False
+        
+                    
     def get_input(self):
+        
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
-            self.rect.y -= self.speedy
+            self.rect.bottom -= self.speedy
             self.speedy -= self.y_gravidade
             if self.speedy <-(self.y_saltomax):
                 self.jumping = False
-                self.speedy = self.y_saltomax        
-            
-    def collide(self,rect): 
-        self.collision = rect.colliderect(self.rect)
-        if self.collision:
-            self.rect.bottom = rect.top
-        if self.collision == False:
-            self.rect.y -= self.y_gravidade
-               
-            
-            
-            
+                self.speedy = self.y_saltomax    
         
-           
+                       
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
@@ -74,7 +85,6 @@ class Player1(pygame.sprite.Sprite):
             self.rect.left = 0
         self.get_input()    
         
-    
     def atirarD(self):
         # Verifica se pode atirar
         agora = pygame.time.get_ticks()
@@ -112,8 +122,7 @@ class Plataforma(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_P, ALTURA_P))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.mask.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.centerx = centerx
         self.rect.bottom = bottom
 
@@ -134,7 +143,7 @@ class Player2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.image = self.imagens[0]
         self.rect.centerx = LARGURA_DR/2
-        self.rect.bottom = ALTURA - 178
+        self.rect.bottom = ALTURA - 170
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo

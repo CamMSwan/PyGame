@@ -11,7 +11,7 @@ LARGURA_DR = 150
 ALTURA_DR = 165
 
 PLATAFORMA_IMG = 'plataforma_jogo.png'
-LARGURA_P = 300
+LARGURA_P = 350
 ALTURA_P = 20
 
 PLANO_DE_FUNDO = 'fundo_jogo.png'

@@ -41,7 +41,6 @@ class Player1(pygame.sprite.Sprite):
         collision = abs(self.rect.bottom - rect.top) 
         tolerancia = 8
         if collisions:
-            print('collision')
             if collision < tolerancia:
                 if self.speedy > 0:
                     self.jumping = False
@@ -50,17 +49,14 @@ class Player1(pygame.sprite.Sprite):
                     
         if not collisions and self.rect.bottom != self.chao:
                 self.falling = True    
-                if self.falling == True and self.rect.bottom != self.chao and self.jumping == False:  
+                if self.falling == True and self.rect.bottom < self.chao and self.jumping == False:  
                     self.rect.bottom += self.y_gravidade
                     if self.rect.bottom == self.chao:
                         self.falling = False
         
                     
-    def get_input(self):
-        
+    def get_input(self):        
         key_pressed = pygame.key.get_pressed()
-        self.rect.y += self.speedy
-        
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
@@ -79,10 +75,6 @@ class Player1(pygame.sprite.Sprite):
             self.image = self.imagens[1]
         if self.speedx > 0:
             self.image = self.imagens[0]
-
-        if self.rect.bottom >= ALTURA - 178:
-            self.rect.bottom = ALTURA - 178
-            self.speedy = 0
             
         # Mantem dentro da tela
         if self.rect.right > LARGURA :
@@ -184,10 +176,6 @@ class Player2(pygame.sprite.Sprite):
             self.image = self.imagens[1]
         if self.speedx > 0:
             self.image = self.imagens[0]
-
-        if self.rect.bottom >= ALTURA - 178:
-            self.rect.bottom = ALTURA - 178
-            self.speedy = 0
             
         # Mantem dentro da tela
         if self.rect.right > LARGURA:
@@ -248,11 +236,6 @@ class BalaE(pygame.sprite.Sprite):
         # se a sala passar do fim da tela, desaparece
         if self.rect.left < 0:
             self.kill()
-    
-    
-        
-
-        
 
 class BalaD(pygame.sprite.Sprite):
     def __init__(self,left,centery):

@@ -14,9 +14,9 @@ def gameplay(janela):
     plano_jogo = pygame.image.load(path.join(DIR_IMG, 'fundo_jogo.png')).convert()
     plano_jogo = pygame.transform.scale(plano_jogo, (LARGURA,ALTURA))
     todos_sprites = pygame.sprite.Group()
-    todas_plataformas1 = pygame.sprite.Group()
-    todas_plataformas2 = pygame.sprite.Group()
     todas_balas = pygame.sprite.Group()
+    plataformas = pygame.sprite.Group()
+    jogadores = pygame.sprite.Group()
     machados = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
@@ -24,8 +24,8 @@ def gameplay(janela):
     grupo['Machados'] = machados
     grupo['Plataformas'] = plataformas
     
-    explosao = Explosao(500)
-    todos_sprites.add(explosao)
+    '''explosao = Explosao(500)
+    todos_sprites.add(explosao)'''
     
     machado = Machado()
     todos_sprites.add(machado)
@@ -46,17 +46,9 @@ def gameplay(janela):
     
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
+    jogadores.add(jogador1)
+    jogadores.add(jogador2)
 
-<<<<<<< HEAD
-=======
-
-    plataforma = Plataforma(1000,430)
-    plataforma2 = Plataforma(400,430)
-    todas_plataformas1.add(plataforma)
-    todas_plataformas2.add(plataforma2)
-    todos_sprites.add(plataforma)
-    todos_sprites.add(plataforma2)
->>>>>>> 6a3fae2a78ac6eed22fe188128943aa9183a10d5
     vidas1 = 3
     vidas2 = 3
     
@@ -160,31 +152,6 @@ def gameplay(janela):
         if dano_tiro2:
             fun.tocar_som(som_dano)
             vidas2 -= 1
-
-        jg1_plat1 = pygame.sprite.spritecollide(jogador1, todas_plataformas1, False, pygame.sprite.collide_mask)
-
-        if jogador1.rect.bottom > plataforma.rect.top:
-            if jg1_plat1:
-                if jogador1.rect.bottom > plataforma.rect.centery:
-                    jogador1.rect.bottom = plataforma.rect.centery
-                if jogador1.rect.bottom < plataforma.rect.bottom:
-                        jogador1.speedy = 7
-
-        jg1_plat2 = pygame.sprite.spritecollide(jogador1, todas_plataformas2, False, pygame.sprite.collide_mask)
-
-        if jogador1.rect.bottom > plataforma2.rect.top:
-            if jg1_plat2:
-                if jogador1.rect.bottom > plataforma2.rect.centery:
-                    jogador1.rect.bottom = plataforma2.rect.centery
-                if jogador1.rect.bottom < plataforma2.rect.bottom:
-                        jogador1.speedy = 7
-
-        
-
-
-
-
-
                                 
         if vidas1 == 0:
                 jogador1.kill()
@@ -208,8 +175,6 @@ def gameplay(janela):
                 
                 
 
-           
-        
         todos_sprites.update()
         
         janela.fill(BRANCO)  

@@ -4,7 +4,7 @@ import pygame
 from Classes import Explosao, Machado, Plataforma, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
-from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO, ALTURA_M
+from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
 
 
@@ -145,17 +145,6 @@ def gameplay(janela):
         if dano_tiro2:
             fun.tocar_som(som_dano)
             vidas2 -= 1
-
-
-        jogador1_plat = pygame.sprite.collide_rect(plataforma, jogador1)
-        jogador2_plat = pygame.sprite.collide_rect(plataforma, jogador2)
-
-        if jogador1_plat:
-            jogador1.y_gravidade = 0
-
-        if jogador2_plat:
-            jogador2.y_gravidade = 0
-
                                 
         if vidas1 == 0:
                 jogador1.kill()
@@ -168,6 +157,10 @@ def gameplay(janela):
                 rodando = GAME_OVER
                 vitoria = VITORIA1
                 
+                
+                        
+                        
+
            
         
         todos_sprites.update()

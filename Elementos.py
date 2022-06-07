@@ -10,8 +10,13 @@ INIMIGO_IMG = 'Jacare'
 LARGURA_DR = 150
 ALTURA_DR = 165
 
+<<<<<<< HEAD
 PLATAFORMA_IMG = 'plataforma_jogo.png'
 LARGURA_P = 350
+=======
+PLATAFORMA_IMG = 'plataforma_jogo.jpeg'
+LARGURA_P = 300
+>>>>>>> 6a3fae2a78ac6eed22fe188128943aa9183a10d5
 ALTURA_P = 20
 
 PLANO_DE_FUNDO = 'fundo_jogo.png'

@@ -32,8 +32,8 @@ def gameplay(janela):
     machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
     
-    plataforma1 = Plataforma(1000,425)
-    plataforma2 = Plataforma(400,425)
+    plataforma1 = Plataforma(1000,420)
+    plataforma2 = Plataforma(400,420)
     todos_sprites.add(plataforma1)
     todos_sprites.add(plataforma2)
     plataformas.add(plataforma1)
@@ -171,8 +171,7 @@ def gameplay(janela):
                 jogador1.collide(plataforma.rect)
                 
                 
-                
-
+            
         todos_sprites.update()
         
         janela.fill(BRANCO)  

@@ -41,13 +41,16 @@ class Player1(pygame.sprite.Sprite):
         collision = abs(self.rect.bottom - rect.top) 
         tolerancia = 8
         if collisions:
+            print('colision')
             if collision < tolerancia:
                 if self.speedy > 0:
                     self.jumping = False
                     self.speedy = 0
                     self.rect.bottom = rect.top + 5
-                    
-        if not collisions and self.rect.bottom <= self.chao and self.jumping == False:
+                   
+        
+        if self.rect.bottom <= self.chao:
+            if self.rect.right < rect.left or self.rect.left > rect.right:
                 self.falling = True    
                 if self.falling == True and self.rect.bottom < self.chao and self.jumping == False:  
                     self.rect.bottom += self.y_gravidade
@@ -81,7 +84,8 @@ class Player1(pygame.sprite.Sprite):
             self.rect.right = LARGURA 
         if self.rect.left < 0:
             self.rect.left = 0
-        self.get_input()    
+        self.get_input() 
+           
         
     def atirarD(self):
         # Verifica se pode atirar

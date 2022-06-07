@@ -219,11 +219,6 @@ class BalaE(pygame.sprite.Sprite):
         # se a sala passar do fim da tela, desaparece
         if self.rect.left < 0:
             self.kill()
-    
-    
-        
-
-        
 
 class BalaD(pygame.sprite.Sprite):
     def __init__(self,left,centery):

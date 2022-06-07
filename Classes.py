@@ -47,7 +47,7 @@ class Player1(pygame.sprite.Sprite):
                     self.speedy = 0
                     self.rect.bottom = rect.top + 5
                     
-        if not collisions and self.rect.bottom != self.chao:
+        if not collisions and self.rect.bottom <= self.chao and self.jumping == False:
                 self.falling = True    
                 if self.falling == True and self.rect.bottom < self.chao and self.jumping == False:  
                     self.rect.bottom += self.y_gravidade

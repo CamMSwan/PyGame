@@ -164,14 +164,12 @@ def gameplay(janela):
                 rodando = GAME_OVER
                 vitoria = VITORIA1
                 
-                
-        #contato = pygame.colliderect(jogador1,plataforma1)
+            
         
-        if jogador1.speedy > 0:
+        if jogador1.speedy > 0 and jogador1.rect.bottom <= jogador1.chao:
             for plataforma in plataformas:
                 jogador1.collide(plataforma.rect)
-                if jogador1.collide(plataforma.rect):
-                      print('collide')
+                
                 
                 
 

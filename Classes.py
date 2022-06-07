@@ -31,7 +31,7 @@ class Player1(pygame.sprite.Sprite):
         
         self.y_gravidade = 1
         self.y_saltomax = 20
-        self.y_velocidade = self.y_saltomax
+        self.speedy = self.y_saltomax
         self.jumping = False
         
 
@@ -40,19 +40,23 @@ class Player1(pygame.sprite.Sprite):
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
-            self.rect.y -= self.y_velocidade
-            self.y_velocidade -= self.y_gravidade
-            if self.y_velocidade <-(self.y_saltomax):
+            self.rect.y -= self.speedy
+            self.speedy -= self.y_gravidade
+            if self.speedy <-(self.y_saltomax):
                 self.jumping = False
-                self.y_velocidade = self.y_saltomax        
+                self.speedy = self.y_saltomax        
             
-    def collide(self,SpriteGroup): 
-        for sprites in SpriteGroup:
-            sprite_rect = sprites.rect
-            if pygame.Rect.colliderect(sprite_rect,self.rect):
-                if abs(self.rect.bottom - sprites.rect.top) == 0:
-                    self.y_velocidade = 0
-                    self.jumping = False
+    def collide(self,rect): 
+        self.collision = rect.colliderect(self.rect)
+        if self.collision:
+            self.rect.bottom = rect.top
+        if self.collision == False:
+            self.rect.y -= self.y_gravidade
+               
+            
+            
+            
+        
            
     def update(self):
         # Atualização da posição da raposa
@@ -108,7 +112,8 @@ class Plataforma(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG)).convert_alpha()
         self.image = pygame.transform.scale(self.image, (LARGURA_P, ALTURA_P))
-        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.mask.get_rect()
         self.rect.centerx = centerx
         self.rect.bottom = bottom
 
@@ -139,7 +144,7 @@ class Player2(pygame.sprite.Sprite):
         
         self.y_gravidade = 1
         self.y_saltomax = 20
-        self.y_velocidade = self.y_saltomax
+        self.speedy = self.y_saltomax
         self.jumping = False
         
 
@@ -149,11 +154,11 @@ class Player2(pygame.sprite.Sprite):
             if key_pressed[pygame.K_w]:
                 self.jumping = True
             if self.jumping:
-                self.rect.y -= self.y_velocidade
-                self.y_velocidade -= self.y_gravidade
-                if self.y_velocidade <-(self.y_saltomax):
+                self.rect.y -= self.speedy
+                self.speedy -= self.y_gravidade
+                if self.speedy <-(self.y_saltomax):
                     self.jumping = False
-                    self.y_velocidade = self.y_saltomax
+                    self.speedy = self.y_saltomax
         
 
     def update(self):

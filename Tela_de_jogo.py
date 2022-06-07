@@ -168,10 +168,11 @@ def gameplay(janela):
                 
         #contato = pygame.colliderect(jogador1,plataforma1)
         
-        if jogador1.y_velocidade > 0:
-            jogador1.collide(plataformas)
-            if jogador1.collide(plataformas):
-                print('collide')
+        if jogador1.speedy > 0:
+            for plataforma in plataformas:
+                jogador1.collide(plataforma.rect)
+                if jogador1.collide(plataforma.rect):
+                      print('collide')
                 
                 
 

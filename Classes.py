@@ -37,6 +37,8 @@ class Player1(pygame.sprite.Sprite):
 
     def get_input(self):
         key_pressed = pygame.key.get_pressed()
+        self.rect.y += self.speedy
+        
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
@@ -46,14 +48,7 @@ class Player1(pygame.sprite.Sprite):
                 self.jumping = False
                 self.y_velocidade = self.y_saltomax        
             
-    def collide(self,SpriteGroup): 
-        for sprites in SpriteGroup:
-            sprite_rect = sprites.rect
-            if pygame.Rect.colliderect(sprite_rect,self.rect):
-                if abs(self.rect.bottom - sprites.rect.top) == 0:
-                    self.y_velocidade = 0
-                    self.jumping = False
-           
+
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx
@@ -62,6 +57,10 @@ class Player1(pygame.sprite.Sprite):
             self.image = self.imagens[1]
         if self.speedx > 0:
             self.image = self.imagens[0]
+
+        if self.rect.bottom >= ALTURA - 178:
+            self.rect.bottom = ALTURA - 178
+            self.speedy = 0
             
         # Mantem dentro da tela
         if self.rect.right > LARGURA :
@@ -164,6 +163,10 @@ class Player2(pygame.sprite.Sprite):
             self.image = self.imagens[1]
         if self.speedx > 0:
             self.image = self.imagens[0]
+
+        if self.rect.bottom >= ALTURA - 178:
+            self.rect.bottom = ALTURA - 178
+            self.speedy = 0
             
         # Mantem dentro da tela
         if self.rect.right > LARGURA:
@@ -224,6 +227,11 @@ class BalaE(pygame.sprite.Sprite):
         # se a sala passar do fim da tela, desaparece
         if self.rect.left < 0:
             self.kill()
+    
+    
+        
+
+        
 
 class BalaD(pygame.sprite.Sprite):
     def __init__(self,left,centery):

@@ -15,6 +15,8 @@ def gameplay(janela):
     plano_jogo = pygame.transform.scale(plano_jogo, (LARGURA,ALTURA))
     todos_sprites = pygame.sprite.Group()
     todas_balas = pygame.sprite.Group()
+    plataformas = pygame.sprite.Group()
+    jogadores = pygame.sprite.Group()
     machados = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
@@ -36,12 +38,18 @@ def gameplay(janela):
     
     todos_sprites.add(jogador2)
     todos_sprites.add(jogador1)
+    jogadores.add(jogador1)
+    jogadores.add(jogador2)
 
 
-    plataforma = Plataforma(1000,500)
+    plataforma1 = Plataforma(1000,500)
     plataforma2 = Plataforma(400,500)
-    todos_sprites.add(plataforma)
+
+    todos_sprites.add(plataforma1)
     todos_sprites.add(plataforma2)
+    plataformas.add(plataforma1)
+    plataformas.add(plataforma2)
+
     vidas1 = 3
     vidas2 = 3
     
@@ -158,11 +166,15 @@ def gameplay(janela):
                 vitoria = VITORIA1
                 
                 
-                        
-                        
-
-           
+        #contato = pygame.colliderect(jogador1,plataforma1)
         
+        if jogador1.y_velocidade > 0:
+            jogador1.collide(plataformas)
+            if jogador1.collide(plataformas):
+                print('collide')
+                
+                
+
         todos_sprites.update()
         
         janela.fill(BRANCO)  

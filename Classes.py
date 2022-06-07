@@ -37,8 +37,6 @@ class Player1(pygame.sprite.Sprite):
 
     def get_input(self):
         key_pressed = pygame.key.get_pressed()
-        self.rect.y += self.speedy
-        
         if key_pressed[pygame.K_UP]:
             self.jumping = True
         if self.jumping:
@@ -48,7 +46,14 @@ class Player1(pygame.sprite.Sprite):
                 self.jumping = False
                 self.y_velocidade = self.y_saltomax        
             
-
+    def collide(self,SpriteGroup): 
+        for sprites in SpriteGroup:
+            sprite_rect = sprites.rect
+            if pygame.Rect.colliderect(sprite_rect,self.rect):
+                if abs(self.rect.bottom - sprites.rect.top) == 0:
+                    self.y_velocidade = 0
+                    self.jumping = False
+           
     def update(self):
         # Atualização da posição da raposa
         self.rect.x += self.speedx

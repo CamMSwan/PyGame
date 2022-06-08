@@ -1,7 +1,8 @@
+from multiprocessing.pool import INIT
 import pygame
 from pygame import mixer
 from Classes import Morte
-from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,GAME_OVER
+from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, INIC, LARGURA,QUIT,GAME,GAME_OVER
 from os import path
 import Funções as fun
 from Elementos import FUNDO_GAME_OVER1, FUNDO_GAME_OVER2, MUSICA_JOGO, WANTEDF, WANTEDJ
@@ -39,6 +40,8 @@ def tela_final (janela,vitoria):
                     rodando = GAME
                     mixer.music.stop()
                     fun.tocar_musica(musica)
+                if evento.key == pygame.K_0:
+                    rodando = INIC
         
         todos_sprites.update()
         

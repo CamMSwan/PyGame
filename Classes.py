@@ -297,7 +297,7 @@ class BalaE(pygame.sprite.Sprite):
 
         self.rect.right = right
         self.rect.centery = centery
-        self.speedx = -25*DT
+        self.speedx = -29*DT
 
     def update(self):
         self.rect.x += self.speedx
@@ -317,7 +317,7 @@ class BalaD(pygame.sprite.Sprite):
 
         self.rect.left = left
         self.rect.centery = centery
-        self.speedx = 25*DT
+        self.speedx = 29*DT
 
     def update(self):
         self.rect.x += self.speedx

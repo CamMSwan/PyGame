@@ -26,7 +26,7 @@ def tela_final (janela,vitoria):
     
     while rodando == GAME_OVER:
         
-        tempo_fps.tick(FPS)
+        tempo_fps.tick(60)
         
         for evento in pygame.event.get():
             

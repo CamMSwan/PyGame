@@ -2,9 +2,9 @@ from platform import platform
 from turtle import speed
 import pygame
 from Classes import Explosao, Machado, Plataforma, Player1, Player2
-from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
+from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM, DT,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
-from Elementos import DIR_IMG, MUSICA_FINAL, SOM_DANO
+from Elementos import ALTURA_POS_P, DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
 
 
@@ -32,8 +32,8 @@ def gameplay(janela):
     machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
     
-    plataforma1 = Plataforma(1000,420)
-    plataforma2 = Plataforma(400,420)
+    plataforma1 = Plataforma(1000,ALTURA_POS_P)
+    plataforma2 = Plataforma(400,ALTURA_POS_P)
     todos_sprites.add(plataforma1)
     todos_sprites.add(plataforma2)
     plataformas.add(plataforma1)
@@ -51,6 +51,7 @@ def gameplay(janela):
 
     vidas1 = 3
     vidas2 = 3
+    encima = True
     
     tecla = {}
 
@@ -59,7 +60,7 @@ def gameplay(janela):
     rodando = GAME
     while rodando != GAME_OVER and rodando != QUIT:
         tempo_fps.tick(FPS)
-
+        plat1 = pygame.sprite.spritecollide(jogador1, todas_balas, True, pygame.sprite.collide_mask)
         for evento in pygame.event.get():
             
             if evento.type == pygame.QUIT:
@@ -71,14 +72,17 @@ def gameplay(janela):
                         # Dependendo da tecla, altera a velocidade.
                         tecla[evento.key] = True
                         if evento.key == pygame.K_LEFT:
-                            jogador1.speedx -= 8
+                            jogador1.speedx -= 8*DT
                             direcao1 = 'E'
                         if evento.key == pygame.K_RIGHT:
-                            jogador1.speedx += 8
+                            jogador1.speedx += 8*DT
                             direcao1 = 'D'
                             
                         if evento.key == pygame.K_UP:
-                            jogador1.jumping
+                            jogador1.jump()
+                            
+                        if evento.key == pygame.K_DOWN:
+                            encima = False
                             
                         if evento.key == pygame.K_SLASH:
                             if direcao1 == 'D':
@@ -90,24 +94,29 @@ def gameplay(janela):
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_LEFT:
-                                jogador1.speedx += 8
+                                jogador1.speedx += 8*DT
                                 
                             if evento.key == pygame.K_RIGHT:
-                                jogador1.speedx -= 8
+                                jogador1.speedx -= 8*DT
                                 
                             if evento.key == pygame.K_SLASH:
                                 evento.key = False
                                 
+                            if evento.key == pygame.K_DOWN:
+                                encima = True
+                                
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
                         tecla[evento.key] = True
                         if evento.key == pygame.K_a:
-                            jogador2.speedx -= 8
+                            jogador2.speedx -= 8*DT
                             direcao2 = 'E'
                         if evento.key == pygame.K_d:
-                            jogador2.speedx += 8
+                            jogador2.speedx += 8*DT
                             direcao2 = 'D'
                         if evento.key == pygame.K_w:
-                            jogador2.jumping
+                            jogador2.jump()
+                        if evento.key == pygame.K_s:
+                                encima = False
                         if evento.key == pygame.K_q:
                             if direcao2 == 'D':
                                 jogador2.atirarD()
@@ -118,15 +127,14 @@ def gameplay(janela):
                     if evento.type == pygame.KEYUP:
                         if evento.key in tecla and tecla[evento.key]:
                             if evento.key == pygame.K_a:
-                                jogador2.speedx += 8
+                                jogador2.speedx += 8*DT
                             if evento.key == pygame.K_d:
-                                jogador2.speedx -= 8
+                                jogador2.speedx -= 8*DT
                             if evento.key == pygame.K_q:
                                 evento.key = False
+                            if evento.key == pygame.K_s:
+                                encima = True
          
-        '''colocar mask                        
-        dano_machado1 = pygame.sprite.collide_rect(machado,jogador1)
-        dano_machado2 = pygame.sprite.collide_rect(machado,jogador2)'''
         
         dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
         dano_machado2 = pygame.sprite.spritecollide(jogador2, machados, False, pygame.sprite.collide_mask)      
@@ -163,12 +171,18 @@ def gameplay(janela):
                 jogador2.kill()
                 rodando = GAME_OVER
                 vitoria = VITORIA1
-                
-            
         
-        if jogador1.speedy > 0 and jogador1.rect.bottom <= jogador1.chao:
+        plat1 = pygame.sprite.spritecollide(jogador1, plataformas, False, pygame.sprite.collide_mask)
+            
+        if jogador1.speedy > 0 and plat1 and encima:
             for plataforma in plataformas:
                 jogador1.collide(plataforma.rect)
+                
+        plat2 = pygame.sprite.spritecollide(jogador2, plataformas, False, pygame.sprite.collide_mask)
+            
+        if jogador2.speedy > 0 and plat2 and encima:
+            for plataforma in plataformas:
+                jogador2.collide(plataforma.rect)
                 
                 
             

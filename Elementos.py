@@ -1,6 +1,6 @@
 import pygame
 import os
-from Configurações import DIR_IMG, DIR_SOM, DIR_FONT, LARGURA
+from Configurações import ALTURA, DIR_IMG, DIR_SOM, DIR_FONT, LARGURA
 
 RAPOSA = 'Raposa'
 LARGURA_FOX = 150
@@ -11,8 +11,9 @@ LARGURA_DR = 150
 ALTURA_DR = 165
 
 PLATAFORMA_IMG = 'plataforma_jogo.png'
-LARGURA_P = 350
+LARGURA_P = 300
 ALTURA_P = 20
+ALTURA_POS_P = 410
 
 PLANO_DE_FUNDO = 'fundo_jogo.png'
 MENU = 'fundo_inicial.png'

@@ -7,9 +7,10 @@ DIR_IMG = path.join(path.dirname(__file__), 'imagens')
 DIR_SOM = path.join(path.dirname(__file__), 'sons')
 DIR_FONT = path.join(path.dirname(__file__), 'fontes')
 
+DT = 1.5
 LARGURA = 1400
 ALTURA = 780
-FPS = 60 
+FPS = 40
 
 BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)

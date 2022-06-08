@@ -1,10 +1,8 @@
-from platform import platform
-from turtle import speed
 import pygame
-from Classes import Explosao, Machado, Plataforma, Player1, Player2
+from Classes import Dinamite, Explosao, Machado, Plataforma, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM, DT,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
-from Elementos import ALTURA_POS_P, DIR_IMG, MUSICA_FINAL, SOM_DANO
+from Elementos import ALTURA_POS_P, CHAO, DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
 
 
@@ -18,14 +16,15 @@ def gameplay(janela):
     plataformas = pygame.sprite.Group()
     jogadores = pygame.sprite.Group()
     machados = pygame.sprite.Group()
+    explosoes = pygame.sprite.Group()
+    dinamites = pygame.sprite.Group()
     grupo = {}
     grupo['todos_sprites'] = todos_sprites
     grupo['todas_balas'] = todas_balas
     grupo['Machados'] = machados
     grupo['Plataformas'] = plataformas
-    
-    '''explosao = Explosao(500)
-    todos_sprites.add(explosao)'''
+    grupo['explosoes'] = explosoes
+    grupo['dinamites'] = dinamites
     
     machado = Machado()
     todos_sprites.add(machado)
@@ -87,8 +86,15 @@ def gameplay(janela):
                         if evento.key == pygame.K_SLASH:
                             if direcao1 == 'D':
                                 jogador1.atirarD()
+                                jogador1.especialD()
                             if direcao1 == 'E':
                                 jogador1.atirarE()
+                                
+                        if evento.key == pygame.K_PERIOD:
+                            if direcao1 == 'D':
+                                jogador1.especialD()
+                            if direcao1 == 'E':
+                                jogador1.especialE()
                             
                             
                     if evento.type == pygame.KEYUP:
@@ -98,10 +104,7 @@ def gameplay(janela):
                                 
                             if evento.key == pygame.K_RIGHT:
                                 jogador1.speedx -= 8*DT
-                                
-                            if evento.key == pygame.K_SLASH:
-                                evento.key = False
-                                
+                                    
                             if evento.key == pygame.K_DOWN:
                                 encima = True
                                 
@@ -122,6 +125,11 @@ def gameplay(janela):
                                 jogador2.atirarD()
                             if direcao2 == 'E':
                                 jogador2.atirarE()
+                        if evento.key == pygame.K_1:
+                            if direcao2 == 'D':
+                                jogador2.especialD()
+                            if direcao2 == 'E':
+                                jogador2.especialE()
                             
                             
                     if evento.type == pygame.KEYUP:
@@ -130,8 +138,6 @@ def gameplay(janela):
                                 jogador2.speedx += 8*DT
                             if evento.key == pygame.K_d:
                                 jogador2.speedx -= 8*DT
-                            if evento.key == pygame.K_q:
-                                evento.key = False
                             if evento.key == pygame.K_s:
                                 encima = True
          
@@ -149,14 +155,12 @@ def gameplay(janela):
             vidas2 -= 1
             fun.tocar_som(som_dano)
         
-        dano_tiro1 = pygame.sprite.spritecollide(jogador1, todas_balas, True, pygame.sprite.collide_mask)
-        dano_tiro2 = pygame.sprite.spritecollide(jogador2, todas_balas, True, pygame.sprite.collide_mask)
-        
-       
+        dano_tiro1 = pygame.sprite.spritecollide(jogador1, todas_balas, True) 
         if dano_tiro1:
+            print('dano')
             fun.tocar_som(som_dano)
             vidas1 -= 1
-                
+        dano_tiro2 = pygame.sprite.spritecollide(jogador2, todas_balas, True, pygame.sprite.collide_mask)
         if dano_tiro2:
             fun.tocar_som(som_dano)
             vidas2 -= 1
@@ -183,7 +187,6 @@ def gameplay(janela):
         if jogador2.speedy > 0 and plat2 and encima:
             for plataforma in plataformas:
                 jogador2.collide(plataforma.rect)
-                
                 
             
         todos_sprites.update()

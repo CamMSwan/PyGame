@@ -26,9 +26,9 @@ def gameplay(janela):
     grupo['explosoes'] = explosoes
     grupo['dinamites'] = dinamites
     
-    machado = Machado()
+    '''machado = Machado()
     todos_sprites.add(machado)
-    machados.add(machado)
+    machados.add(machado)'''
     som_dano = path.join(DIR_SOM,SOM_DANO)
     
     plataforma1 = Plataforma(1000,ALTURA_POS_P)
@@ -141,7 +141,7 @@ def gameplay(janela):
                                 encima = True
          
         
-        dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
+        '''dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
         dano_machado2 = pygame.sprite.spritecollide(jogador2, machados, False, pygame.sprite.collide_mask)      
                         
         if dano_machado1:
@@ -152,7 +152,7 @@ def gameplay(janela):
         if dano_machado2:
             machado.rect.top = ALTURA
             vidas2 -= 1
-            fun.tocar_som(som_dano)
+            fun.tocar_som(som_dano)'''
         
         dano_tiro1 = pygame.sprite.spritecollide(jogador1, todas_balas, True) 
         if dano_tiro1:

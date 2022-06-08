@@ -50,8 +50,10 @@ ALTURA_ARB = 100
 EXPLOSAO = 'Explosão'
 LARGURA_EX = 80
 ALTURA_EX = 80
+BOOM = 'Bomb Blast.mp3'
 
-ANIM_DINAMITE = 'Dinamite'
+ANIM_DINAMITE_D = 'Dinamite D'
+ANIM_DINAMITE_E = 'Dinamite D'
 DINAMITE_LOGO = 'dinamite-0.png'
 LARGURA_DIN = 50
 ALTURA_DIN = 50

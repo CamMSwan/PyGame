@@ -2,7 +2,7 @@ import pygame
 from Classes import Dinamite, Explosao, Machado, Plataforma, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM, DT,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
-from Elementos import ALTURA_POS_P, CHAO, DIR_IMG, MUSICA_FINAL, SOM_DANO
+from Elementos import ALTURA_POS_P, BOOM, CHAO, DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
 
 
@@ -30,6 +30,7 @@ def gameplay(janela):
     todos_sprites.add(machado)
     machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
+    som_boom = path.join(DIR_SOM,BOOM)
     
     plataforma1 = Plataforma(1000,ALTURA_POS_P)
     plataforma2 = Plataforma(400,ALTURA_POS_P)
@@ -86,7 +87,6 @@ def gameplay(janela):
                         if evento.key == pygame.K_SLASH:
                             if direcao1 == 'D':
                                 jogador1.atirarD()
-                                jogador1.especialD()
                             if direcao1 == 'E':
                                 jogador1.atirarE()
                                 
@@ -157,7 +157,6 @@ def gameplay(janela):
         
         dano_tiro1 = pygame.sprite.spritecollide(jogador1, todas_balas, True) 
         if dano_tiro1:
-            print('dano')
             fun.tocar_som(som_dano)
             vidas1 -= 1
         dano_tiro2 = pygame.sprite.spritecollide(jogador2, todas_balas, True, pygame.sprite.collide_mask)
@@ -165,6 +164,18 @@ def gameplay(janela):
             fun.tocar_som(som_dano)
             vidas2 -= 1
                                 
+                                
+        dano_explo1 = pygame.sprite.spritecollide(jogador1, explosoes, False, pygame.sprite.collide_mask)
+        if dano_explo1:
+            fun.tocar_som(som_boom)
+            vidas1 = 0
+            
+        
+        dano_explo2 = pygame.sprite.spritecollide(jogador2, explosoes, False, pygame.sprite.collide_mask)
+        if dano_explo2:
+            fun.tocar_som(som_boom)
+            vidas2 = 0
+            
         if vidas1 == 0:
                 jogador1.kill()
                 rodando = GAME_OVER

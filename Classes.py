@@ -1,7 +1,7 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM, DT,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DIN, ALTURA_DR, ALTURA_EX, ALTURA_FOX, ALTURA_M, ALTURA_P, ALTURA_POS_P, ANIM_DINAMITE, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, CHAO, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DIN, LARGURA_DR, LARGURA_EX, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
+from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DIN, ALTURA_DR, ALTURA_EX, ALTURA_FOX, ALTURA_M, ALTURA_P, ALTURA_POS_P, ANIM_DINAMITE_D, ANIM_DINAMITE_E, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, CHAO, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DIN, LARGURA_DR, LARGURA_EX, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
 import random
 from pygame import mixer
 import Funções as fun
@@ -106,11 +106,6 @@ class Player1(pygame.sprite.Sprite):
             self.groups['todos_sprites'].add(nova_dinamite)
             self.groups['dinamites'].add(nova_dinamite)
             
-            
-
-        
-            
-            
     def atirarE(self):
         # Verifica se pode atirar
         agora = pygame.time.get_ticks()
@@ -137,7 +132,7 @@ class Player1(pygame.sprite.Sprite):
         if elapsed_ticks > self.shoot_ticks:
             # Marca o tick da nova imagem.
             self.last_shot = agora
-            nova_bala = BalaD(self.rect.right-2,self.rect.centery)
+            nova_bala = BalaD(self.rect.right,self.rect.centery)
             self.groups['todos_sprites'].add(nova_bala)
             self.groups['todas_balas'].add(nova_bala)
             tiro = path.join(DIR_SOM,TIRO)
@@ -256,9 +251,6 @@ class Player2(pygame.sprite.Sprite):
             self.groups['dinamites'].add(nova_dinamite)
             
             
-
-        
-            
             
     def atirarE(self):
         # Verifica se pode atirar
@@ -350,7 +342,7 @@ class Machado(pygame.sprite.Sprite):
         self.speedy = 8*DT
         
     def update(self):
-        self.frame_atual += 0.14
+        self.frame_atual += 0.32
         self.rect.y += self.speedy
         
         if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
@@ -438,12 +430,20 @@ class Dinamite(pygame.sprite.Sprite):
     def __init__(self,centerx,centery,direção,grupo):
         pygame.sprite.Sprite.__init__(self)
         self.frames = []
-        for i in range(0,4):
-            self.image = pygame.image.load('{}\{}\dinamite-{}.png'.format(DIR_IMG,ANIM_DINAMITE,i)).convert_alpha()
-            self.image = pygame.transform.scale(self.image, (LARGURA_DIN, ALTURA_DIN))
-            self.rect = self.image.get_rect()
-            self.frames.append(self.image)
+        if direção == 1:
+             for i in range(0,4):
+                self.image = pygame.image.load('{}\{}\dinamite-{}.png'.format(DIR_IMG,ANIM_DINAMITE_D,i)).convert_alpha()
+                self.image = pygame.transform.scale(self.image, (LARGURA_DIN, ALTURA_DIN))
+                self.rect = self.image.get_rect()
+                self.frames.append(self.image)
             
+        if direção == -1:
+             for i in range(0,4):
+                self.image = pygame.image.load('{}\{}\dinamite-{}.png'.format(DIR_IMG,ANIM_DINAMITE_E,i)).convert_alpha()
+                self.image = pygame.transform.scale(self.image, (LARGURA_DIN, ALTURA_DIN))
+                self.rect = self.image.get_rect()
+                self.frames.append(self.image)
+                
         self.mask = pygame.mask.from_surface(self.image)
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
@@ -480,7 +480,7 @@ class Dinamite(pygame.sprite.Sprite):
                 self.chao = False
             
     def update(self):
-        self.frame_atual += 0.14
+        self.frame_atual += 0.32
         self.rect.y += self.speedy
         self.rect.x += self.speedx
                 
@@ -511,7 +511,7 @@ class Explosao(pygame.sprite.Sprite):
         self.rect.bottom = bottom
         
     def update(self):
-        self.frame_atual += 0.32
+        self.frame_atual += 0.32*DT
         
         if self.frame_atual > len(self.frames):
             self.kill()

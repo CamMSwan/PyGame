@@ -178,6 +178,7 @@ class Player2(pygame.sprite.Sprite):
         self.y_gravidade = 2
         self.chao = ALTURA - 170
         self.plataforma = ALTURA_POS_P
+        self.no_chao = True
 
     def movimento_vertical(self):
         self.speedy += self.y_gravidade
@@ -403,12 +404,12 @@ class Tumblweed(pygame.sprite.Sprite):
         self.image = self.frames[self.frame_atual]
         self.rect.x = 0 - LARGURA_ARB
         self.rect.y= ALTURA - 240
-        self.speedx = 5*1.5
+        self.speedx = 6*DT
         
         self.last_animation = pygame.time.get_ticks()
         
     def update(self):
-        self.frame_atual += 0.13
+        self.frame_atual += 0.15
         self.rect.x += self.speedx
     
         if self.rect.left > LARGURA:

@@ -23,7 +23,7 @@ def tela_inicial(janela):
     integrante2 = pygame.transform.scale(integrante2, (180,20))
     integrante3 = fonte.render('Mariana Albuquerque', True, (0,0,0))
     integrante3 =  pygame.transform.scale(integrante3, (210,25))
-    trabalho =  fonte.render('Projeto final de Dessoft', True, (0,0,0))
+    trabalho =  fonte.render('Aperte espaço para iniciar', True, (0,0,0))
     trabalho = pygame.transform.scale(trabalho, (210,25))
     musica = path.join(DIR_SOM,MUSICA_JOGO)
     

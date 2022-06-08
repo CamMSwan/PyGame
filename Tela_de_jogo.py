@@ -30,7 +30,6 @@ def gameplay(janela):
     todos_sprites.add(machado)
     machados.add(machado)
     som_dano = path.join(DIR_SOM,SOM_DANO)
-    som_boom = path.join(DIR_SOM,BOOM)
     
     plataforma1 = Plataforma(1000,ALTURA_POS_P)
     plataforma2 = Plataforma(400,ALTURA_POS_P)
@@ -167,13 +166,11 @@ def gameplay(janela):
                                 
         dano_explo1 = pygame.sprite.spritecollide(jogador1, explosoes, False, pygame.sprite.collide_mask)
         if dano_explo1:
-            fun.tocar_som(som_boom)
             vidas1 = 0
             
         
         dano_explo2 = pygame.sprite.spritecollide(jogador2, explosoes, False, pygame.sprite.collide_mask)
         if dano_explo2:
-            fun.tocar_som(som_boom)
             vidas2 = 0
             
         if vidas1 == 0:

@@ -1,7 +1,7 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM, DT,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DIN, ALTURA_DR, ALTURA_EX, ALTURA_FOX, ALTURA_M, ALTURA_P, ALTURA_POS_P, ANIM_DINAMITE_D, ANIM_DINAMITE_E, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, CHAO, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DIN, LARGURA_DR, LARGURA_EX, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
+from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DIN, ALTURA_DR, ALTURA_EX, ALTURA_FOX, ALTURA_M, ALTURA_P, ALTURA_POS_P, ANIM_DINAMITE_D, ANIM_DINAMITE_E, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, BOOM, CHAO, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DIN, LARGURA_DR, LARGURA_EX, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
 import random
 from pygame import mixer
 import Funções as fun
@@ -474,8 +474,8 @@ class Dinamite(pygame.sprite.Sprite):
                 explosao = Explosao(self.rect.centerx, self.chao)
                 self.groups['todos_sprites'].add(explosao)
                 self.groups['explosoes'].add(explosao)
-                boom = path.join(DIR_SOM,TIRO)
-                #fun.tocar_som(boom)
+                som_boom = path.join(DIR_SOM,BOOM)
+                fun.tocar_som(som_boom)
                 self.kill()
                 self.chao = False
             

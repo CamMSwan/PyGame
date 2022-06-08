@@ -2,7 +2,7 @@ import pygame
 from Classes import Dinamite, Explosao, Machado, Plataforma, Player1, Player2
 from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM, DT,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
 from os import path
-from Elementos import ALTURA_POS_P, BOOM, CHAO, DIR_IMG, MUSICA_FINAL, SOM_DANO
+from Elementos import ALTURA_POS_P, ANIM_DINAMITE_D, ANIM_DINAMITE_E, BOOM, CHAO, DINAMITE_LOGO, DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
 
 
@@ -206,6 +206,12 @@ def gameplay(janela):
     
         coracao = pygame.image.load(path.join(DIR_IMG, CORE_IMG)).convert_alpha()
         coracao = pygame.transform.scale(coracao, (LARGURA_CORE,ALTURA_CORE))
+        
+        '''dinamite_logo1 = pygame.image.load(path.join(DIR_IMG,ANIM_DINAMITE_D,DINAMITE_LOGO)).convert_alpha()
+        dinamite_logo1 = pygame.transform.scale(dinamite_logo1, (LARGURA_CORE,ALTURA_CORE))
+        dinamite_logo2 = pygame.image.load(path.join(DIR_IMG,ANIM_DINAMITE_D,DINAMITE_LOGO)).convert_alpha()
+        dinamite_logo2 = pygame.transform.scale(dinamite_logo2, (LARGURA_CORE,ALTURA_CORE))'''
+        
         if vidas2 >= 1:
             janela.blit(coracao, POSICOES_CORE1[0])
             if vidas2 >= 2:

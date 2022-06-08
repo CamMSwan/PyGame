@@ -340,7 +340,7 @@ class Machado(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
         self.rect.y = 0-ALTURA_M
-        self.speedy = 8*DT
+        self.speedy = 10*DT
         
     def update(self):
         self.frame_atual += 0.32
@@ -451,7 +451,7 @@ class Dinamite(pygame.sprite.Sprite):
         self.rect.centerx = centerx
         self.rect.centery = centery
         self.speedy = -10*DT
-        self.speedx = 5*DT * direção
+        self.speedx = 8*DT * direção
         self.groups = grupo
         self.no_chao = False
         

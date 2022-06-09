@@ -238,7 +238,6 @@ def gameplay(janela):
                 janela.blit(coracao, POSICOES_CORE1[1])
                 if vidas2 == 3:
                     janela.blit(coracao, POSICOES_CORE1[2])
-        
         if vidas1 >=1:
             janela.blit(coracao, POSICOES_CORE2[2])
             if vidas1 >= 2:

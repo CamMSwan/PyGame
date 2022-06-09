@@ -3,21 +3,23 @@ from os import path
 import pygame
 pygame.init()
 
+
+'''Diretório de Imagens e Sons'''
 DIR_IMG = path.join(path.dirname(__file__), 'imagens')
 DIR_SOM = path.join(path.dirname(__file__), 'sons')
-DIR_FONT = path.join(path.dirname(__file__), 'fontes')
 
+'''Delta  de tempo para não conseguir diminuir o FPS preservando o movimento'''
 DT = 1.5
+
+'''Largura e Altura da tela'''
 LARGURA = 1400
 ALTURA = 780
+
+'''Frames por segundo'''
 FPS = 40
 
-BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)
-VERMELHO = (255, 0, 0)
-VERDE = (0, 255, 0)
-AZUL = (0, 0, 255)
-AMARELO = (255, 255, 0)
+
 
 INIC = 0
 GAME = 1

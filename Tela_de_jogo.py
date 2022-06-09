@@ -1,6 +1,6 @@
 import pygame
 from Classes import Dinamite, Explosao, Machado, Plataforma, Player1, Player2
-from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM, DT,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME,PRETO, VERMELHO, VITORIA1, VITORIA2
+from Configurações import ALTURA, ALTURA_CORE, BRANCO, CORE_IMG, DIR_IMG, DIR_SOM, DT,FPS, GAME_OVER, LARGURA, LARGURA_CORE, POSICOES_CORE1, POSICOES_CORE2,QUIT,GAME, VITORIA1, VITORIA2
 from os import path
 from Elementos import ALTURA_POS_P, ANIM_DINAMITE_D, ANIM_DINAMITE_E, BOOM, CHAO, DINAMITE_LOGO, DIR_IMG, MUSICA_FINAL, SOM_DANO
 import Funções as fun
@@ -50,7 +50,10 @@ def gameplay(janela):
 
     vidas1 = 3
     vidas2 = 3
-    encima = True
+    
+    encima1 = True
+    encima2 = True
+    
     
     tecla = {}
 
@@ -81,7 +84,7 @@ def gameplay(janela):
                             jogador1.jump()
                             
                         if evento.key == pygame.K_DOWN:
-                            encima = False
+                            encima1 = False
                             
                         if evento.key == pygame.K_SLASH:
                             if direcao1 == 'D':
@@ -105,7 +108,7 @@ def gameplay(janela):
                                 jogador1.speedx -= 8*DT
                                     
                             if evento.key == pygame.K_DOWN:
-                                encima = True
+                                encima1 = True
                                 
                     if evento.type == pygame.KEYDOWN: #Comandos JOGADOR 2
                         tecla[evento.key] = True
@@ -118,7 +121,7 @@ def gameplay(janela):
                         if evento.key == pygame.K_w:
                             jogador2.jump()
                         if evento.key == pygame.K_s:
-                                encima = False
+                                encima2 = False
                         if evento.key == pygame.K_q:
                             if direcao2 == 'D':
                                 jogador2.atirarD()
@@ -138,7 +141,7 @@ def gameplay(janela):
                             if evento.key == pygame.K_d:
                                 jogador2.speedx -= 8*DT
                             if evento.key == pygame.K_s:
-                                encima = True
+                                encima2 = True
          
         
         '''dano_machado1 = pygame.sprite.spritecollide(jogador1, machados, False, pygame.sprite.collide_mask)  
@@ -186,13 +189,13 @@ def gameplay(janela):
         
         plat1 = pygame.sprite.spritecollide(jogador1, plataformas, False, pygame.sprite.collide_mask)
             
-        if jogador1.speedy > 0 and plat1 and encima:
+        if jogador1.speedy > 0 and plat1 and encima1:
             for plataforma in plataformas:
                 jogador1.collide(plataforma.rect)
                 
         plat2 = pygame.sprite.spritecollide(jogador2, plataformas, False, pygame.sprite.collide_mask)
             
-        if jogador2.speedy > 0 and plat2 and encima:
+        if jogador2.speedy > 0 and plat2 and encima2:
             for plataforma in plataformas:
                 jogador2.collide(plataforma.rect)
                 

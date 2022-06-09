@@ -41,7 +41,7 @@ def tela_final (janela,vitoria):
                     mixer.music.stop()
                     fun.tocar_musica(musica)
                     
-                if evento.key == pygame.K_0:
+                if evento.key == pygame.K_ESCAPE:
                     rodando = INIC
                     musica = path.join(DIR_SOM,MUSICA_MENU)
                     fun.tocar_musica(musica)

@@ -1,3 +1,4 @@
+'''Importa de outros arquivos elementos necessarios'''
 from os import path
 import pygame
 from Configurações import DIR_SOM, INIC, LARGURA, ALTURA, GAME, QUIT, GAME_OVER
@@ -7,15 +8,20 @@ from Elementos import MUSICA_MENU
 import Funções as fun
 import finalização as fim
 
-
+'''Inicia o Pygame e o Mixer(para tocar musicas) '''
 pygame.init()
 pygame.mixer.init()
+
+'''Musica da tela de inicio'''
 musica = path.join(DIR_SOM,MUSICA_MENU)
 fun.tocar_musica(musica)
+
+'''Carrega o tamanho da tela e o nome da caption'''
 janela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption('Red Dead Raposa')
-game = INIC
 
+'''Looping principal que mostra a tela dependendo do estado do jogo'''
+game = INIC
 while game != QUIT:
     
     if game == INIC:

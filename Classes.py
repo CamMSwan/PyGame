@@ -1,13 +1,12 @@
+'''importa os elementos necessarios para as calsses'''
 import pygame
-from Configurações import DIR_IMG, DIR_SOM, DT,FPS,QUIT,GAME,PRETO, LARGURA, ALTURA
+from Configurações import DIR_IMG, DIR_SOM, DT,LARGURA, ALTURA
 from os import path
 from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DIN, ALTURA_DR, ALTURA_EX, ALTURA_FOX, ALTURA_M, ALTURA_P, ALTURA_POS_P, ANIM_DINAMITE_D, ANIM_DINAMITE_E, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, BOOM, CHAO, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DIN, LARGURA_DR, LARGURA_EX, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
 import random
-from pygame import mixer
 import Funções as fun
 
-machado = path.join(DIR_SOM,BARULHO_M)
-    
+'''Classe do jogador 1'''
 class Player1(pygame.sprite.Sprite):
     def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
@@ -34,7 +33,7 @@ class Player1(pygame.sprite.Sprite):
         self.y_gravidade = 2
         self.chao = ALTURA - 170
         self.plataforma = ALTURA_POS_P
-
+    '''Fisica de gravidade do jogador 1'''
     def movimento_vertical(self):
         self.speedy += self.y_gravidade
         if self.speedy > 20*DT:
@@ -43,7 +42,7 @@ class Player1(pygame.sprite.Sprite):
             self.no_chao = True
             self.speedy = 0
             self.rect.bottom = self.chao
-                
+    '''Fisica para detectar se jogador esta em cima da plataforma'''    
     def collide(self,rect): 
         collisions = self.rect.colliderect(rect)  
         collision = abs(self.rect.bottom - rect.top) 
@@ -54,7 +53,7 @@ class Player1(pygame.sprite.Sprite):
                 self.speedy = 0
                 self.rect.bottom = self.plataforma+5
     
-                    
+    '''Função para ele pular'''               
     def jump(self):    
         if self.no_chao:
             self.jumping = True
@@ -79,7 +78,7 @@ class Player1(pygame.sprite.Sprite):
             self.rect.left = 0
         self.movimento_vertical()
            
-        
+    '''Funções para ativar seu especial, dependendo da direção que ele esteja apontando'''   
     def especialD(self):
         agora = pygame.time.get_ticks()
         # Verifica quantos ticks se passaram desde o último tiro.
@@ -106,6 +105,7 @@ class Player1(pygame.sprite.Sprite):
             self.groups['todos_sprites'].add(nova_dinamite)
             self.groups['dinamites'].add(nova_dinamite)
             
+    '''Função para ele atirar, dependendo da sua direção'''         
     def atirarE(self):
         # Verifica se pode atirar
         agora = pygame.time.get_ticks()
@@ -137,19 +137,9 @@ class Player1(pygame.sprite.Sprite):
             self.groups['todas_balas'].add(nova_bala)
             tiro = path.join(DIR_SOM,TIRO)
             fun.tocar_som(tiro)
-               
-class Plataforma(pygame.sprite.Sprite):
-    def __init__(self,centerx,top):
-        pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG)).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (LARGURA_P, ALTURA_P))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.centerx = centerx
-        self.rect.top = top
 
 
-
+'''Classe do jogador 2'''          
 class Player2(pygame.sprite.Sprite):
     def __init__(self, grupo):
         # Construtor da classe mãe (Sprite).
@@ -179,7 +169,8 @@ class Player2(pygame.sprite.Sprite):
         self.chao = ALTURA - 170
         self.plataforma = ALTURA_POS_P
         self.no_chao = True
-
+        
+    '''Fisica de gravidade do jogador 2'''
     def movimento_vertical(self):
         self.speedy += self.y_gravidade
         if self.speedy > 20*DT:
@@ -188,7 +179,8 @@ class Player2(pygame.sprite.Sprite):
             self.no_chao = True
             self.speedy = 0
             self.rect.bottom = self.chao
-                
+            
+    '''Fisica para detectar se jogador esta em cima da plataforma'''            
     def collide(self,rect): 
         collisions = self.rect.colliderect(rect)  
         collision = abs(self.rect.bottom - rect.top) 
@@ -199,7 +191,7 @@ class Player2(pygame.sprite.Sprite):
                 self.speedy = 0
                 self.rect.bottom = self.plataforma+5
     
-                    
+    '''Função para ele pular'''                  
     def jump(self):    
         if self.no_chao:
             self.jumping = True
@@ -224,7 +216,7 @@ class Player2(pygame.sprite.Sprite):
             self.rect.left = 0
         self.movimento_vertical()
            
-        
+    '''Funções para ativar seu especial, dependendo da direção que ele esteja apontando'''     
     def especialD(self):
         agora = pygame.time.get_ticks()
         # Verifica quantos ticks se passaram desde o último tiro.
@@ -251,8 +243,7 @@ class Player2(pygame.sprite.Sprite):
             self.groups['todos_sprites'].add(nova_dinamite)
             self.groups['dinamites'].add(nova_dinamite)
             
-            
-            
+    '''Função para ele atirar, dependendo da sua direção'''              
     def atirarE(self):
         # Verifica se pode atirar
         agora = pygame.time.get_ticks()
@@ -285,6 +276,18 @@ class Player2(pygame.sprite.Sprite):
             tiro = path.join(DIR_SOM,TIRO)
             fun.tocar_som(tiro)
                     
+'''Classe das plataformas'''                   
+class Plataforma(pygame.sprite.Sprite):
+    def __init__(self,centerx,top):
+        pygame.sprite.Sprite.__init__(self)
+        self.image=pygame.image.load(path.join(DIR_IMG, PLATAFORMA_IMG)).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (LARGURA_P, ALTURA_P))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = centerx
+        self.rect.top = top
+
+'''Classes das balas para direita e esquerda'''        
 class BalaE(pygame.sprite.Sprite):
     def __init__(self,right,centery):
         pygame.sprite.Sprite.__init__(self)

@@ -406,19 +406,28 @@ class Tumblweed(pygame.sprite.Sprite):
         self.rect.y= ALTURA - 240
         self.speedx = 6*DT
         
-        self.last_animation = pygame.time.get_ticks()
+        self.ultima_animação = pygame.time.get_ticks()
+        self.intervalo = 3500
         
     def update(self):
         self.frame_atual += 0.15
         self.rect.x += self.speedx
-    
-        if self.rect.left > LARGURA:
-            pygame.time.wait(3500)
-            self.image = self.frames[int(self.frame_atual)]
-            self.rect.x = 0 - LARGURA_ARB
-            self.rect.y= ALTURA - 240                
-            self.speedx = 5
+
+        agora = pygame.time.get_ticks()
+        # Verifica quantos ticks se passaram desde o último tiro.
+        elapsed_ticks = agora - self.ultima_animação
+
+        # Se já pode atirar novamente...
             
+        if self.rect.left > LARGURA:
+            if elapsed_ticks > self.intervalo:
+            # Marca o tick da nova imagem.'
+                self.ultima_animação = agora
+                self.image = self.frames[int(self.frame_atual)]
+                self.rect.x = 0 - LARGURA_ARB
+                self.rect.y= ALTURA - 240                
+                self.speedx = 6*DT
+                
         if self.frame_atual >= len(self.frames):
             self.frame_atual = 0
         

@@ -5,7 +5,7 @@ from Classes import Morte
 from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, INIC, LARGURA,QUIT,GAME,GAME_OVER
 from os import path
 import Funções as fun
-from Elementos import FUNDO_GAME_OVER1, FUNDO_GAME_OVER2, MUSICA_JOGO, WANTEDF, WANTEDJ
+from Elementos import FUNDO_GAME_OVER1, FUNDO_GAME_OVER2, MUSICA_JOGO, MUSICA_MENU, WANTEDF, WANTEDJ
 
 
 
@@ -40,8 +40,11 @@ def tela_final (janela,vitoria):
                     rodando = GAME
                     mixer.music.stop()
                     fun.tocar_musica(musica)
+                    
                 if evento.key == pygame.K_0:
                     rodando = INIC
+                    musica = path.join(DIR_SOM,MUSICA_MENU)
+                    fun.tocar_musica(musica)
         
         todos_sprites.update()
         

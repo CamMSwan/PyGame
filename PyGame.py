@@ -1,3 +1,6 @@
+'''Inicialização.
+    Importa e inicia os pacotes
+'''
 from os import path
 import pygame
 from Configurações import DIR_SOM, INIC, LARGURA, ALTURA, GAME, QUIT, GAME_OVER
@@ -36,5 +39,7 @@ while game != QUIT:
     
     pygame.display.update()  
 
-
+'''Finalização
+Função do pygame que finaliza recursos utilizados
+'''
 pygame.quit()

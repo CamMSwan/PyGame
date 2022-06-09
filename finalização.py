@@ -1,16 +1,16 @@
-from multiprocessing.pool import INIT
 import pygame
 from pygame import mixer
 from Classes import Morte
-from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, INIC, LARGURA,QUIT,GAME,GAME_OVER
+from Configurações import ALTURA, DIR_IMG, DIR_SOM, INIC, LARGURA,QUIT,GAME,GAME_OVER
 from os import path
-import Funções as fun
-from Elementos import FUNDO_GAME_OVER1, FUNDO_GAME_OVER2, MUSICA_JOGO, MUSICA_MENU, WANTEDF, WANTEDJ
+import Musicas as mus
+from Elementos import FUNDO_GAME_OVER1, FUNDO_GAME_OVER2, MUSICA_JOGO, MUSICA_MENU
 
 
-
+'''Inicia o mixer para musicas'''
 mixer.init()
 
+'''Função da tela final que recebe a tela usada e quem venceu'''
 def tela_final (janela,vitoria):
     tempo_fps = pygame.time.Clock()
     musica = path.join(DIR_SOM,MUSICA_JOGO)
@@ -25,30 +25,39 @@ def tela_final (janela,vitoria):
     todos_sprites.add(corvo)
     rodando = GAME_OVER
     
+    '''Loop tela final'''
     while rodando == GAME_OVER:
         
         tempo_fps.tick(60)
         
+        '''Checa as interações do usuario'''
         for evento in pygame.event.get():
             
+            '''Se ele fechou a tela'''
             if evento.type == pygame.QUIT:
                 rodando = QUIT
                 
-
+            '''Checa o botao clicado'''
             if evento.type == pygame.KEYUP:
+                
+                '''Se foi a barra de espaço, ele reinicia o jogo'''
                 if evento.key == pygame.K_SPACE:
                     rodando = GAME
                     mixer.music.stop()
-                    fun.tocar_musica(musica)
-                    
+                    mus.tocar_musica(musica)
+                
+                '''Se foi o ESC, ele volta para a tela inicial, 
+                porem esse é mais para o desenvolvedor que está mostrando, 
+                para ele não ter que ficar fechando e abrindo dnv
+                ''' 
                 if evento.key == pygame.K_ESCAPE:
                     rodando = INIC
                     musica = path.join(DIR_SOM,MUSICA_MENU)
-                    fun.tocar_musica(musica)
+                    mus.tocar_musica(musica)
         
         todos_sprites.update()
         
-
+        '''Checa qual jogador venceu e mostra na tela o ganhador'''
         if vitoria == 1:
             pdf_rect = plano_fundo1.get_rect()
             janela.blit(plano_fundo1, pdf_rect)

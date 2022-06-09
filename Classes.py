@@ -2,9 +2,8 @@
 import pygame
 from Configurações import DIR_IMG, DIR_SOM, DT,LARGURA, ALTURA
 from os import path
-from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DIN, ALTURA_DR, ALTURA_EX, ALTURA_FOX, ALTURA_M, ALTURA_P, ALTURA_POS_P, ANIM_DINAMITE_D, ANIM_DINAMITE_E, ARBUSTO, BALA1_IMG, BALA2_IMG, BARULHO_M, BOOM, CHAO, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DIN, LARGURA_DR, LARGURA_EX, LARGURA_FOX, LARGURA_M, LARGURA_P, MACHADO, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
-import random
-import Funções as fun
+from Elementos import ALTURA_ARB, ALTURA_BALA, ALTURA_DIN, ALTURA_DR, ALTURA_EX, ALTURA_FOX, ALTURA_P, ALTURA_POS_P, ANIM_DINAMITE, ARBUSTO, BALA1_IMG, BALA2_IMG, BOOM, CHAO, EXPLOSAO, INIMIGO_IMG, LARGURA_ARB, LARGURA_BALA, LARGURA_DIN, LARGURA_DR, LARGURA_EX, LARGURA_FOX, LARGURA_P, MORTE, PLATAFORMA_IMG, RAPOSA, TIRO
+import Musicas as fun
 
 '''Classe do jogador 1'''
 class Player1(pygame.sprite.Sprite):
@@ -20,7 +19,7 @@ class Player1(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = LARGURA - LARGURA_FOX/2
-        self.rect.bottom = ALTURA - 170
+        self.rect.bottom = CHAO
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo
@@ -31,7 +30,7 @@ class Player1(pygame.sprite.Sprite):
         self.especial_ticks = 3500
         
         self.y_gravidade = 2
-        self.chao = ALTURA - 170
+        self.chao = CHAO
         self.plataforma = ALTURA_POS_P
     '''Fisica de gravidade do jogador 1'''
     def movimento_vertical(self):
@@ -155,7 +154,7 @@ class Player2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.image = self.imagens[0]
         self.rect.centerx = LARGURA_DR/2
-        self.rect.bottom = ALTURA - 170
+        self.rect.bottom = CHAO
         self.speedx = 0
         self.speedy = 0
         self.groups = grupo
@@ -166,7 +165,7 @@ class Player2(pygame.sprite.Sprite):
         self.especial_ticks = 3500
         
         self.y_gravidade = 2
-        self.chao = ALTURA - 170
+        self.chao = CHAO
         self.plataforma = ALTURA_POS_P
         self.no_chao = True
         
@@ -326,43 +325,9 @@ class BalaD(pygame.sprite.Sprite):
         self.rect.x += self.speedx
         # se a sala passar do fim da tela, desaparece
         if self.rect.left < 0:
-            self.kill()
+            self.kill()            
             
-class Machado(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.frames = []
-        for i in range(1,5):
-            self.image = pygame.image.load('{}/{}/axe-{}.png'.format(DIR_IMG,MACHADO,i)).convert_alpha()
-            self.image = pygame.transform.scale(self.image, (LARGURA_M, ALTURA_M))
-            self.frames.append(self.image)
-            
-        self.mask = pygame.mask.from_surface(self.image)
-        self.frame_atual = 0
-        self.image = self.frames[self.frame_atual]
-        self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
-        self.rect.y = 0-ALTURA_M
-        self.speedy = 10*DT
-        
-    def update(self):
-        self.frame_atual += 0.32
-        self.rect.y += self.speedy
-        
-        if self.rect.top > ALTURA or self.rect.right < 0 or self.rect.left > LARGURA:
-            self.rect.x = random.randint(0+LARGURA_M,LARGURA-LARGURA_M)
-            self.rect.y = 0-ALTURA_M
-            self.speedy = 8*DT
-            
-        if self.frame_atual >= len(self.frames):
-            self.frame_atual = 0
-        
-        self.image = self.frames[int(self.frame_atual)]
-        
-        if self.rect.bottom < 0:
-            self.kill()
-            
-            
+'''Animação do corvo na tela final'''           
 class Morte(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -392,7 +357,7 @@ class Morte(pygame.sprite.Sprite):
             self.last_animation = agora
             self.image = self.frames[int(self.frame_atual)]
         
-            
+'''Animação do mato seco na tela incial'''           
 class Tumblweed(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -438,25 +403,18 @@ class Tumblweed(pygame.sprite.Sprite):
         
         if self.rect.left > LARGURA:
             self.kill()  
-            
+
+'''Classe da dinamite'''            
 class Dinamite(pygame.sprite.Sprite):
     def __init__(self,centerx,centery,direção,grupo):
         pygame.sprite.Sprite.__init__(self)
         self.frames = []
-        if direção == 1:
-             for i in range(0,4):
-                self.image = pygame.image.load('{}\{}\dinamite-{}.png'.format(DIR_IMG,ANIM_DINAMITE_D,i)).convert_alpha()
+        for i in range(0,4):
+                self.image = pygame.image.load('{}\{}\dinamite-{}.png'.format(DIR_IMG,ANIM_DINAMITE,i)).convert_alpha()
                 self.image = pygame.transform.scale(self.image, (LARGURA_DIN, ALTURA_DIN))
                 self.rect = self.image.get_rect()
                 self.frames.append(self.image)
-            
-        if direção == -1:
-             for i in range(0,4):
-                self.image = pygame.image.load('{}\{}\dinamite-{}.png'.format(DIR_IMG,ANIM_DINAMITE_E,i)).convert_alpha()
-                self.image = pygame.transform.scale(self.image, (LARGURA_DIN, ALTURA_DIN))
-                self.rect = self.image.get_rect()
-                self.frames.append(self.image)
-                
+                            
         self.mask = pygame.mask.from_surface(self.image)
         self.frame_atual = 0
         self.image = self.frames[self.frame_atual]
@@ -468,7 +426,7 @@ class Dinamite(pygame.sprite.Sprite):
         self.no_chao = False
         
         self.y_gravidade = 1
-        self.chao = ALTURA - 170
+        self.chao = CHAO
         self.plataforma = ALTURA_POS_P
         
 
@@ -506,8 +464,7 @@ class Dinamite(pygame.sprite.Sprite):
         if self.no_chao:
             self.explosao()
             
-            
-
+'''Classe da explosão'''
 class Explosao(pygame.sprite.Sprite):
     def __init__(self,centerx,bottom):
         pygame.sprite.Sprite.__init__(self)

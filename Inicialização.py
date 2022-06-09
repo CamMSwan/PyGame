@@ -3,7 +3,7 @@ from pygame import mixer
 from Classes import Tumblweed
 from Configurações import ALTURA, DIR_IMG, DIR_SOM,FPS, LARGURA,QUIT,GAME,PRETO
 from os import path
-import Funções as fun
+import Musicas as mus
 
 from Elementos import MUSICA_JOGO
 
@@ -49,7 +49,7 @@ def tela_inicial(janela):
                 
                     if estado == GAME:
                         mixer.music.stop()
-                        fun.tocar_musica(musica)
+                        mus.tocar_musica(musica)
         
         todos_sprites.update()
         

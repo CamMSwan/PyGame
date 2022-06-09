@@ -2,7 +2,7 @@
 Red Dead Raposa
 
 Ojetivo do Jogo:
-Voce precisa ganhar um duelo com seu adversário, com tres tiros ou uma dinamite!
+Voce precisa ganhar um duelo com seu adversário, com tres tiros ou uma dinamite! A dinamite é hitkill, e só explode em contato com o chão. Pode ser usada a cada 3 segundos
 Vencedor será o mais novo fora da lei do velho oeste!
 
 Controles:
@@ -16,7 +16,7 @@ RIGHT = movimenta pra direita
 LEFT = movimenta pra esquerda
 DOWN = desce da plataforma
 SLASH = atira
-PERIOD = epsecial (dinamite)
+PERIOD = dinamite
 
 -Jacaré:
 W = pula
@@ -24,7 +24,7 @@ D = movimenta pra direita
 A = movimenta pra esquerda
 S = desce da plataforma
 Q = atira
-1 = epsecial (dinamite)
+1 = dinamite
 
 Arquivo Principal:
 -PyGame.py

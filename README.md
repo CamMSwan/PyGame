@@ -7,7 +7,7 @@ Vencedor será o mais novo fora da lei do velho oeste!
 
 Controles:
 
-ESPAÇOA: Inicia o jogo ou recomeça o jogo depois do duelo
+ESPAÇO: Inicia o jogo ou recomeça o jogo depois do duelo
 ESC: Vai da tela final para a inicial 
 
 -Raposa:
